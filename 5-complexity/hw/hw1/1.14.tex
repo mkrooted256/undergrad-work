@@ -1,0 +1,70 @@
+\section*{Ex 1.14}
+\begin{mdframed}
+	\textbf{Encode:}
+	Graph as $\{0,1\}$-word. 3 times.
+\end{mdframed}
+
+First of all, Graph is a tuple $(V, E)$ with V for vertices and E for edges. $V\ne\varnothing$ and $E \subseteq V^2$.
+
+\begin{enumerate}
+	\item 
+	\begin{tabular}{|p{15cm}}
+	\textbf{The "Dumb method for dense adjacency matrices".} \\
+	$E$ can be defined via symmetric adjacency matrix.\\ 
+	\quad \(V = \{v_1, v_2, ..., v_n\}; \)\\
+	\quad \( E \approx (E_{ij});\)\\
+	\quad \( E_{ij} = \begin{cases} 
+		1, \text{if} (v_i, v_j) \in E \\
+		0, \text{if} (v_i, v_j) \notin E
+	\end{cases}\)
+
+	Let's just write this $0/1$ matrix row-wise:\\
+	\quad \(w = E_{11} E_{12} ... E_{1n} E_{21} E_{22} ... E_{nn}\) \\
+	Note that \(|w| = n^2 \implies n = \sqrt{|w|} \),
+	so as soon as we have numbered all graph vertices, we can encode it using solely its adjacency matrix.
+	And decoding will be inambigous: \\
+	\quad \(n = \sqrt{|w|}\) \\
+	\quad \(V = \{1, 2, ..., n\}\) \\
+	\quad \(E = (\text{read $w$ row-wise. start new row every $n$ digits})\)
+	\end{tabular}
+	
+	\item 
+	\begin{tabular}{|p{15cm}}
+		\textbf{The "Method for dense adjacency matrices".} \\
+	$(E_{ij})$ is \textbf{symmetric}. Let's throw half elements out. \\
+	\quad \(V = \{v_1, v_2, ..., v_n\}; \)\\
+	\quad \( E \approx (E_{ij});\)\\
+	\quad \( E_{ij} = \begin{cases} 
+		1, \text{if} (v_i, v_j) \in E \\
+		0, \text{if} (v_i, v_j) \notin E
+	\end{cases}\)
+
+	Let's just write this $0/1$ matrix row-wise, but no more than $k$ elements from the $k$-th row:\\
+	\quad \(w = E_{11} E_{12} E_{22} E_{31} E_{32} E_{33} E_{41}... E_{n1} E_{n2} ... E_{nn}\) \\
+	Note that \(|w| = \frac{n(n-1)}{2} = \frac{1}{2} (n^2-n) = \mathbf{f(n)}\). 
+	This function is monotonously going up for all $n>1$ \(\implies \exists ! n:\; f(n)=|w| \),
+	so as soon as we have numbered all graph vertices, we can encode it using \textbf{half} of its adjacency matrix. \\
+	And decoding will be inambigous: \\
+	\quad \(n = f^{-1}(|w|) \) - there will be only one such $n$ \\
+	\quad \(V = \{1, 2, ..., n\}\) \\
+	\quad \(E = (\text{read $w$ row-wise. for $k$-th row read only $k$ digits. Other digits set to $0$})\)
+	\end{tabular}
+	
+	\item
+	\begin{tabular}{|p{15cm}}
+		\textbf{The "Clever method for sparse adjacency matrices".}\\
+	Let's directly encode E set. Give number to every cell of the $E$ matrix. 
+	That is, we are numbering all possible edges (edges of the $K_n$). 
+	For example, we can number them according to the lower triangle of the adjacency matrix.
+	i.e. $1 = 1_2 \to (1,1);\quad 2 = 10_2 \to (1,2);\quad 3 = 11 \to (2,2);\quad4 = 100 \to (3,1), ..., (n(n-1)/2)_2 \to (n,n)$\\ 
+	In other words, $\begin{pmatrix}
+		1 & & & & \\ 2 & 3 & & \\ 4 & 5 & 6 & & \\ 7 & 8 & 9 & 10 \\& & & & ...
+	\end{pmatrix}$\\
+	Now add 0s to the beginning of every number so length of bit vectors would be the same.\\
+	We will have $n(n-1)/2$ bit vectors $e_i$; each corresponds to some edge; \\each has length of  
+	$\log_2 \frac{n^2 - n}{2} \approx 2 \log_2 n - 1$
+
+	Now let's just write $E$ element-wise. Every bitvector $b((v_i, v_j))$ will have the same length thanks to the padding step.
+	So  decoding will be unambigous (if decoder uses the same edge numbering)
+	\end{tabular}
+\end{enumerate}

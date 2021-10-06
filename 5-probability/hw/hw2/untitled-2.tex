@@ -1,0 +1,59 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+% This is a simple template for a XeLaTeX document using the "article" class,
+% with the fontspec package to easily select fonts.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+
+\setmainfont{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+%\setmonofont{Deja Vu Mono}
+
+% other LaTeX packages.....
+\usepackage{geometry} % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx} % support the \includegraphics command and options
+
+\title{Теорія ймовірності \\ Питання до ПР2}
+\author{ФІ-91 Михайло Корешков}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+%\section{}
+
+\begin{enumerate}
+	\item \textbf{Ймовірнісний експеримент} - дія (чи набір дій), результат якої заздалегідь невідомий; при чому його можна представити елементом деякої множини всіх можливих результатів. Додатково мається на увазі, що таку дію можна повторити в незалежний спосіб довільне $n$ число разів, а частоти результатів дій матимуть деяку границю при $n \to \infty$
+	\item Математична модель ймовірнісного експерименту - \textbf{ймовірнісний простір} $\Omega$, елементами якого є попарно несумісні елементарні події $\omega \in \Omega$ та \textbf{функція ймовірності} $P: \Omega \to [0;1]$. \textbf{Випадкова подія} $A \subseteq \Omega$ - підмножина ймовірнісного простору, що нас цікавить. При чому можна розглядати ймовірність події: $P(A) = \sum_{\omega\in A} P(\omega)$
+Також вимагається нормування $P$ на $\Omega$: $ \sum_{\omega\in A} P(\omega) = 1$ \\
+$\Omega$ та $\varnothing$ - також випадкові події; вони називаються відповідно "достовірна" та "неможлива".
+	\item \textbf{Операції над випадковими подіями} \\
+	$A \cap B$ - A та B; $A \cup B$ - А або B; $\bar A = \Omega \setminus A$ - обернена подія / "не А"; $A \setminus B$ - А, але не B;
+	\item \textbf{Правило де Моргана} 
+	\[ \overline{\bigcap_{i \in I} A_i} = \bigcup_{i \in I} \bar{A_i} \]
+	\[ \overline{\bigcup_{i \in I} A_i} = \bigcap_{i \in I} \bar{A_i} \]
+ 	
+	\item Якщо $|\Omega| = n \in \mathbb{N}$, а $\forall \omega \in \Omega:\:P(\omega) = \frac{1}{|\Omega|}$, то
+	\[\forall A:\: P(A) = \sum_{\omega\in A} P(\omega) =  \sum_{\omega\in A} \frac{1}{|\Omega|} = \frac{|A|}{|\Omega|}\]
+
+	\item \textbf{Формула включень-виключень}. Нехай є скінченні $A_1, ..., A_n$. Тоді
+	\begin{multline*} 
+	\left|\bigcap_{i=1}^n A_i\right| \quad = \quad  \sum_{i=1}^n |A_i| \quad - \sum_{1<i_1<i_2<n} |A_{i_1} \cap A_{i_2}| \quad +  \sum_{1<i_1<i_2<i_3<n} |A_{i_1} \cap A_{i_2} \cap A_{i_3}| \quad - \quad \dots \quad +  \\ + \quad (-1)^n \sum_{1<i_1<...<i_{n-1}<n} \left|\bigcap_{j=1}^{n-1} A_{i_j}\right| \quad + \quad (-1)^{n+1} \: \left|\bigcap_{i=1}^n A_i\right|
+	\end{multline*}
+\end{enumerate}
+
+
+
+\end{document}

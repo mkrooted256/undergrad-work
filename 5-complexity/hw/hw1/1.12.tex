@@ -1,0 +1,44 @@
+\section*{Ex 1.12}
+\begin{mdframed}
+	\textbf{Prove or disprove:} 
+	\begin{enumerate}
+		\item $f = \Theta(g) \iff g = \Theta(f)$
+		\item $f = O(g) \iff g = \Omega(f)$
+		\item $f = o(g) \iff g = \omega(f)$
+	\end{enumerate}
+\end{mdframed}
+
+\begin{enumerate}
+	\item $f = \Theta(g) \iff g = \Theta(f)$
+		\subsection*{$\implies$}
+		$f =\Theta(g) \implies 
+		\exists C1, C2, N > 0:\; \forall n > N:\; C1\cdot g(n) \le f(n) \le C2\cdot g(n)$. \\
+		Let $g \ne \Theta(f)$. That is, $\forall a, b: \exists n:\; a\cdot f(n) > g(n) \vee b\cdot f(n) < g(n)$.\\
+		Then $C1\cdot b\cdot f(n) < C1\cdot g(n) \le f(n) \le C2\cdot g(n) < C2\cdot a \cdot f(n)$. \\
+		But that is exactly \[a' \cdot f(n) < g(n) < b'\cdot f(n)\] i.e. $g = \Theta(f)$. Contradiction.
+
+		\subsection*{$\impliedby$}
+		Just swap f and g in previous subsection.
+		\quad \qedsymbol \quad \textbf{True}
+
+	\item $f = O(g) \iff g = \Omega(f)$
+	\begin{align*}
+		& f = O(g) \iff& \\
+		& \iff \exists C:\; \forall n>N:\; f(n) \le C\cdot g(n) \iff& \\
+		& \iff\exists C:\; \forall n>N:\; \frac{f(n)}{C} \le g(n) \iff& \\
+		& \iff\exists C':\; \forall n>N:\; g(n) \ge C'\cdot f(n) \iff& \\
+		& \iff g = \Omega(f) \quad \qedsymbol \quad \textbf{True}& 
+	\end{align*}
+	
+
+
+	\item $f = o(g) \iff g = \omega(f)$
+	\begin{align*}
+		& f = o(g) \iff& \\
+		& \iff \forall \varepsilon:\; \forall n>N:\; f(n) \le \varepsilon\cdot g(n) \iff& \\		
+		& \iff \forall \varepsilon:\; \forall n>N:\; \frac{f(n)}{\varepsilon} \le g(n) \iff& \\
+		& \iff\forall \varepsilon':\; \forall n>N:\; g(n) \ge \varepsilon'\cdot f(n) \iff& \\
+		& \iff g = \omega(f) \quad \qedsymbol \quad \textbf{True} & 
+	\end{align*}
+	
+\end{enumerate}

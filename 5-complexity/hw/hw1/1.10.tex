@@ -1,0 +1,50 @@
+\section*{Ex 1.10}
+\begin{mdframed}
+	\textbf{Prove or disprove:}
+	\begin{enumerate}
+        \item $\frac{(\sqrt x + 1)^3}{x^2 +1} = o(1)$
+        \item $x^3(\log \log x)^2 = o(x^3\log x)$
+        \item $\frac{\cos x}{x} = O(1)$
+        \item $\int_0^xe^{-t^2}dt=O(1)$
+        \item $\sum_{j\le x}\frac{1}{j^2}=o(1)$
+    \end{enumerate}
+\end{mdframed}
+
+\begin{enumerate}
+    \item $\frac{(\sqrt x + 1)^3}{x^2 +1} = o(1)$
+        \[\frac{(\sqrt x + 1)^3}{x^2 +1} = \frac{x^{3/2}+ax^{1}+bx^{1/2} +c}{x^2 + 1} \le \frac{x^{3/2}}{x^2+1}\]
+        \[\lim_{x\to\infty}\frac{\frac{(\sqrt x + 1)^3}{x^2 +1}}{1} \le \lim_{x\to\infty}\frac{x^{3/2}}{x^2+1}
+        = \lim_{x\to\infty}\frac{1}{\sqrt{x}+x^{-3/2}} = \lim_{x\to\infty}\frac{1}{\sqrt{x}} = 0
+        \]
+        \qedsymbol \quad \textbf{True}
+
+
+    \item $x^3(\log \log x)^2 = o(x^3\log x)$
+        \begin{align*}
+            \lim\frac{x^3(\log \log x)^2}{x^3\log x} &= (x = e^y) = \lim\frac{(\log y)^2}{y} =
+            (L'Hospital) = \\ &= \lim \frac{2 \log y \cdot \frac{1}{y}}{y} =
+            \lim \frac{2 \log y}{y^2} = (L'Hospital) = \\
+            &= \lim \frac{2 \cdot 1/y}{2y} = \lim \frac{1}{y^2} = 0
+        \end{align*}
+        \qedsymbol \quad \textbf{True}
+
+    \item $\frac{\cos x}{x} = O(1)$
+        We need to prove that $\displaystyle\exists C:\; \frac{\cos x}{x} \le C$.
+        $\frac{\cos x}{x} \le \frac{1}{x} \le C$. \\
+        Let $C=1$. Then $\forall x \ge 1: \frac{\cos x}{x} \le C = 1$\\
+        \qedsymbol \quad \textbf{True}
+
+    \item $\int_0^xe^{-t^2}dt=O(1)$
+        \[\int_0^xe^{-t^2}dt \le \int_{-\infty}^{+\infty}e^{-t^2}dt = \sqrt{\pi} \]
+        That is, 
+        $\exists C=\sqrt{\pi}\;\forall x\in\mathbb{N}:\; \int_0^xe^{-t^2}dt \le C \cdot 1$.
+        i.e. LHS expression is bounded from above.\\
+        \qedsymbol \quad \textbf{True}
+
+    \item $\sum_{j\le x}\frac{1}{j^2}=o(1)$
+        In the other words, $\lim_{x\to \infty} \sum_{j\le x}\frac{1}{j^2} = 0$. \\
+        But we know that $\lim_{x\to \infty} \sum_{j\le x}\frac{1}{j^2} = \frac{6}{\pi^2} > 0$ 
+        or that at least this sequence is ascending.\\
+        \qedsymbol \quad \textbf{False}
+        
+\end{enumerate}

@@ -1,0 +1,89 @@
+
+\section*{Ex 1.7}
+\begin{mdframed}
+	\textbf{Prove or disprove:}
+
+    $\forall \Sigma \;\forall L_1, L_2 \subseteq \Sigma^*:$
+	\begin{enumerate}
+        \item $(L_1 L_2)^* L_1 = L_1 (L_2 L_1)^*$;
+        \item $(L_1 \cup L_2)^*  = (L_1^* L_2^*)^*$;
+        \item $(L_1^R \cap L_2^R)^* L_1 = (L_1^* L_2^*)^R$
+    \end{enumerate}
+\end{mdframed}
+
+\subsection*{1. $ (L_1 L_2)^* L_1 = L_1 (L_2 L_1)^* $}
+Let $A = (L_1 L_2)^* L_1;\; B = L_1 (L_2 L_1)^*$.
+\begin{align*}
+    A & = \varepsilon L_1 \cup (L_1 L_2) L_1 \cup (L_1 L_2 L_1 L_2) L_1 \cup ... \\
+    B & = L_1 \varepsilon \cup L_1 (L_2 L_1) \cup L_1 (L_2 L_1 L_2 L_1) \cup ...
+\end{align*}
+So, it is safe to assume that indeed $A = B$. \quad  \qedsymbol
+\quad \textbf{\large 1. True}
+
+\subsection*{2. $(L_1 \cup L_2)^*  = (L_1^* L_2^*)^*$}
+Let $A = (L_1 \cup L_2)^*;\; B = (L_1^* L_2^*)^*$.
+\begin{align*}
+    & a \in A \implies a = a_1 a_2 ... a_n ,\quad & n \ge 0,
+    \quad \forall i : (a_i \in L_1 \vee a_i \in L_2) \\
+    & b \in B \implies b = x_1 y_1 x_2 y_2 ... x_m y_m ,\quad & m \ge 0,
+    \quad \forall i : x_i \in L_1^*, y_i \in L_2^* 
+\end{align*}
+
+\begin{minipage}{\linewidth}
+    \subsubsection*{$\subseteq$}
+    Let $w \in A$;
+    $w = w_1 ... w_n,\; w_i \in L_1 \cup L_2$.\\
+    Note that $w_i = x_i^{p_i}y_i^{q_i}, x_i\in L_1, y_i \in L_2, p_i,q_i \in \{0, 1\}$
+    and $\begin{cases}
+        w_i \in L_1 & \implies w_i = x_i^1 y_i^0 \\
+        w_i \in L_2 & \implies w_i = x_i^0 y_i^1
+    \end{cases}$.\\
+    So basically $w_i \in L_1^* L_2^*$. Therefore $w \in (L_1^* L_2^*)^* = B$.
+    
+    \subsubsection*{$\supseteq$}
+    Let $w \in B$;
+    $w = x_1 y_1 x_2 y_2 ... x_m y_m,\; x_i \in L_1^*, y_i \in L_2^* $.
+    Also, $x_i = x_{i,1} x_{i,2} ... x{i,s}, \; x_{i,j} \in L_1$. Same for $y_{i,j}$ and $L_2$.
+    
+    Let's rebuild $w = w_1 w_2 ... w_{|w|}$ using the following algorithm:
+    \begin{lstlisting}
+    i := 1
+    w_i := x_{1,1};      i <- i+1; 
+    w_i := x_{1,2};      i <- i+1; 
+    ... 
+    w_i := x_{1,|x_1|};  i <- i+1;
+    w_i := y_{1, 1};     i <- i+1; 
+    w_i := y_{1, 2};     i <- i+1; 
+    ... 
+    w_i := y_{1,|y_1|};  i <- i+1; 
+    w_i := x_{2,1};      i <- i+1; \end{lstlisting}
+    $\forall i :\; 0<i\le |w| :\; w_i \in (L_1 \cup L_2)$;
+    That is, $w \in (L_1 \cup L_2)^* = A$. 
+\end{minipage} 
+
+Indeed,$(L_1 \cup L_2)^*  = (L_1^* L_2^*)^*$. \qedsymbol \quad \textbf{\large 2. True}
+
+\subsection*{3. $(L_1^R \cap L_2^R)^* L_1 = (L_1^* L_2^*)^R$}
+Firstly, 
+\begin{flalign*}
+    1. L_1^R \cap L_2^R &= \{x | x \in L_1^R \wedge x \in L_2^R\} = && \\
+    &=\{x | x^R \in L_1 \wedge x^R \in L_2\} = 
+    \{x^R | x \in L_1 \wedge x \in L_2\} = && \\
+    &= (L_1 \cap L_2)^R &&
+\end{flalign*}
+\begin{flalign*}
+    2. & (L_1^*)^R   = (L_1^R)^* && \\
+    3. & (L_1 L_2)^R = L_2^R L_1^R && 
+\end{flalign*}
+\pagebreak
+Consider $\Sigma = \{0, 1\}; L_1 = \{0, 10\}; L_2 = \{1, 10\}$. 
+The following languages must be equivalent:
+\begin{align*}
+    (L_1^R \cap L_2^R)^* L_1 &= (L_1^* L_2^*)^R \\
+    [(0|10) \cap (1|10)]^{R*} (0|10) &= [(0|10)^* (1|10)^*]^R\\
+    (10)^{R*} (0|10) &= (1|10)^{R*} (0|10)^{R*} \\
+    (01)^* (0|10) &= (1|01)^* (0|01)^*
+\end{align*}
+\[A = (01)^* (0|10);\quad B = (1|01)^* (0|01)^*\]
+Let $b = 1(01)(01) = 10101 \in B$. There is no such word in $A$: 
+it is impossible to get prefix $"101"$ in $A$. \\ \qedsymbol \quad \textbf{\large 3. False}

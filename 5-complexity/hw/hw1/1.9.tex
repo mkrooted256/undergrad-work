@@ -1,0 +1,78 @@
+\section*{Ex 1.9}
+\begin{mdframed}
+	\textbf{Prove or disprove:}
+	\begin{enumerate}
+        \item $2n = \mathcal{O}(n)$;
+        \item $n^2 = O(n)$;
+        \item $n^2 = O(n \log^2 n)$;
+        \item $2^{2^n} = O(2^{2^n})$;
+        \item $20 = O(1)$;
+        \item $n = o(2n)$;
+        \item $2n = o(n^2)$;
+        \item $1 = o(1/n)$;
+        \item $20 = o(1)$;
+    \end{enumerate}
+\end{mdframed}
+
+\subsection*{Definitions}
+\begin{enumerate}
+    \item $f = O(g) \wedge g = \Omega(f)  \iff \exists c :\; f(n) \le c \cdot g(n)$ after some $n$
+    \item $f = \Theta(g) \iff f = O(g) \wedge g = O(f)$
+    \item $f = o(g) \wedge g = \omega(f) \iff \forall \varepsilon > 0 \; f(n) \le \varepsilon \cdot g(n)$ after some $n$
+\end{enumerate} 
+
+\subsection*{Problems}
+\begin{enumerate}
+    \item $2n = \mathcal{O}(n)$ ?
+        let $c = 2$. $2n \le 2 \cdot n. $. \\ \qedsymbol \quad \textbf{True}
+
+    \item $n^2 = O(n)$;
+        let $\exists c :\; n^2 \le c \cdot n$. 
+        Then $n^2 / n = n \le c$. Contradiction - for every $c$ we can make it false with sufficiently large $n$. \\
+        \qedsymbol \quad \textbf{False}
+
+    \item $n^2 = O(n \log^2 n)$ ?
+        \begin{flalign*}
+            n^2 & \le C \cdot n \ln^2 n \\
+            n  & \le C \cdot \ln^2 n \quad(\text{Let}\; n = e^{m}) \\
+            e^m  & \le C \cdot m^2
+        \end{flalign*}
+        That is just false. $e^m > C m^2$ for $m > 4$
+        \qedsymbol \quad \textbf{False}
+
+    \item $2^{2^n} = O(2^{2^n})$ ?
+        I'll prove more general statement.
+        \[\forall n:\; f(n) \le 1 \cdot f(n)\]
+        So, $f = O(f)$ with $n_0 = 1, C = 1$. Consequently, $2^{2^n} = O(2^{2^n})$ \\
+        \qedsymbol \quad \textbf{True}
+
+    \item $20 = O(1)$ ?
+        \[20 \le 20 \cdot 1\]
+        \qedsymbol \quad \textbf{True}
+
+    \item $n = o(2n)$ ?
+        \[n \le 2 \cdot n\]
+        \qedsymbol \quad \textbf{True}
+    
+    \item $2n = o(n^2)$ ?
+        \[2n \le n^2\]
+        \[n^2 - 2n = n(n-2) \ge 0 \implies \forall n > 2:\; 2n \le n^2\]
+        \qedsymbol \quad \textbf{True}
+
+    \item $1 = o(1/n)$ ?
+        \[\lim_{n\to\infty} \frac{1}{1/n} = \lim_{n\to \infty}n = \infty \ne 0\]
+        So, $1 \ne o(1/n)$
+
+        From the other perspective, we need to check 
+        \[\forall \varepsilon > 0, n > n_0: 1 \le \varepsilon \cdot 1/n\]
+        That is, $n \le \varepsilon$. 
+        In fact, $\forall \varepsilon \exists n:\; n > \varepsilon$ \\
+        \qedsymbol \quad \textbf{False}
+
+    \item $20 = o(1)$ ?
+        \[\forall \varepsilon > 0, n > n_0: 20 \le \varepsilon \cdot 1 = \varepsilon\]
+        Actually, $\exists \varepsilon > 0 :\; \forall n:\; 20 > \varepsilon $. For example, $\varepsilon = 19 < 20$.
+        From the other side, $\lim_{n\to\infty}\frac{20}{1} = 20 \ne 0$
+        \qedsymbol \quad \textbf{False}
+        
+\end{enumerate}

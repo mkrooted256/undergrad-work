@@ -1,0 +1,86 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+% This is a simple template for a XeLaTeX document using the "article" class,
+% with the fontspec package to easily select fonts.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+
+\setmainfont{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+%\setmonofont{Deja Vu Mono}
+
+% other LaTeX packages.....
+\usepackage{geometry} % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx} % support the \includegraphics command and options
+
+\title{Теорія ймовірності \\ Практика 2}
+\author{ФІ-91 Михайло Корешков}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+\pagebreak
+
+\section{hw help}
+\subsection{1.19b}
+$
+\begin{pmatrix}
+    a1, b1, c1, d1, a2, d2 \\
+\end{pmatrix} \\
+\begin{pmatrix}
+    a2, b1, c1, d1, a1, d2 \\
+\end{pmatrix}
+$ 
+
+Два випадки: \\
+1. Ax2, Bx2, Cx1, Dx1 \\
+2. Ax3, Bx1, Cx1, Dx1 \\
+\begin{align*} 
+    N = C_4^1 \cdot C_13^3 \cdot C_13^1 \cdot C_13^1 \cdot C_13^1 + \\ 
+    + C_4^2 \cdot C_13^2 \cdot C_13^2 \cdot C_13^2 \cdot C_13^1
+\end{align*}
+Краще всього взагалі уникати залежних виборів в перемноженні. Тут ми розбили на всі можливі неперетинні випадки.
+
+
+\section*{# 3.3}
+
+\section{# 3.4}
+a) $A = \{$ Одна монета випала гербом $\}$ \\
+$\Omega = \{HHH, HHT, HTH, THH, HTT, THT, TTH, TTT\}$ \\
+$A = \Omega \setminus \{HHH\} \quad \implies \quad P(A) = \frac{7}{8}$
+\\
+b) $B = \{$ 2 герба $\}$ \\
+$B = \{HHT, THH, HTH\} \implies P(B) = \frac{3}{8}$ \\
+\\
+c) $C = \{$ 2+ гебрів $\}$ \\
+$C = \{HHH, HHT, THH, HTH\} \implies P(C) = \frac{4}{8}$
+\\
+
+\section{# 3.5}
+$\Omega = \{(x_1, x_2, ..., x_{12}\:|\: x_i = \overline{1,6})\}$ \\
+$|\Omega| = 6^{12};\quad P(\omega) = \frac{1}{6^{12}}$ \\
+$A = \{$Кожне очко випало двічі$\}$ \\
+$A = \{\omega \in \Omega \:|\: \#_i(\omega)=2 \text{for} i=\overline{1,6} \}$
+1. Розставляємо 2 одиниці. Потім 2 двійки. ... Потім 2 шестірки: \\
+$$|A| = \frac{12!}{(2!)^6} \implies P(A) = \frac{12!}{2^6 \cdot 6^{12}}$$
+
+\section{# 3.7}
+$\Omega = \{1, 2, ..., 100!\}; \quad |\Omega| = 100!$ \\
+a) $A = \{2, 4, 6, ..., 100!\}; \quad P(A) = \frac{1}{2}$ \\
+b) $B = \{k | 2\mid k and 3\mid k\} = \{6, 12, ..., 100!\} \implies P(A) = \frac{1}{6}$\\
+c) $C = \{k | 2\mid k or 3\mid k or 5\mid k \}$
+$$ P(C) = P(F \cup G \cup H) $$
+
+\end{document}

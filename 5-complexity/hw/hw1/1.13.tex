@@ -1,0 +1,31 @@
+\section*{Ex 1.13}
+\begin{mdframed}
+	Encode $(a,b) \in \mathbb N ^ 2$ using $\{0,1\}$
+\end{mdframed}
+
+\begin{enumerate}
+	\item $a, b$ are binary vectors. 
+	\item Select number $n\in \mathbb{N}\setminus \{0,1\}$
+	\item Search for $0^(n-1)$ patterns in $a$. Place "1" after every (n-1)-th "0". Now we have $x$ with no 0-sequences longer than $n-1$.
+	\item $w = x \cdot 0^n 1 \cdot b$ - encoded $(a,b)$
+\end{enumerate}
+
+n zeros in row is less probable as $n \to \infty$. 
+
+In such way we can definetly tell where first number ends. \\
+There will be no more than $\frac{|a|}{n} \cdot n + n = |a| + n$ and no less than $n$ additional symbols.
+
+Moreover, if $a$ has a lot of long constant substrings (..0000.. or ..1111..), 
+we can additionally encode it (before main encoding process) using the following rule:
+$$a'_1 = a_1; \quad a'_k = \begin{cases}
+	\overline{a'_{k-1}}, & \text{if } a_k = a_{k-1} \\
+	a'_{k-1}, & \text{if } a_k \ne a_{k-1} \\
+\end{cases} $$
+
+That is, "..0000000.." sequences will become "..0101010.." and "..10101010.." will become "..0000000..". 
+
+\begin{tabular}{|p{10cm}}
+	Actually I borrowed this encoding from the USB 2.0 protocol 
+	which I happened to learn half a month earlier 
+\end{tabular}
+

@@ -1,0 +1,40 @@
+Let $x,y \in L_1$ and $xy = yx$.
+The proof is going to be by induction on |y|. Note that\\
+$xy = x_1x_2\dots x_{|x|}y_1y_2 \dots y_{|y|}$ \\ 
+$yx = y_1y_2 \dots y_{|y|}x_1x_2\dots x_{|x|}$ 
+
+\subsection*{Base case}
+\[|y| = k = 1\]
+Let's proof $\left(\forall x, y \in L_1 : |y| = 1 \implies xy = yx\right) 
+\implies \exists \omega \in \Sigma :\; L_1 \subseteq \{\omega\}^*$
+
+That is, $y = y_1 \in \Sigma$. 
+\begin{align*} 
+	& xy = xy \implies \\
+	& \begin{pmatrix}
+		& x_1 & x_2 & \dots & x_{|x|-1} & x_{|x|} & y_1 \\
+		& y_1 & x_1 & x_2 & \dots & x_{|x|-1} & x_{|x|}
+	\end{pmatrix} \\
+\end{align*}
+
+So $x_2 = x_1,\; x_3 = x_2,\; \cdots ,\; x_{|x|} = x_{|x|-1}$ 
+meaning that $x_1 = x_2 = \dots = x_{|x|} = y_1 = \omega$.
+
+That is, 
+\[(\forall x, y \in L_1 :\; |y|=1 \implies xy = yx ) \implies \forall x \in L_1 :\; x = \omega ^ {|x|}\]
+where $\omega = y$ for any $y \in L_1$ with $|y| = 1$.
+
+Note that there exists only one $y$ with $|y| = 1$. 
+If $\exists y,z \in L_1 :\; |y|=|z|=1 \implies \forall x \in L_1 :\; xy=yx \;\&\; xz=zx$ then 
+$x_i = y$ and $x_i = z$ and consequently $y = z$
+
+\subsection*{Induction}
+Let the following statement true:
+\[\left(\forall x, y \in L_1 : |y| = \mathbf{k} \implies xy = yx\right) 
+\implies \exists \omega \in \Sigma :\; L_1 \subseteq \{\omega\}^*\]
+
+Let's proof $\left(\forall x, y \in L_1 : |y| = \mathbf{k + 1} \implies xy = yx\right) 
+\implies \exists \omega \in \Sigma :\; L_1 \subseteq \{\omega\}^*$
+
+Let $y = y_1 z$ where $|y_1| = k, |z|=1$.
+$xy = yx \implies xy_1z = y_1zx$. Obviously, 

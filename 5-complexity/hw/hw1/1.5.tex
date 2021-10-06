@@ -1,0 +1,59 @@
+\section*{Ex 1.5}
+\begin{mdframed}
+	\textbf{Prove:} \\
+	let $\varepsilon \notin \Sigma$
+	\[
+		\forall L_1 \subseteq \Sigma^* :\: (L_1^* = L_1 L_1^*) \iff (\varepsilon \in L_1)
+	\]
+\end{mdframed}
+
+% \begin{proof}
+
+% 	1. $\implies$
+
+% 	We got $L_1^* = L_1 L_1^*$. % Let $\varepsilon \notin L_1$.
+% 	Note that $\varepsilon \in L_1^*$ by definition. 
+% 	Then $\varepsilon \in L_1 L_1^*$. \\
+% 	So $\varepsilon \in L_1 \left(\{\varepsilon\} \cup \bigcup_{n=1}^\infty L_1^n\right)$.\\
+% 	$\varepsilon \in \{x_0 x_1 x_2 \dots x_n \;|\; x_0 \in L_1,\; x_i \in (L_1\cup\{\varepsilon\}),\; n>0\}$.\\
+% 	Even if $x_i = \varepsilon, i>0$ we have $\varepsilon \in \{x_0 | x_0 \in L_1\} \in $ left.
+% 	$\varepsilon \in L_1$.
+% \end{proof}
+
+\begin{proof}
+
+	% 2. $\impliedby$
+
+	% We got $\varepsilon \in L_1$. 
+	
+	% Let $x \in L_1^*$. Words from RHS have a form of $a b \;|\; a\in L_1, b\in L_1^*$.
+	% Let $a = \varepsilon, b = x \implies \varepsilon x \in$ RHS. 
+	% That is, $L_1^* \subseteq L_1 L_1^*$.
+
+	% Let $x \in L_1 L_1^*$. 
+	\begin{align*}
+		L_1 L_1^* & = L_1 \left(\{\varepsilon\} \cup \bigcup_{n=1}^\infty L_1^n\right) = 
+		L_1 \cup  \bigcup_{n=2}^\infty L_1^n = \\ & = \bigcup_{n=1}^\infty L_1^n; \\
+		L_1^* & = \left(\bigcup_{n=1}^\infty L_1^n\right) \cup \{\varepsilon\};
+	\end{align*}
+
+	Obviously, $L_1 L_1^* \subseteq L_1^*$. Question is wether $L_1^* \subseteq L_1 L_1^*$. \\
+
+	1. $\implies$ \\
+	Let $x \in L_1^* \implies x \in L_1 L_1^*$. 
+	Let $x = \varepsilon \in L_1^*$. Then $\varepsilon \in \bigcup_{n=1}^\infty L_1^n$.
+	This could be true only when $\varepsilon \in L_1$. \qedsymbol 
+
+	2. $\impliedby$ \\
+	Let $\varepsilon \in L_1$.
+	Then $L_1 = L_1 \cup \{\varepsilon\}$. 
+	Let $x \in L_1^*$. If $x \ne \varepsilon$, obviously $x \in L_1 L_1^*$.
+	If $x = \varepsilon$ we got
+	\begin{align*}
+		L_1 L_1^* & = \bigcup_{n=1}^\infty L_1^n = \bigcup_{n=1}^\infty (L_1 \cup \{\varepsilon\})^n = \\
+		& = L_1 \cup \{\varepsilon\} \cup \bigcup_{n=2}^\infty L_1^n
+	\end{align*}
+	So, $x \in L_1 L_1^*$. \qedsymbol
+
+	That is, $(L_1^* = L_1 L_1^*) \iff (\varepsilon \in L_1)$
+\end{proof}

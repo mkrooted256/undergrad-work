@@ -1,0 +1,88 @@
+\section*{Ex 1.11}
+\begin{mdframed}
+	\textbf{Prove or disprove:}
+    $f, g, h :\; \mathbb N \to \mathbb N$
+	\begin{enumerate}
+        \item $O(f+g) = O(f) + O(g)$
+        \item $O(f\cdot g) = O(f) \cdot O(g)$
+        \item $g=O(f) \wedge h=O(f) \implies g = O(h)$
+        \item $o(f+g) = o(f) + o(g)$
+        \item $o(f\cdot g) = o(f) \cdot o(g)$
+        \item $O(O(f)) = O(f)$
+        \item $o(o(f)) = o(O(f)) = O(o(f)) = o(f)$
+    \end{enumerate}
+\end{mdframed}
+
+\begin{enumerate}
+    \item $O(f+g) = O(f) + O(g)$
+        $$u(n) \in LHS \iff \exists C_1:\; u(n) \le C_1 \cdot (f+g) = C_1 f + C_1 g$$
+        $$v(n) \in RHS \iff (v(n) = x(n) + y(n)) \;\wedge\; \exists C_2, C_3:\; x(n) \le C_2 f, y(n) \le C_3 g \quad$$
+        $$1. \subseteq$$
+        $$u(n) \le C_1 \cdot (f+g) = C_1 f + C_1 g \implies u(n) \le x(n) + y(n) :\; x \le C_1 f \wedge y \le C_1 g $$
+        $$\implies u(n) \in RHS \quad \qedsymbol$$
+        $$2. \supseteq$$
+        $$v(n) = x(n) + y(n) \le C_2 f + C_3 g \le \max{C_2,C_3} (f+g) \implies v(n) \le C' (f+g) $$
+        $$\implies v(n) \in LHS\quad  \qedsymbol$$
+        \qedsymbol \textbf{1. True}\\
+        \hrulefill
+
+    \item $O(f\cdot g) = O(f) \cdot O(g)$
+        $$u(n) \in LHS \iff \exists C_1:\; u(n) \le C_1 f(n) g(n) = C' f(n) \cdot C'' g(n) \quad :\; C'\cdot C'' = C_1$$
+        $$v(n) \in RHS \iff (v(n) = x(n)y(n)) \;\wedge\; \exists C_2, C_3:\; x(n) \le C_2 f(n), y(n) \le C_3 g(n) \quad$$
+        $$1. \subseteq$$
+        $$ u(n) \le C_1 f(n) g(n) = C' f(n) \cdot C'' g(n) \implies u(n) \le x(n) y(n) :\; x \le C' f \wedge y \le C'' g $$
+        $$\implies u(n) \in RHS\quad  \qedsymbol$$
+        $$2. \supseteq$$
+        $$v(n) = x(n)y(n) \le C_2 f(n) \cdot C_3 g(n) \le C_2 C_3 (f(n) g(n)) \implies v(n) \le C' (f(n)g(n)) $$
+        $$\implies v(n) \in LHS\quad  \qedsymbol$$
+        \qedsymbol \textbf{2. True}\\
+        \hrulefill
+
+    \item $g=O(f) \wedge h=O(f) \implies g = O(h)$
+    
+        Let $f(n) = n!,\; g(n) = n^2,\; h(n) = \log n$.
+        Then $g = O(f),\; h = O(f)$, but $g \ne O(h)$! \\
+        \qedsymbol \textbf{3. False}\\
+        \hrulefill
+
+    \item $o(f+g) = o(f) + o(g)$
+        $$u(n) \in LHS \iff \forall E_1:\; u(n) \le E_1 \cdot (f+g) = E_1 f + E_1 g$$
+        $$v(n) \in RHS \iff (v(n) = x(n) + y(n)) \;\wedge\; \forall E_2, E_3:\; x(n) \le E_2 f, y(n) \le E_3 g \quad$$
+        $$1. \subseteq$$
+        $$u(n) \le E_1 \cdot (f+g) = E_1 f + E_1 g \implies u(n) \le x(n) + y(n) :\; x \le E_1 f \wedge y \le E_1 g$$
+        $$\implies u(n) \in RHS \quad \qedsymbol$$
+        $$2. \supseteq$$
+        $$v(n) = x(n) + y(n) \le E_2 f + E_3 g \le \max{C_2,C_3} (f+g) \implies v(n) \le E' (f+g) $$
+        $$\implies v(n) \in LHS \quad \qedsymbol$$
+        \qedsymbol \textbf{4. True}\\
+        \hrulefill
+
+    \item $o(f\cdot g) = o(f) \cdot o(g)$
+        $$u(n) \in LHS \iff \forall E_1:\; u(n) \le E_1 f(n) g(n) = E' f(n) \cdot E'' g(n) \quad :\; E'\cdot E'' = C_1$$
+        $$v(n) \in RHS \iff (v(n) = x(n)y(n)) \;\wedge\; \forall E_2, E_3:\; x(n) \le E_2 f(n), y(n) \le E_3 g(n) \quad$$
+        $$1. \subseteq$$
+        $$ u(n) \le E_1 f(n) g(n) = E' f(n) \cdot E'' g(n) \implies u(n) \le x(n) y(n) :\; x \le E' f \wedge y \le E'' g$$
+        $$ \implies u(n) \in RHS\quad  \qedsymbol$$
+        $$2. \supseteq$$
+        $$v(n) = x(n)y(n) \le E_2 f(n) \cdot E_3 g(n) \le E_2 E_3 (f(n) g(n)) \implies v(n) \le E' (f(n)g(n))$$
+        $$ \implies v(n) \in LHS\quad  \qedsymbol$$
+        \qedsymbol \textbf{5. True}\\
+        \hrulefill
+
+    \item $O(O(f)) = O(f)$
+        $$u(n) \in LHS \iff \exists C_1 :\; \forall g(n) \in O(f) :\; u(n) \le C_1 \cdot g(n)$$
+        That is,
+        $$u(n) \in LHS \iff $$
+        $$\exists C_1 :\; \forall g(n) :\; \exists C_2 :\; (g(n) \le C_2 \cdot f(n) \implies u(n) \le C_1 \cdot g(n))$$
+        So basically 
+        $$u(n) \in LHS \implies u(n) \le C_1 g(n) \le C_1 C_2 f(n) = C' f(n) 
+        \implies u(n) \in O(f) \quad \qedsymbol$$
+        The other way:
+        $$v(n) \in O(f) \implies v(n) \le C f(n) \implies v(n) \le C f(n) \le (C+1) f(n) 
+        \implies v(n) \in O(O(f)) \quad \qedsymbol$$
+        \qedsymbol \textbf{6. True}\\
+        \hrulefill
+
+    \item $o(o(f)) = o(O(f)) = O(o(f)) = o(f)$
+
+\end{enumerate}

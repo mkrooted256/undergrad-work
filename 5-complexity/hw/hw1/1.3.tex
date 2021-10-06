@@ -1,0 +1,43 @@
+
+\section*{Ex 1.3}
+\begin{mdframed}
+	\textbf{Prove:} \\
+	let $L_1 \subseteq \Sigma^*$
+	\[
+		\left( \forall x,y \in L_1 :\: xy = yx \right) \implies \left( \exists \omega \in \Sigma^* :\: L_1 \subseteq \{\omega\}^* \right)
+	\]
+\end{mdframed}
+
+\begin{proof}
+First we need to proof that $(\forall x,y \in L_1 \; xy=yx) \implies 
+(\exists \omega \in \Sigma,\; p,q >0:\; x = \omega^p, y = \omega^q)$.
+The proof will be by induction on $|xy|$.\\
+
+\hfill\begin{minipage}{\dimexpr\textwidth-1cm}
+\begin{proof}
+	\subsection*{Base case}
+	Let $|xy| = 2$. (If $|xy|=1$ then $x=\varepsilon$ or $y=\varepsilon$. Obviously $xy=yx$)
+	Then $|x| = |y| = 1$ and obviously $x = y$. That is, $\omega = x = y$, $p=q=1$
+
+	\subsection*{Induction}
+	Let implication true $\forall x,y :\; |xy| < n$. We prove it for $|xy| = n$.
+	Without loss of generality we can sat that $|x| >= |y|$. If not so, just swap them.
+	\begin{align*}
+		& \begin{pmatrix}
+		x_1 & x_2 & x_3 & x_4 & x_5 & ... & x_{|x|} & y_1 & ... & y_{|y|} \\
+		y_1 & ... & y_{|y|} & x_1 & x_2 & x_3 & x_4 & x_5 & ... & x_{|x|} 
+		\end{pmatrix}; \\
+		& (xy)_i = (yx)_i \\
+		& \implies \exists z \in \Sigma^* :\; x = zy = yz
+	\end{align*}
+	If $|z| = 0$, $x=y$ and we can take $\omega = x, p=q=1$.
+	Otherwise, $z \in \Sigma^+$ and $|zy| < n$. 
+	Induction hypothesis applies: $\exists \omega \in \Sigma,\; p',q' >0:\; z = \omega^{p'}, y = \omega^{q'}$.\\
+	Then, $x = zy = \omega^{p'} \omega^{q'} = \omega^{p' + q'}$ and $y = \omega^{q'}$
+\end{proof}
+\end{minipage}
+\\ \\
+So we know that $\forall x,y \in L_1 \; \exists \omega \in \Sigma,\; p,q \ge 0:\; x = \omega^p, y = \omega^q$.
+In other words, $x,y \in \{\omega\}^*$ and even $x \in \{\omega\}^*$.
+That is, $L_1 \subseteq \{\omega\}^*$
+\end{proof}

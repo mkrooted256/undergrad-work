@@ -1,0 +1,154 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Теорія ймовірності}
+\newcommand\hwnumber{ДЗ №3}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+\section*{Незалежність подій}
+\begin{itemize}
+    \item Події $A,B \subseteq \Omega$ називаються \textbf{незалежними} якщо
+    $$P(A\cap B) = P(A)\cdot P(B)$$
+    
+    \item Події $\{A_i\}_{i\in I}$ називаються \textbf{попарно незалежними} якщо 
+    кожна пара подій є незалежною
+    
+    \item Події $\{A_i\}_{i\in I}$ називаються \textbf{незалежними в сукупності} якщо
+    $$\forall J\subseteq I:\; P(\bigcap_{i\in J}A_i) = \prod_{i\in J}P(A_i)$$
+\end{itemize}
+
+\begin{mdframed}
+    Попарна незалежність $\nRightarrow$ Незалежність в сукупності
+\end{mdframed}
+
+\section*{Несумісні події}
+Події $A, B$ називаються несумісними якщо $A\cap B = \varnothing$. \\
+$A,B \text{ - несумісні} \implies P(A\cap B) = 0$, але не навпаки. 
+
+\pagebreak
+\section*{Умовна ймовірність}
+Умовна ймовірність події $A$ за умови події $B$ позначається $P(A|B)$.
+\begin{mdframed}
+    $$P(A|B) = \frac{P(A\cap B)}{P(B)} \text{, при } P(B) > 0$$
+\end{mdframed}
+
+Тобто умовна ймовірність показує, наскільки ймовірно, що відбудеться $A$, якщо відомо, \\
+що відбулась $B$.
+
+\section*{Повна група гіпотез}
+Множина $\{H_i\}_{i=1}^n, \; H_i \subseteq \Omega$ називається 
+\textbf{Повною групою гіпотез}, якщо:
+\begin{enumerate}
+    \item $H_i \cap H_j = \varnothing \quad (i\ne j)$
+    \item $\displaystyle\bigcup_{i=i}^n H_i = \Omega$
+    \item $P(H_i) > 0$
+\end{enumerate}
+
+Тобто, \textbf{Повна група гіпотез} - це розбиття $\Omega$, елементи якого мають ненульову ймовірність.
+
+\section*{Формула повної ймовірності}
+\begin{mdframed}
+Нехай $\{H_1, ..., H_n\}$ - повна група гіпотез, $A$ - подія. Тоді
+$$P(A) = \sum_{i=1}^n P(A|H_i)P(H_i)$$
+\end{mdframed}
+
+\subsection*{Застосування формули повної ймовірності}
+Використовується коли ми знаємо ймовірність події за різних несумісних гіпотез
+та хочемо обчислити її повну (безумовну) ймовірність 
+
+\section*{Формула Байеса}
+Нехай $\{H_1, ..., H_n\}$ - повна група гіпотез, $A \subseteq \bigcup_{i=1}^n H_i$ - подія.
+\begin{align*}
+    P(H_k|A) &= \frac{P(A\cap H_k)}{P(A)} \cdot \frac{P(H_k)}{P(H_k)}
+    = \frac{P(H_k\cap A)}{P(H_k)} \cdot \frac{P(H_k)}{P(A)} =\\
+    &= \frac{P(A|H_k)P(H_k)}{P(A)}
+\end{align*}
+
+\pagebreak
+Використаємо формулу повної ймовірності ($P(A) = \sum_i P(A|H_i)P(H_i)$)
+і отримаємо формулу Байеса:
+\begin{mdframed}
+$$    P(H_k|A) = \frac{P(A|H_k)P(H_k)}{\sum_{i=1}^n P(A|H_i)P(H_i)}$$
+\end{mdframed}
+
+\subsection*{Застосування формули Байеса}
+Використовується коли ми знаємо ймовірності деякої події за умов різних несумісних гіпотез,
+а хочемо обчислити ймовірність гіпотези за умови, що така подія відбулась.
+
+
+
+\end{document}
+
