@@ -18,6 +18,7 @@
 \usepackage{fullpage}
 \usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{cancel}
 \geometry{a4paper} 
 %\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{fancyhdr}
@@ -234,7 +235,141 @@ $$P(A|B) = \frac{\pi}{16}$$
 
 
 \section*{5.20}
-$$\Omega$$
+$$\Omega = \{O, P\}^n$$
+$$P(\{\omega_i = P\}) = p$$
+$$A = \{\omega \in \Omega \;|\; \omega_1 = P\}$$
+$$B_k = \{\omega \in \Omega \;|\; \text{рівно k Решок}\}$$
+$$P(\omega_1 ... \omega_n) = p^{\#P(\omega)}(1-p)^{\#O(\omega)}$$
+
+Для яких пар $(n,k)$ події $A$ та $B_k$ - незалежні?
+$$P(A) = \sum_{\omega \in A}P(\omega) = p$$
+$$P(B_k) = C_n^k p^k(1-p)^{n-k} = \frac{n! p^k (1-p)^{n-k}}{k!(n-k)!}
+= p^k(1-p)^{n-k} \frac{n!}{k!(n-k)!}$$
+$$P(A\cap B_k) = C_n^{k-1}p^k(1-p)^{n-k} = p^k(1-p)^{n-k} \frac{n!}{(k-1)!(n-k+1)!}$$
+
+
+Незалежність - $P(A)P(B_k) = P(A\cap B_k)$
+$$P(A)P(B_k) = p \cdot (p^{k}-p^{n}) \frac{n!}{k!(n-k)!} =  p^k(1-p)^{n-k} \frac{n!}{(k-1)!(n-k+1)!}$$
+$$p\frac{n!}{k!(n-k)!} = \frac{n!}{(k-1)!(n-k+1)!}$$
+$$p (k-1)!(n-k+1)! = k!(n-k)!$$
+$$p \cdot (n-k+1) = k$$
+\begin{mdframed}[style=ans]
+    $$n = \frac{k}{p}+k-1,\quad \text{При } k\vdots p$$
+\end{mdframed}
+
+\section*{№ 5.21}
+$$\Omega = \{\pi: {1..10} \to {1..10} \text{ - перестановка}\} \ni \omega$$
+$$P(\omega) = \frac{1}{|\Omega|} = \frac{1}{10!}$$
+
+\begin{align*}
+    A &= \{\omega(4) = 4\} = \{(x,x,x,4,x,x,x,x,x,x)\}\\ \\
+    B &= \{\omega(3) = \omega(2)+2 = \omega(1)+4\} = \\
+    &= \{(x,1,x,2,x,3,x,x,x,x), (x,x,x,1,x,2,x,3,x,x), (x,x,x,x,x,1,x,2,x,3)\}
+\end{align*}
+$$P(B) = 3\cdot \frac{7!}{10!}$$
+
+$$A\cap B = \{(x,x,x,4,x,1,x,2,x,3)\};\quad 
+P(A\cap B) = \frac{6!}{10!}$$
+
+\begin{mdframed}[style=ans]
+\begin{equation*}
+    P(A|B) = \frac{P(A\cap B)}{P(B)} = \frac{6!10!}{10!\cdot 3\cdot 7!} = \frac{6!}{3\cdot 7!} = \frac{1}{21}
+\end{equation*}
+\end{mdframed}
+
+\section*{№ 5.22}
+$$\Omega = \{0,1,...,7\} \ni \omega$$
+$$P(\omega) = C_7^\omega (0.1)^\omega 0.9^(7-\omega)$$
+
+\subsection*{a) $A=\{2\}$}
+$P(A) = P(2) = C_7^2 (0.1)^2 0.9^5 = 21 \cdot \frac{9^5}{10^7} \approx 0.124$
+
+\subsection*{b) $B=\{0\}$}
+$P(B) = P(0) = C_7^0 (0.1)^0 0.9^7 = 1 \cdot \frac{9^7}{10^7} \approx 0.478$
+
+\subsection*{c) $C=\{0,1,2\}$}
+$P(C) = P(0)+P(1)+P(2) = \frac{1\cdot 9^7 + 7\cdot 9^6 + 21\cdot 9^5}{10^7} \approx 0.974$
+
+\section*{№ 5.23}
+% $$\Omega = \{(i,j)\;|\; i \text{ - де шукали}, j \text{ - де шукали}\}$$
+$A_j$ - монета в ящику $j$; $B_i$ - монету \textbf{не} знайшли в ящику $i$.
+
+$$P(A_j) = p_j$$
+$$P(B_i|A_j) = 
+\begin{cases}
+    (1-a_i), & i=j\\
+    1, & i \ne j
+\end{cases}$$
+
+$$P(B_i|A_j) P(A_j) = P(A_j|B_i) P(B_i)$$
+$$P(A_j|B_i) = \frac{P(B_i|A_j) P(A_j)}{P(B_i)}$$
+
+$$P(B_i) = P(B_i|A_i)P(A_i) + P(B_i|\overline{A_i})P(\overline{A_i})$$
+$$P(B_i) = (1-a_i)p_i + 1\cdot (1-p_i) = 1 - p_i a_i$$
+
+$$P(A_j|B_i) = \frac{P(B_i|A_j) p_j}{1 - p_i a_i} = \begin{cases}
+    \displaystyle\frac{(1-a_i)p_{j(=i)}}{1 - p_i a_i}, & i=j\\
+    \\
+    \displaystyle\frac{1\cdot p_{j}}{1 - p_i a_i}, & i\ne j
+\end{cases}$$
+
+\section*{№ 5.24}
+$$P(A|B) = P(B|A)$$
+$$P(A\cup B) = 1$$
+$$P(A \cap B) > 0$$
+
+$$P(A|B) = \frac{P(A\cap B)}{P(B)} = \frac{P(A \cap B)}{P(A)} = P(B|A)$$
+$$\implies P(A) = P(B) = p$$
+
+$$P(A\cup B) = P(A) + P(B) - P(A\cap B) = 2p - P(A\cap B) = 1$$
+$$2p = 1 + P(A\cap B) > 1 \implies p > \frac{1}{2}$$
+
+\section*{№ 5.25}
+$$P(AB) = P(A)P(B),\quad A \subset B$$
+
+$$A \subset B \implies AB = A$$
+$$P(AB) = P(A) = P(A)P(B) \;|\; :P(A)$$
+
+Отже,
+$$\left[\begin{array}{cc}
+P(B) = 1 &\\
+P(A) = 0 &
+\end{array}
+\right.$$
+
+\section*{№ 5.26}
+\begin{align*}
+    & P(A_1 | C) P(A_2 | A_1 C) P(A_3 | A_1 A_2 C) ... P(A_n | A_1 A_2 ... A_{n-1} C) = \\ 
+    &= \frac{\cancel{P(A_1 C)}}{P(C)} \frac{\cancel{P(A_2 A_1 C)}}{\cancel{P(A_1 C)}} 
+    \frac{\cancel{P(A_3 A_2 A_1 C)}}{\cancel{P(A_2 A_1 C)}} ... \frac{P(A_n ... A_1 C)}{\cancel{P(A_{n-1} ... A_n C)}} 
+    = \frac{P(A_n ... A_1 C)}{P(C)} = \\
+    &= P(A_1 ... A_n | C) \quad \qedsymbol
+\end{align*}
+
+\section*{№ 5.27}
+$$\left[\begin{array}{c}
+    P(A) = 0 \\
+    P(A) = 1
+\end{array} \right.$$
+
+$$\forall B: \; P(A)=0 \implies$$
+$$\left(\begin{cases}
+    P(A\cap B) \le P(A) \\
+    P(A\cap B) \le P(B)
+\end{cases}\right) \implies P(AB) \le 0 \implies P(AB) = 0$$
+$$P(AB)=0$$
+$$P(A)P(B) = 0\cdot P(B) = 0$$
+$$\implies P(AB) = P(B) \; \qedsymbol$$
+
+$$\forall B: \; P(A)=1 \implies$$
+$$P(A\cup B) \ge P(A) = 1 $$
+$$P(A\cup B) = 1$$
+$$P(A\cup B) = P(A) + P(B) - P(A\cap B)$$
+$$1 = 1 + P(B) - P(AB)$$
+$$P(AB) = P(B)$$
+$$P(A)P(B) = P(B)$$
+$$\implies P(AB) = P(A)P(B) \; \qedsymbol$$
+
 
 \end{document}
 
