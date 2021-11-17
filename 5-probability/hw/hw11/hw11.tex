@@ -1,0 +1,335 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{unicode-math}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Теорія ймовірності}
+\newcommand\hwnumber{ДЗ №11}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+% 9.25-9.28, 11.18
+
+\section*{№ 9.25}
+\begin{mdframed}
+    $\xi$ - в.в із щільністю розподілу $p(x)$
+    \begin{equation*}
+        p(x) = \begin{cases}
+            2e^{-2x},& x\ge 0\\
+            0, x < 0
+        \end{cases}
+    \end{equation*}
+\end{mdframed}
+
+
+
+\subsection*{1. $P(\xi\in[1,2])$}
+$$P(\xi\in[1,2]) = \int_1^2 p(x) dx = \int_1^2 2e^{-2x} = \left. -e^{-2x} \right|_1^2 = e^{-2}-e^{-4}$$
+
+
+\subsection*{2. $P(\xi\in(1,2])$}
+$$\xi$$ має щільність розподілу $\implies$ випадкова величина неперервна \\
+$\implies F_\xi(x-o) = F_\xi(x) = F_\xi(x+o)$
+
+$$P(\xi\in(1,2]) = \int_1^2 p(x) dx = P(\xi\in[1,2]) = e^{-2}-e^{-4}$$
+
+
+\subsection*{3. $P(\xi\ge 2)$}
+$$P(\xi\ge 2) = \int_2^\infty p(x) dx = \lim_{a\to +\infty} \left. -e^{-2x}\right|_2^a = e^{-4} - \cancelto{0}{e^{-\infty}} = e^{-4} $$
+
+\subsection*{4. $P(\xi \le 3)$}
+$$P(\xi\le 3) = \int_{-\infty}^3 p(x) dx = \int_{-\infty}^0 p(x) dx + \int_{0}^3 p(x) dx = $$
+$$= 0 - e^{-2\cdot 3} + e^{-2\cdot 0} = 1-e^{-6} \approx 0.997522$$
+
+Note: $P(\xi\le 3) = P(\xi \in [0,3])$.
+
+Note: $$F_\xi (x) = \begin{cases}
+    0, & x<0 \\
+    1-e^{-2x}, & x \ge 0 
+\end{cases}$$
+
+\subsection*{5. $P(\xi^2-5\xi\ge -6)$}
+
+$$\xi^2-5\xi\ge -6$$
+$$\xi^2-5\xi + 6 \ge 0$$
+$$(\xi - 2)(\xi - 3) \ge 0$$
+$$\left[ \begin{matrix}
+    \xi \le 2\\
+    \xi \ge 3
+\end{matrix} \right.$$
+
+$$P(\xi^2-5\xi\ge -6) = P(\xi \in (-\infty;2]\cup [3,\infty)) 
+= \int_{-\infty}^2 p(x)dx + \int_3^{+\infty} p(x) dx 
+= 1-\int_2^3 p(x) dx = $$
+$$= 1 + e^{-6} - e^{-4} \approx 0.9842$$
+
+\subsection*{6. $\eta = \ln (2\xi)$}
+
+$$P(\eta\le x) = P(\ln (2\xi) \le x)$$
+$$F_\eta(x) = P(\xi \le \frac{1}{2} e^x) = F_\xi(\frac{1}{2} e^x)$$
+$$p_\eta(x) = \frac{1}{2} e^x p_\xi(\frac{1}{2} e^x) = e^x \cdot e^{-2\cdot\frac{1}{2} e^x} = e^{x-e^x}$$
+
+Note: $\xi$ завжди $>0$. Розглядаємо лише $x>0$.
+
+\section*{№ 9.26}
+\begin{mdframed}
+    $\xi$ - вип.величина з щільністю $p(x)$
+\end{mdframed}
+
+\subsection*{1. $\eta = -5\xi + 4$}
+
+$$F_\eta(x) = P(-5\xi+4 \le x) = P(\xi \ge -\frac{x-4}{5}) = 1 - F(-\frac{x-4}{5})$$
+$$p_\eta(x) = \frac{1}{5} p(-\frac{x-4}{5})$$
+
+\subsection*{2. $\eta = \xi^3$}
+$$F_\eta(x) = P(\xi^3 \le x) = P(\xi \le \sqrt[3]{x}) = F(x^{1/3})$$
+$$p_\eta(x) = \frac{1}{3} x^{-2/3} p(\sqrt[3]{x})$$
+
+\subsection*{3. $\eta = 1/\xi$}
+
+$$F_\eta(x) = P(1/\xi \le x) = P(\xi \ge 1/x) = 1 - P(\xi \le 1/x) = 1-F(1/x)$$
+$$p_\eta(x) = +\frac{1}{x^2} p(1/x)$$
+
+\subsection*{4. $\eta =-\xi^4-4\xi^2$}
+
+$$F_\eta(x) = P(-\xi^4-4\xi^2 \le x)$$
+
+$$P(-\xi^4 - 4\xi^2 \le x) = \begin{cases}
+    1,& x\ge0 \quad \text{бо ліва частина недодатня}\\
+    P(\xi^4 + 4\xi^2 - |x| \ge 0)&, x<0
+\end{cases}$$
+
+$$D = 16 + 4|x| = 4(4+|x|)$$
+$$\xi_0 = -2 \pm \sqrt{4+|x|}$$
+$$\xi^4 + 4\xi^2 - |x| = (\xi^2 - (-2 + \sqrt{4+|x|}))\cdot (\xi^2 - (-2 - \sqrt{4+|x|})) \ge 0$$
+
+$$\xi^2 \notin (-2 - \sqrt{4+|x|}; -2 + \sqrt{4+|x|})$$
+Тобто 
+$$\xi^2 > -2 + \sqrt{4+|x|}, \quad \text{бо } \xi^2 \ge 0$$
+Тобто
+$$|\xi| > \sqrt{\sqrt{4+|x|}-2}$$
+$$\xi \notin [-\sqrt{\sqrt{4+|x|}-2},\sqrt{\sqrt{4+|x|}-2}]$$
+
+$$F_\eta(x) = \begin{cases}
+    1,& x\ge0\\
+    1-F(\sqrt{\sqrt{4+|x|}-2}) + F(-\sqrt{\sqrt{4+|x|}-2})&, x<0
+\end{cases} = $$
+$$= \begin{cases}
+    1,& x\ge0\\
+    1-F(\sqrt{\sqrt{4-x}-2}) + F(-\sqrt{\sqrt{4-x}-2})&, x<0
+\end{cases}$$
+
+$$p_\eta(x) |_{x\ge0} = 1$$
+\begin{multline*}
+    p_\eta(x) |_{x<0} = -\frac{1}{2\sqrt{\sqrt{4-x}-2}}\cdot \frac{1}{2\sqrt{4-x}} \cdot (-1) p(\sqrt{\sqrt{4-x}-2}) - \\
+    - \frac{1}{2\sqrt{\sqrt{4-x}-2}}\cdot \frac{1}{2\sqrt{4-x}} \cdot (-1) p(-\sqrt{\sqrt{4-x}-2}) = \\
+= \frac{p(\sqrt{\sqrt{4-x}-2}) + p(\sqrt{\sqrt{4-x}-2})}{4\sqrt{\sqrt{4-x}-2}\sqrt{4-x}}
+\end{multline*}
+
+$$p_\eta(x) = \begin{cases}
+    \displaystyle \frac{p(\sqrt{\sqrt{4-x}-2}) + p(\sqrt{\sqrt{4-x}-2})}{4\sqrt{\sqrt{4-x}-2}\cdot \sqrt{4-x}}, & x<0\\
+    1,& x\ge 0
+\end{cases}$$
+
+\subsection*{5. $\eta =|\xi-2|$}
+
+$$F_\eta(x) = P(|\xi-2| < x) = \begin{cases}
+    P(\xi \in [2-x;2+x]),& x\ge0\\
+    0, x<0
+\end{cases}$$
+
+$$P(\xi \in [2-x;2+x]) = F(2+x)-F(2-x)$$
+$$p_\eta(x) = p(2+x)+p(2-x)$$
+
+$$p_\eta(x) = \begin{cases}
+    p(2+x)+p(2-x),& x\ge0\\
+    0, x<0
+\end{cases}$$
+
+\section*{№ 9.27}
+\begin{mdframed}
+    $$S \sim Exp(2) \text{ - площа правильного шестикутника}$$
+    $$p_S(x) = 2e^{-2x}\cdot \mathbb{1}(x\ge 0);\quad F_S(x) = \left(1-e^{-2x}\right)\cdot \mathbb{1}(x\ge 0)$$
+
+    $$S = \frac{3\sqrt{3}}{2} a^2 $$
+    $$a = \sqrt{\frac{2}{3\sqrt{3}} S} \text{ - сторона шестикутника}$$
+
+    $$p_a(x) - ?$$
+\end{mdframed}
+
+$$F_a(x) = P(\sqrt{\frac{2}{3\sqrt{3}} S} < x) = P(\frac{2}{3\sqrt 3} S < x^2) 
+= P(S < \frac{3\sqrt 3}{2}x^2 ) = F_S(\frac{3\sqrt 3}{2}x^2)$$
+$$p_a(x) = 2x\cdot \frac{3\sqrt 3}{2} \cdot p_S(\frac{3\sqrt 3}{2}x^2) $$
+$$p_a(x) = 2\sqrt{3} \; x e^{-3\sqrt 3 x^2} \cdot \mathbb{1}(x\ge 0)$$
+
+\section*{№ 9.28}
+\begin{mdframed}
+    Знайти щільність розподілу $p_S$ величини
+    $$S(\xi,\eta) = \frac{\sqrt 3}{4}\left(\xi^2 + \eta^2\right)$$
+
+    Якщо 
+    $$\xi, \eta - \text{ незалежні }$$
+    $$\xi \sim U[0,2]; \quad \implies p_\xi(x) = \begin{cases}
+        \frac{1}{2},& x\in [0,2]\\
+        0, x\notin [0,2]
+    \end{cases}$$
+    $$\eta = \begin{cases}
+        1,& p=1/4\\
+        -1,& p=3/4\\
+    \end{cases}$$
+\end{mdframed}
+
+Можемо виділити повний набір гіпотез: $A=\{\eta=1\}$ та $B=\{\eta=-1\}$.
+$$P(A) = 1/4;\quad P(B) = 3/4$$
+
+$$F_S(x) = P(S<x) = P(S<x \;|\; A)P(A) + P(S<x \;|\; B)P(B)$$
+
+$$P(S<x \;|\; A) = P(S<x \;|\; B) = P(\frac{\sqrt 3}{4}\left(\xi^2 + 1^2\right) < x) 
+= P(\xi < \sqrt{\frac{4}{\sqrt 3}x - 1}) = F_{\xi}(\sqrt{\frac{4}{\sqrt 3}x - 1})$$
+
+$\eta$ входить в вираз лише під квадратом - знак не важливий. Тому
+$$P(S<x \;|\; A) = P(S<x \;|\; B) = P(S<x) = F(x)$$
+
+$$F_S(x) = F_{\xi}(\sqrt{\frac{4}{\sqrt 3}x - 1})$$
+$$p_S(x) = \frac{1}{2\sqrt{\frac{4}{\sqrt 3}x - 1}} \cdot \frac{4}{\sqrt 3} \cdot p(\sqrt{\frac{4}{\sqrt 3}x - 1}) $$
+$$p_S(x) = \frac{1}{\sqrt{\sqrt{3} x - 3}} \cdot \frac{1}{2} \; \cdot \mathbb{1}\left(\sqrt{\frac{4}{\sqrt 3}x - 1} \in [0,2]\right) $$
+$$p_S(x) = \frac{1}{\sqrt{\sqrt{3} x - 3}} \cdot \frac{1}{2} \; \cdot \mathbb{1}\left(x \in [\frac{\sqrt 3}{4},5\frac{\sqrt 3}{4}]\right) $$
+
+
+
+\section*{№ 11.18}
+\begin{mdframed}
+    $\xi$ та $\eta$ - однаково розподілені в.в. з щільністю
+    $$p(x) = \frac{1}{2}e^{-|x|}$$
+
+    Знайти щільність розподілу їх суми.
+\end{mdframed}
+
+$$p'(x) = \int_{-\infty}^\infty p(y)p(x-y) dy =
+ \frac{1}{4} \int_{-\infty}^\infty e^{-|y|}e^{-|x-y|} dy = $$
+
+$$\int_{-\infty}^\infty e^{-|y|}e^{-|x-y|} dy = \begin{cases}
+    \int_{-\infty}^x e^{+y}e^{+x-y} dy + \int_{x}^0 e^{+y}e^{-x+y} dy 
+    + \int_{0}^{+\infty} e^{-y}e^{-x+y} dy ,& x<0 \\
+    \int_{-\infty}^0 e^{+y}e^{+x-y} dy + \int_{0}^x e^{-y}e^{+x-y} dy 
+    + \int_{x}^{+\infty} e^{-y}e^{-x+y} dy ,& x\ge 0 
+\end{cases}$$
+
+$$\int_{-\infty}^\infty e^{-|y|}e^{-|y-x|} dy = \begin{cases}
+    \int_{-\infty}^x e^{x} dy + \int_{x}^0 e^{x} dy 
+    + \int_{0}^{+\infty} e^{-2y}e^{x} dy ,& x<0 \\
+    \int_{-\infty}^0 e^{2y}e^{-x} dy + \int_{0}^x e^{-x} dy 
+    + \int_{x}^{+\infty} e^{-2y}e^{x} dy ,& x\ge 0 
+\end{cases}$$
+
+$$\int_{-\infty}^\infty e^{-|y|}e^{-|y-x|} dy = \begin{cases}
+    \frac{1}{2}e^{2x}e^{-x} - xe^{x} 
+    + \frac{1}{2} \cdot 1 \cdot e^{x} ,& x<0 \\
+    \frac{1}{2} \cdot 1 \cdot e^{-x} + xe^{-x}
+    + \frac{1}{2}e^{-2x}e^{x} ,& x\ge 0 
+\end{cases}$$
+
+$$\int_{-\infty}^\infty e^{-|y|}e^{-|y-x|} dy = \begin{cases}
+    e^{x}(-x+1) ,& x<0 \\
+    e^{-x} (x+1) ,& x\ge 0
+\end{cases}$$
+
+$$p'(x) = \begin{cases}
+    \frac{1}{4} e^{x} (-x+1) ,& x<0 \\
+    \frac{1}{4} e^{-x} (x+1) ,& x\ge 0
+\end{cases}$$
+
+Тобто
+
+$$p'(x) = \frac{1}{4} e^{-|x|}(1+|x|)$$
+
+\begin{mdframed}[backgroundcolor=violet!10]
+    При чому:
+    $$\zeta = \eta + \xi = 2\xi$$
+    $$F_\zeta(x) = P(\zeta \le x) = P(\xi \le \frac{x}{2}) = F(x/2)$$
+    $$p_\zeta(x) = \frac{1}{2} p(x/2) = \frac{1}{4} e^{-|x/2|}$$
+
+    $$p'(x) = \begin{cases}
+        \frac{1}{4} e^{x/2}, & x<0\\
+        \frac{1}{4} e^{-x/2}, & x\ge 0
+    \end{cases}$$
+\end{mdframed}
+
+% TODO: додати пропущений пункт в 9.26
+% TODO: пофіксити 9.26.3 - додати обернену заміну
+
+
+\end{document}
+

@@ -1,0 +1,85 @@
+﻿груповано по підрозділам
+AbonentID   Number           DivisionName
+----------- ---------------- --------------------------------
+3           111-11-13        Reception
+4           111-11-14        Reception
+5           111-11-15        Reception
+1           111-11-11        Security
+2           111-11-12        Security
+8           111-13-10        Engineering
+9           111-13-11        Engineering
+10          111-13-12        Engineering
+11          111-13-13        Engineering
+12          111-13-14        Engineering
+13          111-13-15        Engineering
+7           111-12-11        IT
+6           111-12-10        Admin
+
+(13 rows affected)
+
+вибрати лише один підрозділ
+AbonentID   Number           DivisionName
+----------- ---------------- --------------------------------
+8           111-13-10        Engineering
+9           111-13-11        Engineering
+10          111-13-12        Engineering
+11          111-13-13        Engineering
+12          111-13-14        Engineering
+13          111-13-15        Engineering
+
+(6 rows affected)
+
+групувати за кімнатами
+AbonentID   Number           RoomName
+----------- ---------------- --------------------------------
+3           111-11-13        Reception
+1           111-11-11        Security HQ
+2           111-11-12        Security HQ
+4           111-11-14        Client Services
+5           111-11-15        Client Manager
+6           111-12-10        CEO
+7           111-12-11        CTO
+8           111-13-10        Engineer On-Duty
+9           111-13-11        Engineering
+10          111-13-12        NULL
+11          111-13-13        NULL
+12          111-13-14        NULL
+13          111-13-15        NULL
+
+(13 rows affected)
+
+вибрати лише одну кімнату
+AbonentID   Number           RoomName
+----------- ---------------- --------------------------------
+9           111-13-11        Engineering
+
+(1 row affected)
+
+Підрахувати кількість абонентів по підрозділах
+AbonentCount DivisionName
+------------ --------------------------------
+1            Admin
+6            Engineering
+1            IT
+3            Reception
+2            Security
+
+(5 rows affected)
+
+Підрахувати кількість абонентів по підрозділах та приміщеннях
+AbonentCount RoomName                         DivisionName
+------------ -------------------------------- --------------------------------
+1            CEO                              Admin
+4            NULL                             Engineering
+1            Engineer On-Duty                 Engineering
+1            Engineering                      Engineering
+1            CTO                              IT
+1            Client Manager                   Reception
+1            Client Services                  Reception
+1            Reception                        Reception
+2            Security HQ                      Security
+
+(9 rows affected)
+
+
+Completion time: 2021-11-05T16:17:07.7782197+02:00

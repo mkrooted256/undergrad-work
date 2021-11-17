@@ -1,0 +1,291 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Теорія ймовірності}
+\newcommand\hwnumber{ДЗ №9}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+%  7 27
+
+\section*{№ 7}
+
+\begin{mdframed}
+    \begin{equation}
+        \begin{cases}
+            u_t=7u_{xx};\\
+            u(x,0) = u_0(x) = 4\sin 3\pi x + 15 \sin 5\pi x;\\
+            u(0,t) = u(1,t) = 0
+        \end{cases}    
+    \end{equation}
+\end{mdframed}
+
+\begin{mdframed}[backgroundcolor=violet!25]
+    Ця задача має граничні умови першого роду праворуч та ліворуч.
+    $$\lambda = 7 > 0$$
+\end{mdframed}
+
+Розв'язуємо задачу методом розділення змінних.\\
+Нехай
+\begin{equation}
+    u(x,t) = X(x)T(t)
+\end{equation}
+
+Тоді рівняння 1 приймає наступний вигляд:
+\begin{equation}
+    X(x) T'(t) = 7 X''(x) T(t) \; | \cdot \frac{1}{7 X(x)T(t)}
+\end{equation}
+
+\begin{equation}
+    \frac{T'(t)}{7\cdot T(t)} = \frac{X''(x)}{X(x)} = \text{const} = -\Lambda
+\end{equation}
+
+\begin{equation}
+    \begin{cases}
+        T'(t) = -7\Lambda\cdot T(t);\\
+        X''(x) + \Lambda \cdot X(x) = 0
+    \end{cases}
+\end{equation}
+
+Розглядаємо різні значення $\Lambda$:
+
+\subsection*{$\Lambda=0$}
+\begin{equation}
+    \begin{cases}
+        X''(x) = 0\\
+        X(0) = X(1) = 0
+    \end{cases} \implies X(x) = 0
+\end{equation}
+
+Тобто лише тривіальний розв'язок
+
+\subsection*{$\Lambda<0$}
+
+$$
+    \begin{cases}
+        X''(x) = |\Lambda| \cdot X(x)\\
+        X(0) = X(1) = 0
+    \end{cases}
+$$
+
+$$X(x) = A \cosh \sqrt{-\Lambda}x + B \sinh \sqrt{-\Lambda}x$$
+$$X(0) = A + 0 = 0 \implies A = 0$$
+$$X(1) = B \sinh \sqrt{-\Lambda}x = 0 \implies B = 0$$
+
+Тобто лише тривіальний розв'язок
+
+\textbf{Отже, розглядаємо лише $\Lambda > 0$}
+
+\subsection*{$\Lambda > 0$}
+
+$$X''(x) + \Lambda \cdot X(x) = 0 \implies$$
+\begin{equation}
+    X(x) = A \cos \sqrt{\Lambda}x + B \sin \sqrt{\Lambda}x
+\end{equation}
+
+$$X(0) = A + 0 = 0 \implies A = 0$$
+$$X(1) = B \sin \sqrt{\Lambda} = 0 \implies$$
+\begin{equation}
+    \Lambda_n = (\pi n)^2;
+\end{equation}
+\begin{equation}
+    X_n(x) = \sin \pi n x
+\end{equation}
+
+$$T'(t) = - 7 \Lambda \cdot T(t)$$
+\begin{equation}
+    T_n(t) = e^{-7\pi^2 n^2 t}
+\end{equation}
+
+Отже,
+\begin{equation}
+    u_n(x,t) = e^{-7\pi^2 n^2 t} \sin \pi n x
+\end{equation}
+
+Тепер розвинемо розв'язок $u(x,t)$ та граничні умови $u_0(x)$ в наступні ряди:
+$$u(x,t) = \sum_{n=1}^\infty a_n e^{-7\pi^2 n^2 t} \sin \pi n x$$
+$$u_0(x) = \sum_{n=1}^\infty a_n e^{-7\pi^2 n^2 t} \sin \pi n x |_{t=0} = \sum_{n=1}^\infty a_n \sin \pi n x$$
+
+Знаходимо коефіцієнти
+$$u_0(x) = \sum_{n=1}^\infty a_n \sin \pi n x = 4\sin 3\pi x + 15 \sin 5\pi x$$
+
+\begin{equation}
+\begin{cases}
+    a_3 = 4; \\
+    a_5 = 15; \\
+    a_i = 0 \quad (i\notin \{3,5\}).
+\end{cases}
+\end{equation}
+
+$$u(x,y) = 4 e^{-7\cdot 9\pi^2 t} \sin 3\pi x + 15 e^{-7\cdot 25\pi^2 t} \sin 5\pi x$$
+
+Тобто
+\begin{mdframed}[style=ans]
+    $$u(x,y) = 4 e^{-63\pi^2 t} \sin 3\pi x + 15 e^{-175\pi^2 t} \sin 5\pi x$$
+\end{mdframed}
+
+\section*{№ 27}
+
+\begin{mdframed}
+    \begin{equation}
+        \begin{cases}
+            u_t=6u_{xx};\\
+            u(x,0) = u_0(x) = 18\sin 3\pi x + 5 \sin 5\pi x;\\
+            u(0,t) = u(3,t) = 0
+        \end{cases}    
+    \end{equation}
+\end{mdframed}
+
+\begin{mdframed}[backgroundcolor=violet!25]
+    Ця задача має граничні умови першого роду праворуч та ліворуч.
+    $$\lambda = 6 > 0$$
+\end{mdframed}
+
+Розв'язуємо задачу методом розділення змінних.\\
+Нехай
+\begin{equation}
+    u(x,t) = X(x)T(t)
+\end{equation}
+
+Тоді рівняння 1 приймає наступний вигляд:
+\begin{equation}
+    X(x) T'(t) = 6 X''(x) T(t) \; | \cdot \frac{1}{6 X(x)T(t)}
+\end{equation}
+
+\begin{equation}
+    \frac{T'(t)}{6\cdot T(t)} = \frac{X''(x)}{X(x)} = \text{const} = -\Lambda
+\end{equation}
+
+\begin{equation}
+    \begin{cases}
+        T'(t) = -6\Lambda\cdot T(t);\\
+        X''(x) + \Lambda \cdot X(x) = 0
+    \end{cases}
+\end{equation}
+
+Можемо одразу відкинути $\Lambda \le 0$, бо там лише тривіальні розв'язки.
+
+\subsection*{$\Lambda > 0$}
+
+\begin{equation}
+    \begin{cases}
+        X(x) = A \cos \sqrt{\Lambda}x + B \sin \sqrt{\Lambda}x;\\
+        T(t) = e^{-6\Lambda t}
+    \end{cases}
+\end{equation}
+
+Підставимо граничні умови:
+$$X(0) = A + 0 = 0 \implies A = 0$$
+$$X(3) = B \sin 3\sqrt{\Lambda} = 0$$
+
+\begin{equation}
+    \Lambda_n = \left(\frac{\pi n}{3}\right)^2
+\end{equation}
+\begin{equation}
+    \begin{cases}
+        T_n(t) = e^{-6\frac{\pi^2 n^2}{9} t}; \\
+        X_n(t) = a \sin \pi n x
+    \end{cases}
+\end{equation}
+
+Шукаємо розв'язок у вигляді
+$$u(x,t) = \sum_{n=1}^\infty a_n e^{-6\frac{\pi^2 n^2}{9} t} \sin \pi n x$$
+
+Підставимо граничні умови:
+$$u(x,0) = \sum_{n=1}^\infty a_n \sin \pi n x =18\sin 3\pi x + 5 \sin 5\pi x $$
+
+\begin{equation}
+    \begin{cases}
+        a_3 = 18;\\
+        a_5 = 5;\\
+        a_i = 0 \quad (i \notin \{3,5\}).
+    \end{cases}
+\end{equation}
+
+Отже
+$$
+    u(x,t) = 18 e^{-6\frac{\pi^2 3^2}{9} t} \sin 3\pi x + 5 e^{-6\frac{\pi^2 5^2}{9} t} \sin 5\pi x
+$$
+
+Маємо
+\begin{mdframed}[style=ans]  
+$$    
+u(x,t) = 18 e^{-6\pi^2 t} \sin 3\pi x + 5 e^{-\frac{50}{3} \pi^2 t} \sin 5\pi x
+$$
+\end{mdframed}
+
+\end{document}
+

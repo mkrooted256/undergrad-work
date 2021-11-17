@@ -1,0 +1,313 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Теорія ймовірності}
+\newcommand\hwnumber{ДЗ №9}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+%  9.19-9.22
+
+\section*{№ 9.19}
+\newcommand{\nA}{\overline{A}}
+\begin{mdframed}
+    $$\Omega = \{\nA, A\nA, AA\nA, \cdots \}$$
+    $$P(A) = 0.8;\quad A = \{\text{вистріл влучив}\}$$
+    
+    Let $|\omega| = $ кількість пострілів. Наприклад, $|AA\nA| = 3$.
+
+    Let $\xi(\omega) = |\omega|$
+
+    $$F_{\xi} - ?$$
+\end{mdframed}
+
+Let $\omega \in \Omega;$. 
+$$P(\omega) = P(A)^{|\omega|-1}\cdot P(\nA)$$
+
+
+$$P(\xi = k) = P(A)^{k-1}\cdot (1-P(A))$$
+Одразу можна побачити зв'язок з Геометричним розподілом. 
+
+$$\xi \sim \operatorname{Geom}(1-P(A)) + 1$$ 
+
+\section*{№ 9.20}
+\begin{mdframed}
+    $$\begin{gathered}
+        P(\xi = -4) = 0.3; \quad P(\xi = -3)=0.2;\\
+        P(\xi=1)=p; \quad P(\xi=2) = 0.3
+    \end{gathered}$$
+
+    \begin{itemize}
+        \item Обчислити $p$
+        \item Записати закон розподілу в.в.
+        $$\eta = \cos \bigl(\frac{\pi}{2} \cdot (\xi^2 + 2\xi -8)\bigr)$$
+    \end{itemize}
+\end{mdframed}
+
+Якщо припустити, що в умові описані всі можливі значення $\xi$, то 
+$$p = 1 - 0.3 - 0.2 - 0.3 = 0.2$$
+
+$$\eta = \begin{cases}
+    \cos \bigl(\frac{\pi}{2} \cdot ((-4)^2 - 2\cdot 4 - 8)\bigr) = \cos 0 = 1, & \xi = -4 \\
+    \cos \bigl(\frac{\pi}{2} \cdot ((-3)^2 - 2\cdot 3 - 8)\bigr) = \cos (-\frac{5}{2}\pi) = \cos \frac{pi}{2} =  0, & \xi = -3 \\
+    \cos \bigl(\frac{\pi}{2} \cdot ((1)^2 + 2\cdot 1 - 8)\bigr) = \cos (-\frac{5}{2}\pi) = 0, & \xi = 1 \\
+    \cos \bigl(\frac{\pi}{2} \cdot ((2)^2 + 2\cdot 2 - 8)\bigr) = \cos 0 = 1, & \xi = 2 \\
+\end{cases}$$
+
+Маємо:
+$$P(\eta = 1) = P(\xi = -4) + P(\xi = 2) = 0.6$$
+$$P(\eta = 0) = P(\xi = -3) + P(\xi = 1) = 0.4$$
+
+\section*{№ 9.21}
+\begin{mdframed}
+    Визначити, які з наступних функцій є функціями розподілу
+\end{mdframed}
+
+\begin{mdframed}[backgroundcolor=blue!25]
+    Критерій того, що $F(x)$ - фція розподілу:
+    \begin{itemize}
+        \item $F(x)$ - неспадна;
+        \item $F(x+o) = F(x)$ - неперервність справа;
+        \item $F(-\infty) = 0;\quad F(+\infty) = 1$ - нормування;
+    \end{itemize}
+\end{mdframed}
+
+\subsection*{a)}
+\begin{mdframed}
+    $$F(x) = \begin{cases}
+        0,& x<0\\
+        1-\frac{1-e^{-x}}{2},& x\ge 0
+    \end{cases}$$
+\end{mdframed}
+
+$$F'(x) = \begin{cases}
+    -\frac{1}{2}\cdot (-1) \cdot - e^{-x} = -\frac{1}{2}e^{-x} \le 0\\
+    0, x<0
+\end{cases}$$
+Отже, $F$ - незростаюча; А має бути неспадна!
+
+$$F(x+o) = \begin{cases}
+    0,& x < 0\\
+    1-\frac{1-e^{-(x+o)}}{2} = 1-\frac{1-e^{-x}}{2},& x\ge 0
+\end{cases} = F(x)$$
+Отже, $F$-неперервна справа;
+
+$$\begin{gathered}
+    F(-\infty) = 0;\\
+    F(+\infty) = 1 - \frac{1 - o}{2} = \frac{1}{2} \ne 1
+\end{gathered}$$
+
+\begin{mdframed}[backgroundcolor=red!25]
+    $F$ - не фція розподілу, бо $F(+\infty) = \frac{1}{2} \ne 1 $
+    та бо вона спадна.
+\end{mdframed}
+
+\subsection*{б)}
+\begin{mdframed}
+    $$F(x) = \begin{cases}
+        0,& x\le0\\
+        1-\frac{1-e^{-x}}{2},& x > 0
+    \end{cases}$$
+\end{mdframed}
+
+Єдина проблема може бути в $x=0$.
+$$F(0+o) = 1-\frac{1-e^{-o}}{2} = 1-o = 1 \ne F(0) = 0$$
+
+\begin{mdframed}[backgroundcolor=red!25]
+    $F$ - не фція розподілу, бо $F(+\infty) = \frac{1}{2} \ne 1 $, 
+    бо вона спадна та бо вона не неперервна справа в $x=0$
+\end{mdframed}
+
+\subsection*{в)}
+\begin{mdframed}
+    $$F(x) = e^{-e^{-x}}$$
+\end{mdframed}
+
+$$F(x+0) = F(x), \text{ бо експонента - неперервна фція}$$
+
+$$F'(x) = e^{-x} \cdot (-e^{-x}) \cdot e^{-e^{-x}} > 0$$
+Тобто, функція неспадна.
+
+$$F(-\infty) = e^{-e^{+\infty}} = e^{-\infty} = 0$$
+$$F(+\infty) = e^{-e^{-\infty}} = e^{-0} = 1$$
+Тобто, функція правильно поводить себе на нескінченностях.
+
+\begin{mdframed}[backgroundcolor=green!25]
+    $F$ - функція розподілу.
+\end{mdframed}
+
+\section*{№9.22}
+\begin{mdframed}
+    Let $\xi$ - випадкова величина із функцією розподілу
+    $$F(x) = \begin{cases} 
+        0, & x<0 \\
+        \displaystyle\frac{x+[x]}{10},& 0\le x\le 5\\
+        1,& x>5
+    \end{cases}$$
+    Обчислити ймовірності:
+\end{mdframed}
+
+\begin{mdframed}
+    Зауваження: вважатиму $[x] = \lfloor x \rfloor$, бо підлога неперервна справа.
+\end{mdframed}
+
+\subsection*{а)}
+$$P(\xi \le 3)$$
+
+За визначенням PDF, $F_\xi(x) = P(\xi \le x)$.
+$$P(\xi \le 3) = F(3) = \frac{6}{10} = 0.6$$
+
+\subsection*{б)}
+$$P(\xi > 2) = 1-P(\xi \le 2) = 1 - F(2) = \frac{4}{10} = 0.4$$
+
+\subsection*{в)}
+$$P(1<\xi\le 3.5) = P(\xi \le 3.5) - P(\xi \le 1) = F(3.5) - F(1) = \frac{6.5}{10} - \frac{2}{10} = 0.45$$
+
+\subsection*{г)}
+$$\begin{gathered}
+    P(\xi^2 - 3\xi \ge -2) = P((\xi-2)(\xi-1)\ge 0) = P(\xi \le 1 \vee \xi \ge 2) = \\
+    = F(1) + (1-F(2-o)) = 0.2 + (1-\frac{2+1}{10}) = 0.2 + 0.7 = \\
+    = 0.9
+\end{gathered}$$
+
+\subsection*{д)}
+$$P(|\xi|=2) = 1-P(|\xi|< 2 \vee \overline{|\xi|\le 2}) = 1-\bigl( (F(2-0)-F(-2)) + 1 - (F(2)-F(2-0)) \bigr) = 1-1 = 0$$
+
+\subsection*{е)}
+
+$$\begin{tikzpicture}
+    \draw[thick, ->] (-4,0) -- (4,0) node[right] {$\xi$};
+    \draw[thick, ->] (0,-2) -- (0,2) node[above] {$\sin \xi$};
+    \draw[red] plot[%
+        scale=1,
+        samples=100,
+        domain=-4:4,
+    ] (\x,{2*sin(deg(pi * \x))});
+    \draw[green] plot[%
+        scale=1,
+        samples=50,
+        domain=5 / 6 : 2 + 1/6,
+    ] (\x,{2*sin(deg(pi * \x))});
+    \draw (-4,1) -- (4,1) node[right] {$\sin \xi = 0.5$};
+    \draw[thin] (2,-2) -- (2,2) node[above] {$2\pi k$};
+    \draw[thin] ({{5/6}},-2)  node[below] {\tiny $2\pi k - \frac{7\pi}{6}$} -- ({{5/6}},2);
+    \draw[thin] ({{2+1/6}},-2) node[below] {\tiny $2\pi k + \frac{\pi}{6}$}-- ({{2+1/6}},2);
+    \fill ({{5/6}},-2) circle (2pt);
+    \fill ({{2+1/6}},-2) circle (2pt);
+    \fill (2,2) circle (2pt);
+\end{tikzpicture}$$
+
+$$p = P(\sin \xi < 0.5) = P\bigl(\exists k:\; \xi \in (2\pi k - \frac{7\pi}{6};2\pi k + \frac{\pi}{6}) \bigr)$$
+
+$$p_k = P(\xi \in (2\pi k - \frac{7\pi}{6};2\pi k + \frac{\pi}{6})) = F(2\pi k + \frac{\pi}{6} - o) - F(2\pi k - \frac{7\pi}{6})$$
+$$p = \sum_{k=-\infty}^{+\infty}p_k$$
+$$p = p_{-1} + p_0 + p_1 + p_2, \text{ бо для $x$ до $0$ та після $2\pi \approx 6.24$ розглядати не має менсу}$$
+
+$$p_{-1} = F(-2\pi + \frac{\pi}{6} - o) - F(-2\pi-\frac{7\pi}{6}) \approx F(-5.76) - F(-9.94) = 0$$
+$$p_0 = F(\frac{\pi}{6} - o) - F(-\frac{7\pi}{6}) = F(\frac{\pi}{6}) \approx \frac{0.5236 + 0}{10} = 0.05236$$
+$$p_1 = F(2\pi + \frac{\pi}{6} - o) - F(2\pi-\frac{7\pi}{6}) \approx F(6.8) - F(2.618) = 1-\frac{2.618+2}{10} = 1 - 0.4618 = 0.5382$$
+$$p_2 = F(4\pi + \frac{\pi}{6} - o) - F(4\pi-\frac{7\pi}{6}) = 1-1 = 0$$
+
+$$P(\sin \xi < 0.5) = p_0 + p_1 \approx 0.59 $$
+
+\subsection*{є)}
+$$P(|\xi-2.5|\le 1.5) = P(\xi \le 4 \wedge \xi \ge 1) = F(4)-F(1-o) = 0.8 - \frac{1+0}{10} = 0.7$$
+
+\subsection*{ж)}
+$$P(\{\xi\} < 0.5)$$
+
+\begin{mdframed}
+    Зауваження: вважатиму $\{x\}$ як дробова частина $x$.\\
+    Зауваження: дробова частина неперервна справа.
+\end{mdframed}
+
+$$p = P(\{\xi\} < 0.5) = \sum_{k=0}^{5} P(\xi < k+0.5 \wedge \xi \ge k) 
+ = \sum_{k=0}^{5} (F(k+0.5-o) - F(k-o)) = \sum_{k=0}^{5} p_k$$
+
+$$p_{-1} = F(-0.5-o) - F(-1-o) = 0-0 = 0$$
+$$p_0 = F(0.5-o) - F(-o) = 0.05 - 0 = 0.05$$
+$$p_k = F(k+0.5-o) - F(k-o) = \frac{1}{10} (k+0.5 + k) - (k + (k-1)) 
+= \frac{1}{10} (0.5+1) = 0.15$$
+$$p_5 = F(5.5-o) - F(5-o) = 1-0.9 = 0.1$$
+$$p_6 = F(6.5-o) - F(6-o) = 1-1 = 0$$
+
+
+$$p = 0.05 + 0.15 \cdot 4 + 0.1 = 0.15 \cdot 5 = 0.75$$
+
+
+
+\end{document}
+

@@ -1,0 +1,408 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Аналіз алгоритмів}
+\newcommand\hwnumber{ДЗ №2}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+\section*{№ 1.25 ж)}
+\begin{mdframed}
+    Prove $o(f) + O(f) = O(f)$
+\end{mdframed}
+
+$$u \in o(f) \iff
+\underset{n\to \infty}{\lim} \frac{u(n)}{f(n)} = 0 \iff
+$$
+$$\iff \forall \varepsilon>0:\; \exists N:\; \forall n>N:\; u(n) < \varepsilon \cdot f(n)$$
+
+$$v\in O(f) \iff \exists E, N:\; \forall n>N:\; v(n) < E\cdot f(n)$$
+
+$$w \in o(f) + O(f) \implies$$
+$$\left\{ \begin{array}{ll}
+\forall \varepsilon>0:\; \exists N_1:\; \forall n>N_1:\;& u(n) < \varepsilon \cdot f(n)  \\
+\exists E, N_2:\; \forall n>N_2:\;& v(n) < E\cdot f(n) \\
+w(n) = u(n) + v(n)
+\end{array}\right.$$
+
+let $\varepsilon = 1$, $u(n) < f(n)$
+$$
+w(n) = u(n) + v(n) < f(n) + E\cdot f(n) < E' \cdot f(n) \implies
+$$
+$$\implies w \in O(f) \; \qedsymbol$$
+
+\section*{№ 1.26 б)}
+\begin{mdframed}
+    Prove $\omega(\omega(f)) = \Omega(f)$
+\end{mdframed}
+
+$$u\in \omega(f) \iff 
+\underset{n\to \infty}{\lim} \frac{u(n)}{f(n)} = \infty \iff$$
+$$\forall E>0:\; \exists N:\; \forall n>N:\; u(n) > E \cdot f(n)$$
+
+$$u\in \Omega(f) \iff $$
+$$\exists E>0:\; \exists N:\; \forall n>N:\; u(n) > E \cdot f(n)$$
+
+If $v \in \omega(\omega(f))$, we have:
+\begin{align*}
+    & u(n) = \omega(f)\\
+    & v(n) = \omega(u)
+\end{align*}
+$$\forall E>0:\; \exists N_1:\; \forall n>N_1:\; u(n) > E \cdot f(n)$$
+$$\forall E>0:\; \exists N_2:\; \forall n>N_2:\; v(n) > E\cdot u(n)$$
+
+Let $N = \max\{N_1, N_2\}$. Then both predicates are true.
+
+$$\forall E>0, E_1>0, n>N:\; v(n) > E\cdot u(n) > E \cdot E_1 \cdot f(n) = E' \cdot f(n)$$
+$$\exists E', N:\; \forall n>N:\; v(n)> E'\cdot f(n)$$
+
+That is, $v\in \Omega(f)$ \qedsymbol
+
+\section*{№1.27}
+\begin{mdframed}
+    \textbf{a)} Чи iснують такi функцiї f та g, що f = ω(g) та f = o(g)?
+\end{mdframed}
+
+Let:
+\begin{align*}
+    f = \omega(g);& \underset{n\to \infty}{\lim} \frac{f(n)}{g(n)} = \infty \\
+    f = o(g);& \underset{n\to \infty}{\lim} \frac{f(n)}{g(n)} = 0
+\end{align*}
+
+That is not possible because if limit exists it must be unique.
+
+\begin{mdframed}
+    \textbf{b)} Покажiть, що якщо f = ω(g), то g = o(f).
+\end{mdframed}
+
+$$f = \omega(g) \implies \underset{n\to \infty}{\lim} \frac{f(n)}{g(n)} = \infty \implies$$
+$$\implies \underset{n\to \infty}{\lim} \frac{g(n)}{f(n)} = 0 \implies g = o(f) \;\qedsymbol$$
+
+\section*{№1.28 г)}
+\begin{mdframed}
+    Prove $\Omega(f g) = f \cdot \Omega(g)$
+\end{mdframed}
+
+$$u \in \Omega(fg) \iff$$
+$$\exists E>0:\; \exists N:\; \forall n>N:\; u(n) > E \cdot f(n)g(n) \iff$$
+$$u(n) > f(n) \cdot (E \cdot g(n)) \iff $$
+$$u \in f \cdot \Omega(g)$$
+
+There is logical equivalence, so the sets are equal. \qedsymbol
+
+\section*{№1.29 в)}
+\begin{mdframed}
+    Prove $\Omega(f)\cdot\Omega(g) = \Omega(fg)$
+\end{mdframed}
+
+$$u\in \Omega(f)\cdot\Omega(g) \implies$$
+$$
+\exists E_1>0, N_1, E_2>0, N_2:\; \forall n>N = \max(N_1, N_2):\; u(n) > E_1 f(n)\cdot E_2 g(n) \implies
+$$
+$$\exists E=E_1\cdot E_2, N:\; \forall n>N u(n) > E \cdot f(n)g(n)$$
+
+That is, $u(n) = \Omega(fg)$
+
+In the opposite way:
+$$u\in \Omega(f g) \implies$$
+$$\exists E, N:\; \forall n>N:\; u(n) > E \cdot f(n)g(n) \implies$$
+$$\exists E_1, E_2:\; E_1\cdot E_2 = E, N:\; \forall n>N:\; u(n) > E_1 f(n) \cdot E_2 g(n)$$
+
+That is, $u = \Omega(f) \cdot \Omega(g)$ \qedsymbol
+
+\section*{№1.30}
+
+$$g = \Theta(f) \iff \exists A,B,N:\; \forall n>N:\; A<\frac{|g(n)|}{|f(n)|}<B$$
+
+\begin{mdframed}
+    \textbf{a)} $f = \Theta(f)$
+\end{mdframed}
+
+$$\forall n>0:\; 0.5 < \frac{f(n)}{f(n)} = 1 < 1.5$$
+That is, $f = \Theta(f)$ \qedsymbol
+
+\begin{mdframed}
+    \textbf{б)} $\Theta(\Theta(f)) = \Theta(f)$
+\end{mdframed}
+Let $u = \Theta(f)$
+$$\exists A_u,B_u,N_u:\; \forall n>N_u:\; A_u<\frac{|u(n)|}{|f(n)|}<B_u$$
+Let $v = \Theta(u)$
+$$\exists A_v,B_v,N_v:\; \forall n>N_v:\; A_v<\frac{|v(n)|}{|u(n)|}<B_v$$
+
+Оцінемо $\frac{|v(n)|}{|f(n)|} = \frac{|v(n)|}{|u(n)|}\cdot \frac{|u(n)|}{|f(n)|}$:
+$$\forall n>\max(N_u,N_v):\;A_u A_v < \frac{|v(n)|}{|f(n)|} < B_u B_v $$
+
+That is,  $\Theta(\Theta(f)) = \Theta(f)$\qedsymbol
+
+\begin{mdframed}
+    \textbf{в)} $\Theta(f)\cdot\Theta(g) = \Theta(fg)$
+\end{mdframed}
+Let $w(n) \in \Theta(f)\cdot\Theta(g)$:
+$$\exists N:\; \forall n>N:\; \begin{cases}
+    A_u<\frac{|u(n)|}{|f(n)|}<B_u \\
+    A_v<\frac{|v(n)|}{|g(n)|}<B_v \\
+    w(n) = u(n) \cdot v(n)
+\end{cases}$$
+$$F = \frac{|w(n)|}{|f(n)g(n)|} =\frac{|u(n)|}{|f(n)|}\cdot\frac{|v(n)|}{|g(n)|} $$
+$$A_u A_v < F < B_u B_v$$
+That is, $w(n) \in \Theta(f)\cdot\Theta(g) \implies w(n) \in \Theta(fg)$\\
+
+In the other way:
+
+Let $w(n) \in \Theta(fg)$:
+$$\exists A,B,N:\; \forall n>N:\; A<\frac{|w(n)|}{|f(n)g(n)|}<B$$
+
+$$\text{Let } w(n) = f(n)h(n)$$
+$$A < \frac{|w(n)|}{|f(n)g(n)|} = \frac{|f(n)h(n)|}{|f(n)g(n)|} = \frac{|h(n)|}{|g(n)|} < B$$
+$$A < \frac{|h(n)|}{|g(n)|} < B \iff h = \Theta(g)$$
+
+That is, $w(n) = f(n) \cdot \Theta(g) = \Theta(f) \cdot \Theta(g)$
+
+So, $\Theta(f)\cdot\Theta(g) = \Theta(fg)$\qedsymbol
+
+
+\section*{№1.31}
+\begin{mdframed}
+    \textbf{б)} $f \sim g \implies f = g + o(g)$
+\end{mdframed}
+
+$$f = g + o(g) \iff$$
+$$\iff \exists u: f=g+u \;\wedge\; \underset{n\to \infty}{\lim} \frac{u(n)}{g(n)} = 0$$
+
+$$f \sim g \iff \underset{n\to \infty}{\lim} \frac{f(n)}{g(n)} = 1$$
+$$\text{let } u(n) = f(n)-g(n).\;\text{Obviously, } f = g+u$$
+$$\underset{n\to \infty}{\lim} \frac{u(n)}{g(n)} = \underset{n\to \infty}{\lim} \frac{f(n) - g(n)}{g(n)} =$$
+$$= \underset{n\to \infty}{\lim} \frac{f(n)}{g(n)} - \frac{g(n)}{g(n)} = 1 - 1 = 0$$
+That is, $\forall f,g:\; f\sim g\; \exists u=o(g):\; f = g + u$.
+So, $f = g+o(g)$\qedsymbol
+
+\section*{№1.35}
+\begin{mdframed}
+    Prove: $\max\{f,g\} = \Theta(|f| + |g|)$
+\end{mdframed}
+
+$$\text{Let } u = \max(f,g)$$
+$$\text{Obviously, } |\max(f,g)| \le |f(n)|+|g(n)| \iff \frac{|u(n)|}{|f(n)|+|g(n)|} \le 1 < 2$$
+$$\text{Also, } |\max(f,g)| \ge \frac{|f(n)|+|g(n)|}{2} \iff \frac{|u(n)|}{|f(n)|+|g(n)|} \ge \frac{1}{2} > \frac{1}{3}$$
+So
+$$\forall n>0:\; \frac{1}{3} < \frac{|\max(f,g)|}{|f(n)|+|g(n)|} < 3$$
+That is, $$\max(f,g) = \Theta(|f|+|g|)$$\qedsymbol
+
+\section*{№1.37}
+\begin{mdframed}
+    Prove: 
+    $$\underset{n\to\infty}{\lim}\left(1+\frac{k}{n}\right)^n = A,\; 0<A<\infty$$
+    $$\underset{n\to\infty}{\lim}\left(1-\frac{k}{n}\right)^n = B,\; 0<B<\infty$$
+    $$k = \text{const}$$
+\end{mdframed}
+
+(Let $n' = \frac{n}{k}$; $n = n'k$)
+$$\underset{n\to\infty}{\lim}\left(1+\frac{k}{n}\right)^n =
+\underset{n'\to\infty}{\lim}\left(1+\frac{1}{n'}\right)^{n'k} = 
+\left(\underset{n'\to\infty}{\lim}\left(1+\frac{1}{n'}\right)^{n'}\right)^k = e^k$$
+
+(Let $n' = -\frac{n}{k}$; $n = -n'k$)
+$$\underset{n\to\infty}{\lim}\left(1-\frac{k}{n}\right)^n = 
+\underset{n'\to\infty}{\lim}\left(1+\frac{1}{n'}\right)^{-n'k} = 
+\left(\underset{n'\to\infty}{\lim}\left(1+\frac{1}{n'}\right)^{n'}\right)^{-k} = e^{-k}$$
+
+\pagebreak
+\section*{№1.44}
+\begin{mdframed}
+    Prove:
+    $$\forall a\ge 0,b\in\mathbb{R}:\; (n+a)^b = \Theta(n^b)$$
+\end{mdframed}
+
+Note that $(n+a)^b > 0$.
+
+$$\frac{(n+a)^b}{n^b} = \frac{n^b (1+\frac{a}{n})^b}{n^b} = (1 + \frac{a}{n})^b$$
+
+Let $b>0$. Then $\{(1+\frac{a}{n})^b\}_n$ is a monotonously descending sequence.
+$$1^b < \frac{(n+a)^b}{n^b} = (1+\frac{a}{n})^b \le (1+a)^b$$
+So, 
+$$\forall n>1:\; 1 < \frac{(n+a)^b}{n^b} < (1+a)^b$$
+That is, $(n+a)^b = \Theta(n^b)$
+
+Let $b<0$. Then $\{(1+\frac{a}{n})^b\}_n$ is a monotonously ascending sequence.
+$$1^b > \frac{(n+a)^b}{n^b} = (1+\frac{a}{n})^b > (1+a)^b$$
+So, 
+$$\forall n>1:\; 1 > \frac{(n+a)^b}{n^b} > (1+a)^b$$
+That is, $(n+a)^b = \Theta(n^b)$
+
+\section*{№1.45}
+\begin{mdframed}
+    Порівняти асиптотично
+    $$f(n) = n^{\ln n},\quad g(n) = (\ln n)^n$$
+\end{mdframed}
+
+$$n^{\ln n} = \exp(\ln^2 n)$$
+$$(\ln n)^n = \exp(n \cdot \ln \ln n)$$
+
+$$
+\underset{n\to\infty}{\lim}\frac{f(n)}{g(n)} = \underset{n\to\infty}{\lim}\frac{\exp(\ln^2 n)}{\exp(n \cdot \ln \ln n)} = $$
+Застосуємо правило Лопіталя
+$$= \underset{n\to\infty}{\lim}\frac{2\ln n \cdot \frac{1}{n}}{(\ln \ln n + n \cdot \cancelto{0}{\frac{1}{\ln n}} \cdot \frac{1}{n} )}
+= \underset{n\to\infty}{\lim}\frac{2\ln n \cdot \frac{1}{n}}{\ln \ln n}
+= \underset{n\to\infty}{\lim}\frac{2\ln n}{n\cdot \ln \ln n} =
+$$
+Знову Лопіталь
+$$
+= \underset{n\to\infty}{\lim}\frac{2\frac{1}{n}}{\frac{1}{\ln n} \cdot \frac{1}{n}\cdot n + \ln \ln n}
+= \underset{n\to\infty}{\lim}\frac{2 \frac{1}{n}}{\frac{1}{\ln n}+\ln \ln n}
+= \underset{n\to\infty}{\lim}\frac{2 \frac{1}{n}}{\ln \ln n} = \left< \frac{0}{\infty} \right> = 0
+$$
+
+Отже, $$n^{\ln n} = o((\ln n)^n)$$
+
+\section*{№1.46}
+\begin{mdframed}
+    Порівняти асиптотично
+    $$f(n) = a^n,\quad g(n) = b^n \ln n$$
+    ($a,b>0$)
+\end{mdframed}
+
+Let $p = \frac{a}{b}$
+$$
+\frac{a^n}{b^n\ln n} = \frac{p^n}{\ln n}
+$$
+
+$$A = \underset{n\to\infty}{\lim}\frac{p^n}{\ln n} = (\text{Лопіталь}) 
+= \underset{n\to\infty}{\lim}\frac{p^n \ln p}{\frac{1}{n}} = 
+\underset{n\to\infty}{\lim} n p^n \ln p = $$
+$$=\underset{n\to\infty}{\lim} \frac{n}{(1/p)^n} \ln p = (\text{Лопіталь}) = \underset{n\to\infty}{\lim} -p^n $$
+
+$$A = \begin{cases}
+    p\ge1,& \infty\\
+    p<1,& 0
+\end{cases}$$
+
+Тобто,
+$$\begin{cases}
+    f = o(g) \;\wedge\; g=\omega(f),&\text{if } \frac{a}{b}<1\\
+    f=\omega(g)\;\wedge\;g = o(f),&\text{if } \frac{a}{b}<1\\
+\end{cases}$$
+
+\pagebreak
+
+\section*{№1.53}
+\begin{mdframed}
+    Знайти асимптотичний еквівалент $C_n^k$ при $n\to\infty$.
+    ($k = o(n)$)
+\end{mdframed}
+Формула Стірлінга: $n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n$
+
+$$C_n^k = \frac{n!}{k!(n-k)!} \sim 
+\frac{\sqrt{2\pi n}\left(\frac{n}{e}\right)^n}{\sqrt{2\pi k}\left(\frac{k}{e}\right)^k \cdot \sqrt{2\pi (n-k)}\left(\frac{n-k}{e}\right)^{n-k}} =
+$$
+$$
+= \frac{1}{\sqrt{2\pi}}\cdot \sqrt{\frac{n}{(n-k)k}} \cdot \frac{n^n}{k^k(n-k)^{n-k}} \cdot \frac{e^{n-k} e^k}{e^n} =
+$$
+$$
+= \frac{1}{\sqrt{2\pi}}\cdot \sqrt{\frac{n}{(n-k)k}} \cdot \frac{n^n}{k(n-k)^{n-k}} =
+$$
+$$
+= \frac{1}{\sqrt{2\pi k}}\cdot \sqrt{\frac{1}{1-\frac{k}{n}}} \cdot \left(\frac{n}{n-k}\right)^n \cdot \left(\frac{n-k}{k}\right)^k \sim
+$$
+$$
+\sim \frac{1}{\sqrt{2\pi k}} \cdot \left(\frac{1}{1-\frac{k}{n}}\right)^n \cdot \left(\frac{1-\frac{k}{n}}{\frac{k}{n}}\right)^k \sim
+$$
+$$
+\sim \frac{1}{\sqrt{2\pi k}} \cdot e^k \cdot \frac{n^{k}}{k^k} \cdot \left(1-\frac{k}{n}\right)^k \sim
+$$
+$$
+\sim \frac{1}{\sqrt{2\pi k}} \cdot \left(\frac{en}{k}\right)^k
+$$
+
+\begin{mdframed}[style=ans]
+    $$C_n^k \sim \frac{1}{\sqrt{2\pi k}} \cdot \left(\frac{en}{k}\right)^k$$
+    $$C_n^k \sim \frac{n^k}{k!}$$
+\end{mdframed}
+
+\begin{mdframed}
+    Знайти асимптотичний еквівалент $C_{2n}^n$ при $n\to\infty$
+\end{mdframed}
+
+$$C_{2n}^n = \frac{(2n)!}{(n!)^2} 
+\sim \frac{\sqrt{2\pi \cdot 2n}\left(\frac{2n}{e}\right)^{2n}}{(\sqrt{2\pi n}\left(\frac{n}{e}\right)^n)^2}
+= \frac{\left(\frac{2n}{e}\right)^{2n}}{\sqrt{\pi n}\left(\frac{n}{e}\right)^{2n}}
+= \frac{1}{\sqrt{\pi n}}\cdot \left(\frac{2n}{e}\cdot \frac{e}{n}\right)^{2n} = \frac{2^{2n}}{\sqrt{\pi n}}$$
+
+\begin{mdframed}[style=ans]
+    $$C_{2n}^n = \frac{2^{2n}}{\sqrt{\pi n}}$$
+\end{mdframed}
+
+\end{document}
+
