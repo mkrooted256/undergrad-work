@@ -1,0 +1,377 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Аналіз алгоритмів}
+\newcommand\hwnumber{ДЗ №3}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+\section*{№ 2.3}
+\subsection*{a) Знайдiть мультиплiкативну та адитивну складнiсть пiднесення m-цифрового
+числа до квадрату}
+
+\begin{mdframed}
+    Нехай:\\
+    Складність додавання - $O(add)$\\
+    Складність множення - $O(mul)$
+\end{mdframed}
+
+$$\begin{matrix}
+    0 & 0 & ... & 0 & x_{n-1} & x_{n-2} & ... & x_2 & x_1 & x_0 \\
+    0 & 0 & ... & 0 & x_{n-1} & x_{n-2} & ... & x_2 & x_1 & x_0 \\
+    \hline \\
+    c_0^{2n-1} & c_0^{2n-2} & ... & c_0^{n} & c_0^{n-1} & c_0^{n-2} & ... & c_0^2 & c_0^1 & c_0^0 \\
+    c_1^{2n-1} & c_1^{2n-2} & ... & c_1^{n} & c_0^{n-1} & c_1^{n-2} & ... & c_1^2 & c_1^1 & c_1^0 \\
+    ...\\
+    c_{n-1}^{2n-1} & c_{n-1}^{2n-2} & ... & c_{n-1}^{n} & c_{n-1}^{n-1} & c_{n-1}^{n-2} & ... & c_{n-1}^2 & c_{n-1}^1 & c_{n-1}^0 \\
+    \hline \\
+    0 & 0 & ... & 0 & z_{n-1} & z_{n-2} & ... & z_2 & z_1 & z_0
+\end{matrix}$$
+
+Кожен рядок матриці $c_i^j$ утворюємо множенням першого числа на $i$-й розряд другого та зсувом ліворуч на $i$ позицій.
+
+\begin{mdframed}[backgroundcolor=violet!15]
+    \textbf{Твердження 1:}
+    $$c_k^{2n-1} = c_k^{2n-2} = ... = c_k^{n+k+1} = 0$$
+
+    Помножимо перший рядок на $10^{k+1}$. \\
+    Матимемо $c_k^{n+k} = x_{n-1}$, а $c_k^{n+k+1} = c_k^{n+k+2} = ... c_k^{2n-1} = 0$.
+    
+    А при множенні на $9 \cdot 10^k < 10^{k+1}$ буде зайнято не більше розрядів.
+    \qedsymbol
+\end{mdframed}
+
+Тобто маємо наступну картину
+
+$$\begin{matrix}
+    0 & 0 & ... & 0 & x_{n-1} & x_{n-2} & ... & x_2 & x_1 & x_0 \\
+    0 & 0 & ... & 0 & x_{n-1} & x_{n-2} & ... & x_2 & x_1 & x_0 \\
+    \hline \\
+    0 & 0 & ... & c_0^{n} & c_0^{n-1} & c_0^{n-2} & ... & c_0^2 & c_0^1 & c_0^0 \\
+    0 & 0 & ... & c_1^{n} & c_0^{n-1} & c_1^{n-2} & ... & c_1^2 & c_1^1 & 0 \\
+    ...\\
+    c_{n-1}^{2n-1} & c_{n-1}^{2n-2} & ... & c_{n-1}^{n} & c_{n-1}^{n-1} & 0 & ... & 0 & 0 & 0 \\
+    \hline \\
+    z_{2n-1} & z_{2n-2} & ... & z_n & z_{n-1} & z_{n-2} & ... & z_2 & z_1 & z_0
+\end{matrix}$$
+
+% $$x^2 = (\sum_{i=0}^{n-1} x_i \beta^i)(\sum_{i=0}^{n-1} x_i \beta^i) = 2 \cdot \sum_{0\le i < j \le n-1} x_ix_j\beta^{i+j} + \sum_{k=0}^{n-1} x_k^2 \beta^{2k} = $$
+% $$= 2 \sum_{i=0}^{n-2} \sum_{j=i+1}^{n-1} x_ix_{j} \beta^{i+j} + \sum_{k=0}^{n-1} x_k^2 \beta^{2k} = $$
+% Нехай $p = i+j$. $p=\overline{1,2n-3}$. Тоді $j = p-i$.
+
+% ---
+% $$= 2 \sum_{p=1}^{2n-3} \sum_{j=\left\lfloor \frac{p-1}{2} \right\lfloor}^{n-1} x_ix_{j} \beta^{i+j} + \sum_{k=0}^{n-1} x_k^2 \beta^{2k} = $$
+
+% ---
+
+% $$= 2 \sum_{p=1}^{2n-3} \sum_{j=\frac{p+1}{2}}^{n-1} x_{p-j}x_{j} \beta^{p} + \sum_{k=0}^{n-1} x_k^2 \beta^{2k} = $$
+% Оптимізуємо. Нехай $\sum_{i=1}^{n-1} x_ix_{p-i} = X_{p}$
+% $$\sum_{p=1}^{2n-3}  \beta^p \sum_{i=1}^{n-1} x_ix_{p-i} = \sum_{p=1}^{2n-3}  \beta^p X_{p} = $$
+% $$= (( ... (((X_{2n-3} \cdot \beta) + X_{2n-4})\cdot \beta + X_{2n-5})\cdot \beta + ... ) \cdot \beta + X_1)\cdot \beta$$
+
+\pagebreak
+
+Алгоритм множення двох чисел:
+\begin{lstlisting}
+    c = zeros(2n-1)
+    for i = 0 to n-1:
+        carry = 0
+        for j = 0 to n-1:
+            // Додаємо до відповіді добуток числа на i-й розряд
+            (carry, c[i,j]) = c[i+j] + xx[i,j] + carry
+
+            // max_carry_1 <= (9 + 9*9 + 9)//10 = (18+81)//10 = 99//10 = 9
+            // carry <= 9
+            // Тобто все ок, величина переносу поміщається в один розряд
+
+        // додаємо цифру переносу. 
+        // цей розряд ще не чіпали, тому просто присвоєння, не "+="
+        c[i+n] = carry
+
+    return c    // c[0..2n-1] містить результат множення
+\end{lstlisting}
+
+\textbf{Можемо попередньо обчислити всі добутки цифр.}
+
+\begin{lstlisting}
+    c = zeros(2n-1)
+
+    xx = zeros(n,n)
+    for i = 0 to n-1:
+        for j = i to n-1:
+            xx[i,j] = xx[j,i] = x[i] * x[j]
+            // Економимо половину операцій через симетрію xx
+
+    for i = 0 to n-1:
+        carry = 0
+        for j = 0 to n-1:
+            // Додаємо до відповіді добуток числа на i-й розряд
+            (carry, c[i,j]) = c[i+j] + xx[i,j] + carry
+
+            // max carry <= (9 + 9*9 + 9)//10 = (18+81)//10 = 99//10 = 9
+            // carry <= 9
+            // Тобто все ок, величина переносу поміщається в один розряд
+
+        // додаємо цифру переносу. 
+        // цей розряд ще не чіпали, тому просто присвоєння, не "+="
+        c[i+n] = carry
+
+    return c    // c[0..2n-1] містить результат множення
+\end{lstlisting}
+
+Складність:
+\begin{itemize}
+    \item Мультиплікативна:\\
+    Лише передобчислення масиву \texttt{xx[i,j]} - $N_{\times} = \frac{n(n-1)}{2}$
+    \item Адитивна:\\
+    На кожній ітерації внутрішнього циклу - $N^i_{+} = 2 = O(1)$\\
+    Всього ітерацій - $(n-1)^2$\\
+    Всього додавань - $N_{+} = 2(n-1)^2 = O(n^2)$
+\end{itemize}
+
+Якщо вважати, що додавання знехтовно швидка операція порівняно з множенням, 
+то складність всього піднесення до квадрату - $O(n^2)$
+
+\subsection*{b)}
+
+$$A = 4 xy = (x+y)^2 - (x-y)^2 = x^2 + 2xy + y^2 - x^2 +2xy - y^2$$
+$$xy = \frac{A}{4}$$
+
+Складність $A/4$ - $O(n)$ (якщо попередньо обчислити результати ділення на 2 чисел до 20, бо просто один прохід long division)\\
+Складність $(x+y)^2 - (x-y)^2$ - $2sq(n)$, де $sq(n)$ - складність піднесення до квадрату
+
+Тобто, складність множення $= \Omega($ складність квадрату $)$
+
+складність квадрату = $O($складність множення$)$ \qedsymbol
+
+
+\section*{№ 2.4}
+\begin{mdframed}
+    Обчислiть бiтову складнiсть операцiй множення та дiлення m-цифрового натурального числа на 2. 
+    Вважайте, що система числення має основу $2^w$
+\end{mdframed}
+
+$$x = x_{m-1}x_{m-2}\cdots x_1 x_0, \quad x_i \in \{0,1,\cdots , 2^w - 1\}$$
+
+$x$ в бінарній системі - це просто результат заміни кожного розряду $x_i$ 
+на відповідний tuple $y_i \in \{0,1\}^w$
+
+Ділення/множення на 2 - це просто bitwise shift на 1 праворуч/ліворуч (в молодший/старший бік)
+
+$$y_i = bin[x_i] - \text{просто lookup в масиві, } O(1) \;\text{ відносно $m$ або }\; O(2^w)$$
+$$bin[0] = 0; \quad bin[j] = bin[j-1] \oplus 1, \; \text{ де $\oplus$ - бінарне додавання}$$
+
+Перехід з двійкового назад - те саме, але lookup по значенню, а не ключу.
+
+\begin{itemize}
+\item 
+Бітова складність бінарного додавання чисел довжини n - $C_\oplus = O(n) = O(w)$
+
+\item 
+Складність передобчислення $bin[]$ - $C_{pre bin} = 2^w * O(w) = O(2^w)$\\
+\textbf{Але}, оскільки система числення фіксована, можна говорити, що це $O(1)$ відносно $m$. 
+
+\item 
+Складність множення на 2 - $O(1)$, бо це просто bitwise shift на 1 ліворуч (в старший бік)
+
+\item 
+Складність ділення на 2 - $O(1)$, бо це просто bitwise shift на 1 праворуч (в молодший бік)
+
+\item
+Складність переходу до/від двійкового представлення - $m*O(1) + C_{pre bin} = O(m) + O(1) = O(m)$
+\end{itemize}
+
+Алгоритм:
+\begin{lstlisting}
+    Переходимо в двійкове представлення: O(m)
+    Зсув ліворуч / праворуч: O(1)
+    Переходимо назад з двійкового представлення: O(m)
+\end{lstlisting}
+
+\begin{mdframed}[style=ans]
+    В сумі складність - $C = 2O(m) + O(1) = O(m)$
+\end{mdframed}
+
+
+\section*{№ 2.5}
+\begin{mdframed}
+    Обчислiть бiтову та адитивну складнiсть дiлення $m$-цифрового числа на $k$-цифрове ($m > k$) 
+    за алгоритмом «зсувай@вiднiмай». Вважайте, що система числення має основу $2^w$.
+\end{mdframed}
+
+Нехай ділимо $x$ на $y$
+
+$$y = \sum_{i=0}^{wm-1} y_i 2^i$$
+
+
+
+Алгоритм
+\begin{lstlisting}
+    Перейти до двійкового представлення x та y
+
+    // x - масив бітів. len(x) = w*m = M
+    // y - масив бітів. len(y) = w*k = K
+
+    z = zeros(m-k+1)
+    // z - масив бітів. результат ділення.
+
+    y = y << M-K    // O(1)
+    I = 1 << M      // O(1)
+
+    for i = M-K to 0:  // M-K+1 iterations
+
+        j = (x - y) & I  // O(M) + O(1) = O(M)
+        if j: 
+            // That is, x - y*2^i < 0
+            // borrow - do nothing yet
+            z[i] = 0     
+        else:
+            x = x - y    // O(M)
+            z[i] = 1     
+
+        y = y >> 1    // O(1)
+        I = I >> 1    // O(1)
+
+    Перейти назад від двійкового представлення z
+
+\end{lstlisting}
+\pagebreak
+
+Бітова складність
+$$C_{total bin} = O(1) + (M-K+1)\cdot\left(O(M) + O(M) + O(1)\right) = (M-K+1) * O(M) = O(M(M-K)) = $$
+$$ = O(w^2m(m-k))$$
+
+Адитивна складність
+$$C_{total +} = 2 * (M-K) = O(w(m-k))$$
+
+\section*{№ 2.7}
+$$\beta = 2^w - \text{база системи числення}$$
+$$a^m - ?$$
+$$|a| = n$$
+$$t = \log_{2^w} m$$
+
+$$a^m = a^{\left( \sum_{i=0}^{t} m_i 2^{wi} \right)} = $$
+$$= a^{(2^{wt}m_t)}\cdot a^{(2^{w(t-1)}m_{t-1})} \cdot ... \cdot a^{(2^{w}m_1)} \cdot a^{m_0} = $$
+$$= (( ... ((a^{m_t})^{2^{w}} \cdot a^{m_{t-1}})^{2^{w}} \cdot ... )^{2^{w}} \cdot a^{m_1})^{2^{w}} \cdot a^{m_0}$$
+
+Алгоритм
+\begin{lstlisting}
+    // precalculation
+    S[0] = 1
+    for i = 1 to 2^w-1:    // 2^w-1 iterations
+        S[i] = S[i-1] * a  // O(1)
+
+    p = 1
+    for i = t to 0:        // (t+1) iterations
+        p = p^(2^w)        // w squares = w multiplications
+        p = p * S[ m[i] ]  // 1 multiplication
+    
+    return p
+\end{lstlisting}
+
+Складність:
+$$C_{tot} = (2^w-1) * 1 + (t+1) * 1 * (w + 1) = 2^w + tw + t + w$$
+
+\begin{mdframed}[style=ans]
+    $$2^w + tw + t + w$$
+\end{mdframed}
+
+\section*{№  2.10}
+\begin{mdframed}
+    Нехай N — m-цифрове натуральне число. 
+    Знайдiть мультиплiкативну складнiсть обчислення N! шляхом безпосереднього множення.
+\end{mdframed}
+
+$$log N = m$$
+$$R = N!$$
+$$R = N*(N-1)*(N-2)* ... * 2 * 1$$
+
+Довжина $(N-k)$ - це $\log (N-k)$
+
+Всього: $$T(m) = \sum_{k=0}^{N-1} T_{mul}(\log (N-k)) = O\left(\sum_{k=0}^{N-1} \log (N-k)\right)$$
+
+По-перше, ясно, що $T(m) = O(N \log N) = O(Nm)$
+
+По-друге, 
+$$\sum_{k=0}^{N-1} \log (N-k) \to \int_0^{N-1} \log (N-k) dk = $$
+$$= - k - (N-k)\log (N-k) |_0^{N-1} 
+= N\log N - N + 1 = O(N\log N)$$
+
+Тобто
+$$T(m) = O(N\log N) = O(m\beta^m)$$
+
+\end{document}
+
