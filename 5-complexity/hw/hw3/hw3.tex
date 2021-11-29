@@ -119,47 +119,33 @@ $$|A| = \sum |A_i| = 100 + 90 + 81 = 271$$
 Тобто різниця між теоремами в тому, що ми доводимо існування нескінченної кількості таких нерухомих точок.
 \pagebreak
 
+
+
 \begin{proof}
-Let $k' = k+1$
+    Нехай 
+    $$g(x) = \begin{cases}
+        f(x), & x>k \\
+        q : \varphi_q \simeq \varphi_x + 1, & x\le k
+    \end{cases}$$
+    $g$ - повністю визначена. Застосовуємо теорему про нерухому точку:
 
-Розглянемо функцію $\varphi_{f(\varphi_x(x)+k')}(y)$.
-\begin{equation}    
-\varphi_{f(\varphi_x(x)+k')}(y) \simeq g'(f(\varphi_x(x)+k'),y) \simeq g(x,y)
-\end{equation}
+    $$\exists t\in\mathbb{N}: \varphi_{g(t)} \simeq \varphi_t$$
+    
+    Якщо $t > k$, то просто беремо $n = t$ бо
+    $$\varphi_{g(t)} \simeq \varphi_{f(t)} \simeq \varphi_t$$
 
-З $s_n^m$ теореми:
-\begin{equation}
-    \exists h\in\Phi^{tot}:\; \varphi_{f(\varphi_x(x)+k')}(y) \simeq \varphi_{h(x)}(y)
-\end{equation}
-
-$h$ - обчислювальна та всюди визначена. Розглянемо
-% $$v(x) = h(x) + k'$$
-
-\begin{equation}
-    \Phi^{tot} \ni \varphi_m(x) \simeq h(x)
-\end{equation}
-% $v$ - обчислювальна та всюди визначена.
-
-З всюди визначеності можемо розглянути наступне значення:
-\begin{equation}
-    \begin{cases}
-        \varphi_m(m) = t;%\\
-        % t = h(m) + k + 1 > k
-    \end{cases}
-\end{equation} 
-
-З рівняння 2:
-$$\varphi_{f(\varphi_m(m)+k')} \simeq \varphi_{h(m)} $$%\simeq \varphi_{v(m)-k'}$$
-
-Тобто маємо
-$$\varphi_{f(\varphi_m(m)+k')} \simeq \varphi_{\varphi_{m}(m)}$$
-Підставивши $t$:
-$$\varphi_{f(t)} \simeq \varphi_{t}$$
-
-Отже, знайшли нерухому точку - функція $\varphi_n$ з номером $n=t$. 
-
-TODO: АЛЕ $t$ МАЄ БУТИ БІЛЬШЕ $k$!!
-
+    Якщо $t \le k$, то маємо наступне:
+    $$\varphi_{g(t)} \simeq \varphi_{q} \simeq \varphi_t$$
+    При цьому 
+    $$\varphi_q \simeq \varphi_t + 1$$
+    Тобто 
+    $$\varphi_t \simeq \varphi_t + 1$$
+    Протиріччя. Значить $t > k$.
 \end{proof}
+
+
+\section*{№ 3.4}
+
+
 \end{document}
 

@@ -1,0 +1,406 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Аналіз алгоритмів}
+\newcommand\hwnumber{ДЗ №5}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+% 2.31, 2.32 - довести нижню границю (Омега-велика), ми з вами доводили тільки верхню (О-велике).
+% 2.35 - два пункти на вибір.
+% 2.37 (б - г).
+% 2.41
+% 2.42 (те, що не розглядали на парі)
+
+\section*{№ 2.31}
+\begin{mdframed}
+    $$T(n) = 2T(\lfloor \frac{n}{2} \rfloor) + n, \quad T(1) = 1$$
+    Довести:
+    $$T(n) = \Theta(n \log n)$$
+\end{mdframed}
+
+Потрібно довести, що
+\begin{enumerate}
+    \item $T(n) = O(n\log n) \iff T(n) < C n\log n$
+    \item $T(n) = \Omega(n\log n) \iff T(n) > C n\log n$
+\end{enumerate}
+
+\begin{mdframed}[backgroundcolor=black!5]
+    Note: $$\forall n: 2\lfloor \frac{n}{2} \rfloor + 2 \ge n$$
+\end{mdframed}
+
+\subsection*{1. $O(n\log n)$}
+
+Note: $$\lfloor \frac{n}{2} \rfloor < n$$
+
+\begin{proof}
+Нехай $\exists C: \forall n_0<n < N: T(n) < C\cdot n\log n $. Тоді
+
+$$T(N) = 2T(\lfloor \frac{N}{2} \rfloor) + N <$$
+(за припущенням)
+$$< C \lfloor \frac{N}{2} \rfloor \cdot \log \lfloor \frac{N}{2} \rfloor + N 
+< C \cdot N \cdot \log N + N$$
+Треба підігнати.
+
+Нехай $T(n) < C\cdot n\log n - (2n+2) < C\cdot n \log n$. Тоді
+
+$$T(N) = 2T(\lfloor \frac{N}{2} \rfloor) + N <$$
+(за припущенням)
+$$< C \lfloor \frac{N}{2} \rfloor \cdot \log \lfloor \frac{N}{2} \rfloor - (2\lfloor \frac{N}{2} \rfloor+2) + N
+< C \cdot N \cdot \log N - N + N = C \cdot N \cdot \log N$$
+
+База індукції:
+$$T(2) = 2T(1)+2 = 4 < C\cdot 2 \cdot \log 2 - 2 = 2(C-1) \implies C > 3$$
+
+Маємо: 
+$$T(n) = O(n\log n), n_0 = 2, C = 4$$
+\end{proof}
+
+\subsection*{2. $\Omega(n\log n)$}
+\begin{proof}
+    Нехай $\exists C:\; \forall n_0 < n < N: T(n) > C\cdot n\log n$.
+    $$T(N) = 2T(\lfloor \frac{N}{2} \rfloor) + N > T(\lfloor \frac{N}{2} \rfloor) > $$
+    $$> C\cdot \lfloor \frac{N}{2} \rfloor \cdot \log \lfloor \frac{N}{2} \rfloor 
+    \ge C \cdot \lfloor \frac{N}{2} \rfloor \cdot \log \frac{N}{3} = C \cdot \lfloor \frac{N}{2} \rfloor \cdot (\log N - \log 3) >$$
+    $$> \frac{C}{10} N \log N - \frac{C}{10} N \cdot \log 3 $$
+
+    Підгоняємо:
+
+    Нехай $$T(n) > 10 C \cdot (2n+2)\log (2n+2) > C n \log n$$.
+    Тоді
+    $$T(N) = 2T(\lfloor \frac{N}{2} \rfloor) + N > T(\lfloor \frac{N}{2} \rfloor) > $$
+    $$> 10 C \cdot (2\lfloor \frac{N}{2}\rfloor+2)\cdot  \log (2\lfloor \frac{N}{2} \rfloor+2) 
+    > C N \log N$$
+
+    База індукції:
+    $$T(2) = 4 > C \cdot (2\cdot 2 + 2) \cdot \log (2\cdot 2 + 2) = 6C\log 6 \implies C < \frac{4}{6\log 6}$$
+    
+    Маємо: 
+    $$T(n) = \Omega(n\log n), n_0 = 2, C = 0.3$$
+\end{proof}
+
+\section*{№ 2.32}
+\begin{mdframed}
+    $$T(n) = 4T(\frac{n}{3}) + n, \quad T(1)=1$$
+    Довести:
+    $$T(n) = \Theta(n^{\log_3 4})$$
+\end{mdframed}
+
+\subsection*{1. $T(n) = O(n^{\log_3 4})$}
+\begin{proof}
+    Нехай 
+    $$\exists C: \forall n_0 < n' < n: T(n') < C n'^{\log_3 4} - a < C n'^{\log_3 4}$$
+    Тоді
+
+    $$T(n) = 4T(\frac{n}{3}) + n < 4C \left(\frac{n}{3}\right)^{\log_3 4} - 4a + n = $$
+    $$= 4C \frac{n^{\log_3 4}}{4} -4a + n = C n^{\log_3 4} - 4a + n = $$
+    
+    Нехай $a = 3n'$
+    $$T(n') < C n'^{\log_3 4} - 3n' < C n'^{\log_3 4}$$
+    Тоді
+    
+    $$T(n) = 4T(\frac{n}{3}) + n < 4C \left(\frac{n}{3}\right)^{\log_3 4} - 4\frac{3n}{3} + n = $$
+    $$= 4C \frac{n^{\log_3 4}}{4} - 3n = C n^{\log_3 4} - 3n < C n^{\log_3 4}$$
+    
+    База індукції:
+    $$T(3) = 4T(1) + 3 = 7 < C 3^{\log_3 4} - 3/3 = 4C - 1 \implies C > \frac{8}{4} = 2$$
+
+    Маємо:
+    $$T(n) = O(n^{\log_3 4}), n_0=3, C = 3$$
+\end{proof}
+
+\subsection*{2. $T(n) = \Omega(n^{\log_3 4})$}
+\begin{proof}
+    Нехай 
+    $$\exists C: \forall n_0 < n' < n: T(n') > C n'^{\log_3 4} $$
+    Тоді
+    $$T(n) = 4T(\frac{n}{3}) + n > 4C \left(\frac{n}{3}\right)^{\log_3 4} + n = $$
+    $$= 4C \frac{n^{\log_3 4}}{4} + n = C n^{\log_3 4} + n > C n^{\log_3 4} $$
+
+    База індукції:
+    $$T(3) = 7 > 4C \implies C < \frac{7}{4}$$
+
+    Маємо:
+    $$T(n) = \Omega(n^{\log_3 4}), n_0=3, C = 1$$
+\end{proof}
+\pagebreak
+
+\section*{№ 2.35 б)}
+$$T(n) = 3T(\frac{n}{2}) + n^2$$
+$$
+\begin{tikzpicture}
+    \fill (2,0) node[above] {$T(n)$} circle (2pt);
+
+    \fill (4,4) node[above] {$T(\frac{n}{2})$} circle (2pt);
+    \fill (4,0) node[above] {$T(\frac{n}{2})$} circle (2pt);
+    \fill (4,-4) node[above] {$T(\frac{n}{2})$} circle (2pt);
+
+    \fill (8,5) node[above] {$T(\frac{n}{4})$} circle (2pt);
+    \fill (8,4) node[above] {$T(\frac{n}{4})$} circle (2pt);
+    \fill (8,3) node[above] {$T(\frac{n}{4})$} circle (2pt);
+
+    \fill (8,1) node[above] {$T(\frac{n}{4})$} circle (2pt);
+    \fill (8,0) node[above] {$T(\frac{n}{4})$} circle (2pt);
+    \fill (8,-1) node[above] {$T(\frac{n}{4})$} circle (2pt);
+
+    \fill (8,-3) node[above] {$T(\frac{n}{4})$} circle (2pt);
+    \fill (8,-4) node[above] {$T(\frac{n}{4})$} circle (2pt);
+    \fill (8,-5) node[above] {$T(\frac{n}{4})$} circle (2pt);
+
+    \path (10,4) node {$\cdots$};
+    \path (10,0) node {$\cdots$};
+    \path (10,-4) node {$\cdots$};
+
+    \fill (12,5) node[above] {$T(\frac{n}{2^t})$} circle (2pt);
+    \path (12,0) node {$\vdots$};
+    \path (12,3) node {$\vdots$};
+    \path (12,-3) node {$\vdots$};
+    \fill (12,-5) node[above] {$T(\frac{n}{2^t})$} circle (2pt);
+
+    \draw (2,0) -- (4,4);
+    \draw (2,0) -- (4,0);
+    \draw (2,0) -- (4,-4);
+
+    \draw (4,4) -- (8,5);
+    \draw (4,4) -- (8,4);
+    \draw (4,4) -- (8,3);
+    \draw (4,-4) -- (8,-5);
+    \draw (4,-4) -- (8,-4);
+    \draw (4,-4) -- (8,-3);
+    \draw (4,0) -- (8,1);
+    \draw (4,0) -- (8,0);
+    \draw (4,0) -- (8,-1);
+
+    \draw[decorate,decoration = {brace, amplitude=0.5cm}] (13,5.5) -- (13,-5.5);
+    \path (13.5, 0) node[right] {$\displaystyle3^t$};
+    \draw[decorate,decoration = {brace, amplitude=0.5cm, mirror}] (1.5,-5.5) -- (12.5,-5.5);
+    \path (6.5, -6.5) node[right] {$\displaystyle t = \log_2 n$};
+    
+
+\end{tikzpicture}
+$$
+
+$$t = \log_2 n$$
+$$T(n) = \sum_{i=0}^{t-1} 3^i \cdot \left(\frac{n}{2^i}\right)^2 + \sum_{i=1}^{3^t} 1 =$$
+$$= \sum_{i=0}^{t-1} \left(\frac{3}{4}\right)^i \cdot n^2 + 3^t = (\sum_{i=0}^{\infty} \left(\frac{3}{4}\right)^i - \sum_{i=t-1}^{\infty} \left(\frac{3}{4}\right)^i) \cdot n^2 + 3^t = $$
+$$= (\cancelto{4}{\frac{1}{1-3/4}} - \frac{(3/4)^{t-1}}{1-3/4}) \cdot n^2 + 3^t = 4\cdot (1-0.75^{t-1})\cdot n^2 + \cancelto{n^{\log_2 3}}{3^{\log_2 n}} \approx 4n^2 + n^{1.58} $$
+
+$$T(n) = \Theta(4n^2 + n^{\log_2 3})$$
+
+\subsection*{Доведення $O$}
+$$T(N) < C \cdot (4N^2 + N^{1.58})$$
+$$T(n) = 3T(\frac{n}{2}) + n^2 < 3C \cdot (n^2 + \frac{n^{1.58}}{2^{\log_2 3}}) + n^2 = 3Cn^2 + Cn^{1.58} + n^2 < C\cdot (4n^2 + n^{1.58}) + n^2$$
+Трохи змінимо припущення:
+
+$$T(N) < C \cdot (4N^2 + N^{1.58}) - (2N)^2 < C \cdot (4N^2 + N^{1.58})$$
+$$T(n) = 3T(\frac{n}{2}) + n^2 < 3C \cdot (n^2 + \frac{n^{1.58}}{2^{\log_2 3}}) - (2n/2)^2 + n^2 = 3Cn^2 + Cn^{1.58} <$$
+$$< C\cdot (4n^2 + n^{1.58})\; \qedsymbol$$
+
+База індукції:
+$$T(2) = 7 < C \cdot (16 + 3) - 4 \implies C > \frac{7}{15}$$
+
+\subsection*{Доведення $\Omega$}
+$$T(N) > C \cdot (4N^2 + \frac{4}{3}N^{\log_2 3}) > C \cdot (4N^2 + N^{\log_2 3})$$
+$$T(n) = 3T(\frac{n}{2}) + n^2 > 3C \cdot (n^2 + \frac{4}{3}\cdot \frac{n^{\log_2 3}}{2^{\log_2 3}}) + n^2 = 3C \cdot (n^2 + \frac{4}{3} n^{1.58}) + n^2 >$$
+$$> C \cdot (n^2 + \frac{4}{3} n^{1.58}) > C \cdot (n^2 + n^{1.58})\; \qedsymbol$$
+
+База індукції:
+$$T(2) = 7 > C \cdot (16 + 4) \implies C < \frac{7}{20}$$
+
+\begin{mdframed}[style=ans]
+    Отже, $T(n) = \Theta(4n^2 + n^{\log_2 3})$
+\end{mdframed} 
+\pagebreak
+
+\section*{№ 2.35 д)}
+$$T(n) = 4T(\frac{n}{2}) + cn, \quad c=\text{const} >0$$
+
+\begin{lstlisting}
+[cn] T(n) -- [cn/2] T(n/2) -- [cn/4] T(n/4) -- ...      -- [1] T(n/2^t) 
+                           -- [cn/4] T(n/4) -- ...      ...
+                           -- [cn/4] T(n/4) -- ...
+                           -- [cn/4] T(n/4) -- ...
+                           
+          -- [cn/2] T(n/2) -- [cn/4] T(n/4) -- ...
+                           -- [cn/4] T(n/4) -- ...
+                           -- [cn/4] T(n/4) -- ...
+                           -- [cn/4] T(n/4) -- ...
+                           
+          -- [cn/2] T(n/2) -- [cn/4] T(n/4) -- ...
+                           -- [cn/4] T(n/4) -- ...
+                           -- [cn/4] T(n/4) -- ...
+                           -- [cn/4] T(n/4) -- ...
+                           
+          -- [cn/2] T(n/2) -- [cn/4] T(n/4) -- ...
+                           -- [cn/4] T(n/4) -- ...
+                           -- [cn/4] T(n/4) -- ...       ...
+                           -- [cn/4] T(n/4) -- ...       -- [1] T(n/2^t) 
+
+> Depth = t = log(2,n)
+> Number of points on the last level = 4^t = 2^(2 log(2,n)) = n^2
+\end{lstlisting}
+
+$$T(n) = \sum_{i=0}^{t-1} 4^i \frac{cn}{2^i} + \sum_{i=1}^{n^2} 1 = $$
+$$= cn \cdot \sum_{i=0}^{t-1}  \frac{2^{2i}}{2^i} + n^2 = cn \cdot \sum_{i=0}^{t-1} 2^i + n^2 = $$
+$$= cn \cdot (2^t - 1) + n^2 = cn \cdot (2^{\log_2 n} - 1) + n^2 = cn(n - 1) + n^2 = $$
+$$= (c+1)n^2 - cn$$
+
+\subsection*{Доведення $O$}
+$$T(n) < A \cdot ((c+1)n^2 - cn)$$
+$$T(n) = 4T(\frac{n}{2}) + cn < 4A \cdot ((c+1)\frac{n^2}{4} - c\frac{n}{2}) + cn = $$
+$$= A(c+1)n^2 - 2Acn + cn < A(c+1)n^2 - Acn + cn = A\cdot ((c+1)n^2 - cn) + cn$$
+
+Трохи змінимо припущення:
+$$T(n) < A \cdot ((c+1)n^2 - cn) - 2cn < A \cdot ((c+1)n^2 - cn)$$
+$$T(n) = 4T(\frac{n}{2}) + cn < 4A \cdot ((c+1)\frac{n^2}{4} - c\frac{n}{2}) - 2cn/2 + cn = $$
+$$= A(c+1)n^2 - 2Acn < A(c+1)n^2 - Acn = A\cdot ((c+1)n^2 - cn)$$
+\qedsymbol
+
+\subsection*{Доведення $\Omega$}
+$$T(n) > A \cdot ((c+1)n^2 - cn)$$
+$$T(n) = 4T(\frac{n}{2}) + cn > 4A \cdot ((c+1)\frac{n^2}{4} - c\frac{n}{2}) + cn = $$
+$$= A(c+1)n^2 - 2Acn + cn > A\cdot ((c+1)n^2 - 2cn)$$
+
+Трохи змінимо припущення:
+$$T(n) > A \cdot ((c+1)n^2 - \frac{1}{2}cn) >  A \cdot ((c+1)n^2 - cn)$$
+$$T(n) = 4T(\frac{n}{2}) + cn > 4A \cdot ((c+1)\frac{n^2}{4} - \frac{1}{2}c\frac{n}{2}) + cn = $$
+$$= A(c+1)n^2 - Acn + cn > A\cdot ((c+1)n^2 - cn)\; \qedsymbol$$
+
+\section*{№ 2.37 б)}
+$$T(n) = 2T(\sqrt n) + n; \quad m = \log_2 n$$
+
+$n = 2^m$
+$$T(n) = 2T(n^{0.5}) + n$$
+$$T(2^m) = 2T(2^{m/2}) + 2^m = G(m)$$
+$$G(m) = 2G(m/2) + 2^m$$
+
+\begin{itemize}
+    \item Глибина дерева рекурсії - $t = \log_2 m = \log_2 \log_2 n$.
+    \item Ширина дерева (кількість нод на найглибшому рівні) - $2^t = m$
+    \item Складність збірки на i-му рівні - $2^(m/2^i)$
+    \item к-сть нод на одному рівні - $2^i$
+\end{itemize}
+
+$$G(m) = \sum_{i=0}^{t-1} 2^i \cdot 2^{m/2^i} + \sum_{i=1}^m 1 =  \sum_{i=0}^{t-1}2^{i + m/2^i} + m$$
+$$T(n) = G(m) = \sum_{i=0}^{t-1}2^{i + \log_2 n/2^i} + \log_2 n = \sum_{i=0}^{t-1}2^i \sqrt[2^i]{n} + \log_2 n$$
+
+\section*{№ 2.37 в)}
+$$T(n) = 2T(n-1) + 1, \quad m = 2^n, \quad n = \log m$$
+
+$$G(m) = T(n) = T(\log m) = 2T(\log m-1) + 1 = 2T(\log \frac{m}{2}) + 1 = 2G(\frac{m}{2}) + 1$$
+$$G(m) = 2G(\frac{m}{2}) + 1$$
+
+\begin{itemize}
+    \item Глибина дерева рекурсії - $t = \log_2 m  = n$.
+    \item Ширина дерева (кількість нод на найглибшому рівні) - $2^{t-1} = m/2 = 2^{n-1}$
+    \item Складність збірки на i-му рівні - $1$
+    \item к-сть нод на одному рівні - $2^i$
+\end{itemize}
+
+$$G(m) = \sum_{i=0}^{t-2} 2^i\cdot 1 + \sum_{i=1}^{2^{t-1}} 1 = (2^{t-1}-1) + 2^{t-1} = 2^t - 1$$
+$$T(n) = 2^n - 1$$
+
+Дійсно
+$$T(n) = 2T(n-1) + 1 = 2(2^{n-1} - 1) + 1 = 2^{n-1+1} -2 + 1 = 2^{n-1} - 1$$
+
+\section*{№ 2.37 г)}
+$$T(n) = 4T(n-8) +2^n, \quad m=2^n, \quad n = \log m$$
+$$G(m) = 4T(\log m - 8) + m = 4T(\log (m/256)) + m $$
+
+\begin{itemize}
+    \item Глибина дерева рекурсії - $t = \log_{2^8} m + 1$.
+    \item Ширина дерева (кількість нод на найглибшому рівні) - $4^{t}$
+    \item Складність збірки на i-му рівні - $m/2^{8i}$
+    \item к-сть нод на одному рівні - $4^i$
+\end{itemize}
+
+$$G(m) = \sum_{i=0}^{t-1} 4^i\cdot m/2^{8i} + \sum_{i=1}^{4^t} 1 = $$
+$$= m \cdot \sum_{i=0}^{t-1} 2^{-6i} + 4^t = m \cdot (\frac{1}{1-2^{-6}} - \frac{2^{-6t}}{1-2^{-6}})  + 4^t = $$
+$$= m \cdot \frac{64}{63} ( 1 - 2^{-6t} ) + 4^t T(1) $$
+
+$$t = \log_{2^8} m + 1 = \log_{2^8} (2^8 \cdot m) = \frac{1}{8} \log (2^8 \cdot 2^n) = 1 + \frac{n}{8}$$
+
+$$T(n) = 2^n \cdot \frac{64}{63} ( 1 - 2^{-6t} ) + 4^t, \quad t = 1 + \frac{n}{8} $$
+
+
+\section*{№ 2.41}
+TODO
+
+\section*{№ 2.42}
+TODO
+
+\end{document}
+

@@ -224,130 +224,192 @@ $$xy = \frac{A}{4}$$
     Вважайте, що система числення має основу $2^w$
 \end{mdframed}
 
-$$x = x_{m-1}x_{m-2}\cdots x_1 x_0, \quad x_i \in \{0,1,\cdots , 2^w - 1\}$$
+$$x = x^{m-1}x^{m-2}\cdots x^1 x^0, \quad x^i \in \{0,1,\cdots , 2^w - 1\}$$
 
-$x$ в бінарній системі - це просто результат заміни кожного розряду $x_i$ 
-на відповідний tuple $y_i \in \{0,1\}^w$
+1 разряд $x$ відповідає одному бітовому регістру розміру $w$.
+Тобто 
+$$x = \boxed{x_{w-1}^{m-1} \cdots x_0^{m-1}} \boxed{x_{w-1}^{m-2} \cdots x_0^{m-2}} \cdots \boxed{x_{w-1}^{0} \cdots x_0^{0}} $$ 
+де $x^i_j \in \{0,1\}$
 
 Ділення/множення на 2 - це просто bitwise shift на 1 праворуч/ліворуч (в молодший/старший бік)
 
-$$y_i = bin[x_i] - \text{просто lookup в масиві, } O(1) \;\text{ відносно $m$ або }\; O(2^w)$$
-$$bin[0] = 0; \quad bin[j] = bin[j-1] \oplus 1, \; \text{ де $\oplus$ - бінарне додавання}$$
+\subsection*{Ділення на 2}
+Схема роботи:
+\begin{enumerate}
+    \item Зсунути старший регістр >> 1
+    \item Зберегти молодший біт старшого регістру в старший біт наступного вже зсунутого регістру\\
+    Останній біт - \texttt{x[1] \& 1}\\
+    Додати в старший біт наступного регістра - \texttt{y[0] = (x[0] >> 1) | ((x[1] \& 1) << w-1)}\\
+    Можна спростити: \texttt{y[0] = (x[0] >> 1) | (x[1] << w-1)}
+\end{enumerate}
 
-Перехід з двійкового назад - те саме, але lookup по значенню, а не ключу.
-
-\begin{itemize}
-\item 
-Бітова складність бінарного додавання чисел довжини n - $C_\oplus = O(n) = O(w)$
-
-\item 
-Складність передобчислення $bin[]$ - $C_{pre bin} = 2^w * O(w) = O(2^w)$\\
-\textbf{Але}, оскільки система числення фіксована, можна говорити, що це $O(1)$ відносно $m$. 
-
-\item 
-Складність множення на 2 - $O(1)$, бо це просто bitwise shift на 1 ліворуч (в старший бік)
-
-\item 
-Складність ділення на 2 - $O(1)$, бо це просто bitwise shift на 1 праворуч (в молодший бік)
-
-\item
-Складність переходу до/від двійкового представлення - $m*O(1) + C_{pre bin} = O(m) + O(1) = O(m)$
-\end{itemize}
-
-Алгоритм:
 \begin{lstlisting}
-    Переходимо в двійкове представлення: O(m)
-    Зсув ліворуч / праворуч: O(1)
-    Переходимо назад з двійкового представлення: O(m)
+    // y[i] - iй регістр, нумерація як вище
+    // y[i][j] - jй біт i-го регістру, нумерація як вище
+    // x - вхід, y - вихід
+
+    y[m-1] := x[m-1] >> 1                       // 1 op
+    for i = m-2 to 0:                           // m-1 ітерацій
+        y[i] := (x[i] >> 1) | (x[i+1] << w-1)   // 3 ops
 \end{lstlisting}
 
-\begin{mdframed}[style=ans]
-    В сумі складність - $C = 2O(m) + O(1) = O(m)$
-\end{mdframed}
+В результаті, $$T(n) = 1 + 3(m-1)$$
 
+\subsection*{Множення на 2}
+Схема роботи:
+\begin{enumerate}
+    \item Зсунути молодший регістр << 1
+    \item Зберегти старший біт молодшого регістру в молодший біт попередього вже зсунутого регістру\\
+    Старший біт - \texttt{x[0] \& (1<<w-1)}\\
+    Додати в молодший біт попередього регістра - \texttt{y[1] = (x[1] << 1) | ((x[0] \& (1<<w-1)) >> w-1)}\\
+    Можна спростити: \texttt{y[1] = (x[1] << 1) | (x[0] >> w-1)}
+\end{enumerate}
 
-\section*{№ 2.5}
-\begin{mdframed}
-    Обчислiть бiтову та адитивну складнiсть дiлення $m$-цифрового числа на $k$-цифрове ($m > k$) 
-    за алгоритмом «зсувай@вiднiмай». Вважайте, що система числення має основу $2^w$.
-\end{mdframed}
-
-Нехай ділимо $x$ на $y$
-
-$$y = \sum_{i=0}^{wm-1} y_i 2^i$$
-
-
-
-Алгоритм
 \begin{lstlisting}
-    Перейти до двійкового представлення x та y
+    // y[i] - iй регістр, нумерація як вище
+    // y[i][j] - jй біт i-го регістру, нумерація як вище
+    // x - вхід, y - вихід
 
-    // x - масив бітів. len(x) = w*m = M
-    // y - масив бітів. len(y) = w*k = K
-
-    z = zeros(m-k+1)
-    // z - масив бітів. результат ділення.
-
-    y = y << M-K    // O(1)
-    I = 1 << M      // O(1)
-
-    for i = M-K to 0:  // M-K+1 iterations
-
-        j = (x - y) & I  // O(M) + O(1) = O(M)
-        if j: 
-            // That is, x - y*2^i < 0
-            // borrow - do nothing yet
-            z[i] = 0     
-        else:
-            x = x - y    // O(M)
-            z[i] = 1     
-
-        y = y >> 1    // O(1)
-        I = I >> 1    // O(1)
-
-    Перейти назад від двійкового представлення z
-
+    y[0] := x[0] << 1                           // 1 op
+    for i = 1 to m-1:                           // m-1 ітерацій
+        y[i] := (x[i] << 1) | (x[i-1] >> w-1)   // 3 ops
 \end{lstlisting}
+
+В результаті, $$T(n) = 1 + 3(m-1)$$
+
 \pagebreak
 
-Бітова складність
-$$C_{total bin} = O(1) + (M-K+1)\cdot\left(O(M) + O(M) + O(1)\right) = (M-K+1) * O(M) = O(M(M-K)) = $$
-$$ = O(w^2m(m-k))$$
+\section*{№ 2.5}
+$$C = \frac{X}{Y}$$
+$X, Y$ - $n$ та $m$ цифрові числа в $2^w$-системі числення
 
-Адитивна складність
-$$C_{total +} = 2 * (M-K) = O(w(m-k))$$
+Нехай регістр має розмір $w$
+
+\begin{lstlisting}
+    R = X
+    Q = 0
+    while R >= Y:                 // T_bit = |R| = |X|, бо це як віднімання
+        t = |R|
+        C = Y << |R| - |Y|        // T_bit = T_shift(|Y|) * (|R| - |Y|)
+        if R < C:                 // T_bit = |X|, бо це як віднімання
+            t = t-1               // 1
+            C = Y << t - |Y|      // T_bit = T_shift(|Y|) * (t - |Y|)
+        R = R - C                 // |R| = |X|
+        Q = Q + (1 << t - |Y|)    // |Q| + 1
+    
+    // T_shift(|Y|) = 1 + 3(|Y|-1) = 3|Y| - 2
+    // |Q| = |X| - |Y|
+\end{lstlisting}
+
+Найвища складність коли віднімання відбувається кожну ітерацію. 
+Вважаємо, що цикл виконається $|X| - |Y|$ ітерацій
+$$T_{max}(|X|,|Y|) = |X| + (|X| - |Y|)\cdot (|X| + (3|Y| - 2)\cdot(|X|-|Y|) + |X| + |X| - |Y| + 1) = $$
+$$= n + (n-m)\cdot (3n + (3m-2)\cdot (n-m) - m + 1) = $$
+$$=3 m^3 - 6 m^2 n - m^2 + 3 m n^2 - m + n^2 + 2 n = $$
+$$=O(mn^2)$$
+Бо $n > m$
 
 \section*{№ 2.7}
+
 $$\beta = 2^w - \text{база системи числення}$$
-$$a^m - ?$$
-$$|a| = n$$
-$$t = \log_{2^w} m$$
+$$x^y - ?$$
+$$|x|_w = \text{к-сть розрядів в $\beta$-системі числення} = \lfloor\log_\beta |x| + 1\rfloor$$
+$$|x|_2 = \text{к-сть розрядів (бітів) в $2$-системі числення} = w\cdot |x|_w$$
+$$|x|_r = \text{к-сть n-бітних регістрів для запису числа} = \lceil|x|_2/n\rceil$$
 
-$$a^m = a^{\left( \sum_{i=0}^{t} m_i 2^{wi} \right)} = $$
-$$= a^{(2^{wt}m_t)}\cdot a^{(2^{w(t-1)}m_{t-1})} \cdot ... \cdot a^{(2^{w}m_1)} \cdot a^{m_0} = $$
-$$= (( ... ((a^{m_t})^{2^{w}} \cdot a^{m_{t-1}})^{2^{w}} \cdot ... )^{2^{w}} \cdot a^{m_1})^{2^{w}} \cdot a^{m_0}$$
+Базова операція - множення двох n-бітних чисел
 
-Алгоритм
+Let $t = |y|_w$
+$$x^y = x^{\left( \sum_{i=0}^{t-1} y_i 2^{wi} \right)} = $$
+$$= x^{2^{w(t-1)}y_{t-1}}\cdot x^{2^{w(t-2)}y_{t-2}} \cdot ... \cdot x^{2^{w\cdot 1}y_1} \cdot x^{2^{0}y_0} = $$
+$$= (( ... ((x^{y_{t-1}})^{2^{w}} \cdot x^{y_{t-2}})^{2^{w}} \cdot ... )^{2^{w}} \cdot x^{y_1})^{2^{w}} \cdot x^{y_0}$$
+
+В обчисленні задіяні наступні операції
+\begin{enumerate}
+    \item множення довгих чисел
+        \subitem $a \cdot b$ 
+    \item $x^{y_i}$ - одне і те саме число до різних степенів зі скінченного набору
+    \item $(...)^{2^w}$ - $w$ разів піднесення до квадрату
+\end{enumerate}
+
+\subsection*{1. Shift-and-add}
+$$a \cdot b$$
+$$|a|_r = u,\quad |b|_r = v$$
+
 \begin{lstlisting}
-    // precalculation
-    S[0] = 1
-    for i = 1 to 2^w-1:    // 2^w-1 iterations
-        S[i] = S[i-1] * a  // O(1)
+    1011   (this is binary for decimal 11)
+  x 1110   (this is binary for decimal 14)
+  ======
+    0000   (this is 1011 x 0)
+   1011    (this is 1011 x 1, shifted one position to the left)
+  1011     (this is 1011 x 1, shifted two positions to the left)
++ 1011      (this is 1011 x 1, shifted three positions to the left)
+=========
+10011010   (this is binary for decimal 154)
+\end{lstlisting}
 
-    p = 1
-    for i = t to 0:        // (t+1) iterations
-        p = p^(2^w)        // w squares = w multiplications
-        p = p * S[ m[i] ]  // 1 multiplication
-    
-    return p
+Algorithm:
+\begin{lstlisting}
+    IN: a, b
+        a: [a_u-1][a_u-2]...[a_0] - u n-bit registers
+        b: [b_v-1][b_v-2]...[b_0] - v n-bit registers
+    OUT: c = a*b
+        c: [c_q-1][c_q-2]...[c_0] - (q=u+v) n-bit registers
+
+    c = 0
+    for i = 0 to v-1:         // iterate through b's registers 
+        shift = 0
+        for j = 0 to u-1:     // iterate through a's registers 
+            c += (a_i * b_j) << shift  
+            shift += n
+\end{lstlisting}
+
+Кількість множень відносно регістрової довжини множників:
+$$T_{mul}(|a|_r,|b|_r) = |a|_r \cdot |b|_r$$
+
+\subsection*{2. $x^{y_i}$}
+Можна обчислити всі можливі значення заздалегідь:
+
+\begin{lstlisting}
+    pows: [x^(2^w -1), x^(2^w-2), ..., x^1, x^0]
+    len(pows) = 2^w
+
+    pows[0] = 1
+    for i = 1 to 2^w-1:
+        pows[i] = pows[i-1] * x
+\end{lstlisting}
+
+Складність $pows[i-1] * x$ залежить від регістрової довжини операндів.
+$$|pows[i]|_r = \lceil\frac{2^w \cdot |x|_2}{n}\rceil$$
+$$T_1 = T_{mul}(|pows[i]|_r, |x|_r) = |pows[i]|_r \cdot |x|_r$$
+
+Складність обчислення всіх степенів:
+$$T_{pows} = T_1 \cdot (2^w-1) = |pows[i]|_r \cdot |x|_r \cdot (2^w-1)$$
+
+\subsection*{3. $a^{2w}$}
+Це $2^w$ разів піднести до квадрату.
+$$T_{**2^w}(|a|_r) = 2^w \cdot |a|_r^2$$
+
+\subsection*{Збираємо все разом}
+
+Розмір результату в регістрах - $|result|_r = |x|_r \cdot y$
+
+Algorithm
+\begin{lstlisting}
+    precalculate_pows()       // T_pows
+
+    result = x^(y[t-1])
+    for i = t-1 to 0:
+        result = result^(2^w)          // T_{\text{^}2^w}
+        result = result * pows[y[i]]   // T_mul(|x|_r \cdot y, |pows[i]|_r)
+    return result
 \end{lstlisting}
 
 Складність:
-$$C_{tot} = (2^w-1) * 1 + (t+1) * 1 * (w + 1) = 2^w + tw + t + w$$
+$$T = T_pows + y_|w| \cdot \left(T_{**2^w} + T_mul(|x|_r \cdot y, |pows[i]|_r)\right) = $$
+$$= |pows[i]|_r \cdot |x|_r \cdot (2^w-1) + y_|w| \cdot (2^w \cdot (|x|_r \cdot y)^2 +  |x|_r \cdot y \cdot \lceil\frac{2^w \cdot |x|_2}{n}\rceil) $$
 
-\begin{mdframed}[style=ans]
-    $$2^w + tw + t + w$$
-\end{mdframed}
+
 
 \section*{№  2.10}
 \begin{mdframed}

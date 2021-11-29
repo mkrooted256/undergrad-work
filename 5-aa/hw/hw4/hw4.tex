@@ -1,0 +1,284 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Аналіз алгоритмів}
+\newcommand\hwnumber{ДЗ №4}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+% 2.16 а, б
+% 2.17 в
+% 2.18
+% 2.24 в
+
+\section*{№ 2.16 a)}
+\begin{mdframed}
+    Яку мультиплiкативну складнiсть має множення двох матриць розмiрами
+n × m та m × k? Яку складнiсть має множення квадратних матриць розмiрами n × n?
+\end{mdframed}
+
+$$C = AB$$
+$$A = {a_{ij}}_{i=\overline{1,n}}^{j=\overline{1,m}}$$
+$$B = {b_{ij}}_{i=\overline{1,m}}^{j=\overline{1,k}}$$
+
+\subsection*{Множення брутфорсом}
+$$c_{ik} = \sum_{l=1}^m a_{il}b_{lk} \quad (m\text{ множень})$$
+
+\begin{lstlisting}
+    for i = 1 to n:
+        for j = 1 to k:
+            C[i,j] = 0 
+            for k = 1 to m:
+                C[i,j] += A[i,k] * B[k,j]
+\end{lstlisting}
+
+Складність - $T_1 = (\text{кількість комірок в }C)\cdot m = n\cdot m \cdot k$
+\begin{mdframed}[style=ans]
+    \begin{itemize}
+        \item Множення n × m та m × k: $T_1 = nmk$
+        \item Множення n × n та n × n: $T'_1 = n^3$
+    \end{itemize}
+\end{mdframed}
+
+\section*{№ 2.16 б)}
+\begin{mdframed}
+    Знайдiть мультиплiкативну складнiсть множення симетричних матриць розмiрами
+n × n.
+\end{mdframed}
+
+Я не знайшов алгоритму швидше, ніж як для множення довільних квадратних матриць.
+Єдине що, можна десь зекономити в кешуванні.
+
+$$\begin{pmatrix}
+    a_{11} & a_{12} \\ a_{21} & a_{22}
+\end{pmatrix}\begin{pmatrix}
+    b_{11} & b_{12} \\ b_{21} & b_{22}
+\end{pmatrix} = \begin{pmatrix}
+    a_{11}b_{11}+\boxed{a_{12}b_{21}} & a_{11}b_{12} + {a_{12}b_{22}}\\
+    a_{21}b_{11}+{a_{22}b_{21}} & \boxed{a_{21}b_{12}} + a_{22}b_{22}
+\end{pmatrix}$$
+
+Повторні множення:
+$$a_{12}b_{21} = a_{21}b_{12}$$
+
+Тобто вони виникають у виразах виду $a_{ij}b_{ji},\; i\ne j$.
+Можна зменшити цю кількість множень в половину за допомогою кешування.
+
+В свою чергу, такі добутки з'являються лише в елементах $C$ виду $c_{ii}$.
+І взагалі,
+$$c_{ii} = \sum_{j=1}^n a_{ij}b_{ji} = a_{ii}b_{ii} + \sum_{j\ne i} a_{ij}b_{ji}$$
+
+$$(n=3)\quad AB = \begin{pmatrix}
+    a_{11}b_{11}+\boxed{a_{12}b_{21}}+\boxed{a_{13}b_{31}} & * & *\\
+    * & \boxed{a_{21}b_{12}} + a_{22}b_{22} + \boxed{a_{23}b_{32}} & *\\
+    * & * & \boxed{a_{31}b_{13}} + \boxed{a_{23}b_{32}} + a_{33}b_{33} \\
+\end{pmatrix}$$
+
+Перепишемо алгоритм з попереднього пункту
+\begin{lstlisting}
+    // ab[] - масив
+
+    for i = 1 to n:
+        for j = 1 to n:
+            C[i,j] = 0 
+            if i==j:
+                ab[i,i] = A[i,i]B[i,i]
+                for k = 1 to n:
+                    if ab[i,k] is not set:
+                        ab[i,k] = ab[k,i] = A[i,k]B[k,i]
+                    C[i,j] += ab[i,k]
+            else:
+                for k = 1 to n:
+                    C[i,j] += A[i,k] * B[k,j]
+\end{lstlisting}
+
+Таких множень всього $n(n-1)$ і половина з них пропускається завдяки кешуванню.
+
+$$T_{sym}(n) = T(n) - n(n-1)/2 = n^3 - n^2 + n$$
+
+
+\begin{mdframed}[style=ans]
+    $$T_{sym}(n) = T(n) - n(n-1)/2 = n^3 - n^2 + n$$
+\end{mdframed}
+
+\section*{№ 2.17 в)}
+\begin{mdframed}
+    Мультиплікативна складність обчислення визначника матриці n x n методом елементарних\\ перетворень (методом Гаусса). 
+    Вважайте, що перестановка рядкiв матрицi виконується за знехтовно малий час
+\end{mdframed}
+
+Note: \\
+\texttt{A[i,:]} це i-й рядок\\
+\texttt{A[:,j]} це j-й стовпець
+
+
+Алгоритм:
+\begin{lstlisting}
+
+    // Для максимальної складності вважаємо, що А - повнорангова
+
+    for i = 1 to n-1:
+        for j = i+1 to n: 
+            // (1)
+            coef = A[j, i] / A[i, i]   // 1
+            // (2)
+            A[j,:] -= coef * A[i,:]    // (n-i), бо перші i елементів рядка = 0
+        
+    // Зараз матриця A має upper rectangular форму
+    // det = просто добутку елемнтів на діагоналі
+
+    det = A[1,1]
+    for i = 2 to n:    // *(n-1)
+        det *= A[i,i]  // 1
+    return det
+\end{lstlisting}
+
+Рядок після (1) виконається $$\sum_{i=1}^{n-1} (n-i) = \frac{n(n-1)}{2}$$ разів.\\
+У рядку після (2) за весь час роботи виконається $$\sum_{i=1}^{n-1} (n-i)^2 = 1/6 (n - 3 n^2 + 2 n^3)$$ множень
+
+$$T_{det}(n) = \frac{n(n-1)}{2} + 1/6 (n - 3 n^2 + 2 n^3) + n-1 = $$
+$$=1/3 (n^3 + 2 n - 3) = O(n^3)$$
+
+\section*{№ 2.18}
+\begin{mdframed}
+    Яку мультиплiкативну складнiсть в найгiршому випадку має обчислення рангу квадратної матрицi розмiру n × n\\
+а) методом обвiдних мiнорiв;\\
+б) методом елементарних перетворень?
+\end{mdframed}
+
+\subsection*{a) Обвідні мінори}
+
+Note: \\
+\texttt{A[a:b, c:d]} - це підматриця матриці A 
+
+\begin{lstlisting}
+    // IN: A
+    // OUT: rang(A)
+
+    // функція може змінювати B
+    function find_minor(&B, r):
+        // max (n-r)^2 ітерацій
+        for i = r to n:
+            for j = r to n:
+                // Міняємо місцями рядки та стовпці так, щоб мінор був ліворуч згори
+                B = A
+                B[r,:] = A[i,:]
+                B[:,r] = A[:,j]
+                d = det(B[1:r, 1:r])   // T_det(r)
+                if d != 0:
+                    return True
+        return False
+    
+    for r = 1 to n:
+        B = A
+        found = find_minor(B, r)  // (n-r)^2 * T_det(r)
+        if not found:
+            return r-1
+        A = B
+    return n
+
+\end{lstlisting}
+
+$$T_{rang}(n) = \sum_{r=1}^n (n-r)^2 * T_{det}(r) = $$
+$$= \sum_{r=1}^n (n-r)^2 * O(r^3) = \sum_{r=1}^n O(r^5) = $$
+$$= O(\sum_{r=1}^n r^5) = O(n^6)$$
+
+
+\subsection*{б) Gauss elimination}
+\begin{lstlisting}
+    Виконуємо gauss elimination з задачі 2.17  // T(n) = O(n^3)
+    (єдине що, треба пропускати рядки, де з'явилися нулі на початку)
+    Дивимося на кількість нульових рядків знизу матриці
+\end{lstlisting}
+
+$$T_{rang}'(n) = O(n^3)$$
+
+\section*{№ 2.24 в)}
+\begin{mdframed}
+    Iнтерполяцiйна формула Лагранжа дозволяє також знаходити значення полiному в
+довiльнiй точцi. Знайдiть мультиплiкативну складнiсть такого обчислення;
+\end{mdframed}
+
+$$p(x) = \sum_{k=0}^m \lambda_k \prod_{t\ne k} (x-x_t)$$
+$$\lambda_k = \frac{y_k}{\displaystyle \prod_{t\ne k}(x_k - x_t)}$$
+
+$$T(m) = \sum_{k=0}^m (1 + (m)) \cdot (m) = \sum_{k=0}^m m(m+1) = m(m+1)^2$$
+
+$$T(m) = m^3 + 2m^2 + m = O(m^3)$$
+
+
+
+\end{document}
+
