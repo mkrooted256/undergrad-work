@@ -1,0 +1,259 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Complexity}
+\newcommand\hwnumber{ДЗ №4}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+\section*{№ 4.2}
+\begin{mdframed}
+    \begin{multicols*}{2}
+        $$L_1,L_2,L_3 \subseteq \{0,1\}*$$
+        $$L_1 \in R$$
+        $$L_2 \in RE \setminus R$$
+        $$L_3 \in NRNC = ALL \setminus (RE \cup coRE)$$
+    \columnbreak
+        $$L'_1, L'_2, L'_3 \subseteq \{0,1\}*$$
+        $$L'_1 = 0 \cdot L_1$$
+        $$L'_2 = 0 \cdot L_2$$
+        $$L'_3 = 0 \cdot L_3$$
+    \end{multicols*}
+$$L'_1, L'_2, L'_3 \in \; ?$$
+\end{mdframed}
+
+$$L'_1 = \{0x : x\in L_1\} \wedge L_1 \in R$$
+Перевірка $x \in L_1$ - вирішувана. Перевірка, чи є перший символ 0 - вирішувана.
+Значить, перевірка $w \in L'_1$ - вирішувана.\\
+$L'_1 \in R$
+
+З іншого боку:
+$$\text{Let } L_0 = \{0x : x \in \{0,1\}*\};\quad L_0 \in R$$
+Клас $R$ замкнений відносно перетину.
+$$\begin{cases}
+    L'_1 = L_0 \cap L_1\\
+    L_0 \in R\\
+    L_1 \in R
+\end{cases} \implies L'_1 \in R$$
+
+$$L'_2 = \{0x : x\in L_2\} \wedge L_2 \in RE\setminus R$$
+$$L_0 \in R \implies L_0 \in RE$$
+$$\begin{cases}
+    L'_2 = L_0 \cap L_2\\
+    L_0 \in RE\\
+    L_2 \in RE
+\end{cases} \implies L'_2 \in RE$$
+
+$L'_2 \notin R$, бо інакше машиною $M_{L_2}(x) = M_{L'_2}(0x)$ можна вирішити мову $L_2$ (протиріччя).
+
+
+$$L'_3 = \{0x : x\in L_3\} \wedge L_3 \in NRNC$$
+Припустимо, що $L'_3 \in RE$.
+Тоді можна побудувати $M_{L_3}(x) = M_{L'_3}(0x)$ - розпізнавач $L_3$. Протиріччя. 
+
+Припустимо, що $L'_3 \in coRE$.
+Тоді можна побудувати $M_{\overline{L_3}}(x) = 1 - M_{\overline{L'_3}}(0x)$ - розпізнавач $\overline{L_3}$. 
+Але $L_3 \notin coRE$ Протиріччя.
+
+Значить, $L'_3 \in NRNC$
+
+\begin{mdframed}[style=ans]
+    $$L'_1 \in R$$
+    $$L'_2 \in RE$$
+    $$L'_3 \in NRNC$$
+\end{mdframed}
+
+\section*{№ 4.3}
+\subsection*{1)}
+\begin{mdframed}
+    $$\exists? L_1, L_2 \in NRNC;\quad L_1\cup L_2 \in NRNC$$
+\end{mdframed}
+Нехай $L_{N} \in NRNC$.
+Нехай $L_1 = 0\cdot L_N, L_2 = 1\cdot L_N$.
+В попередньому завданні доведено, що ці мови в $NRNC$.
+
+$$L_1 \cup L_2 = \{xy : x \in \{0,1\}, y \in L_{N}\} \in NRNC$$
+Бо інакше видаливши перший символ слова можна вирішити \ розв'язати $L_N$.
+\begin{mdframed}[style=ans]
+    Існує
+\end{mdframed}
+
+\subsection*{2)}
+\begin{mdframed}
+    $$\exists? L_1, L_2 \in RE \setminus R;\quad L_x = L_1\cap L_2 \in R$$
+\end{mdframed}
+% Нехай 
+% $$L_1, L_2 \in RE \setminus R \wedge L_x = L_1\cap L_2 \in R$$
+% $$\overline{L_x} = \overline{L_1} \cup \overline{L_2} \in R \text{ з замкненості }R$$
+
+Нехай $L_{1} = \{<M> : |L(M)| = 1\}$.
+$L_{1} \in RE \setminus R$.
+
+Нехай $L_{2} = \{<M> : |L(M)| = 2\}$.
+$L_{2} \in RE \setminus R$.
+
+$$L_1 \cap L_2 = \varnothing = L_x$$
+$$L_x \in R$$
+бо $L_x$ вирішує МТ, що відхиляє всі слова.
+\begin{mdframed}[style=ans]
+    Існує
+\end{mdframed}
+
+\section*{№ 4.4}
+\subsection*{a)}
+\begin{mdframed}
+    $$A, B \subseteq 2^{\{0,1\}^*}$$
+    $$A\cup B = A \vee B$$
+\end{mdframed}
+
+$$A = \{0 \cdot L_0 : L_0 \in ALL \setminus \{\varnothing\}\}$$
+$$B = \{1 \cdot L_0 : L_1 \in ALL \setminus \{\varnothing\}\}$$
+$$C = \{\{\varepsilon\}, \varnothing\}$$
+
+$$A \cup B = ALL \setminus C$$
+$$A \vee B = \{L_1\cup L_2 : \forall x \in \{0,1\}^*: 0x \in L_1 \wedge 1x \in L_2\} = $$
+$$= \{L_0 : \forall x \in \{0,1\}^*: 0x \in L_0 \vee 1x \in L_0\} = $$
+$$= ALL \setminus C = A\cup B$$
+
+
+\subsection*{б)}
+\begin{mdframed}
+    $$A, B \subseteq 2^{\{0,1\}^*}$$
+    $$A\cap B = A \wedge B$$
+\end{mdframed}
+
+$$A = ALL$$
+$$B = \{\varnothing\}$$
+$$A \cap B = \{\varnothing\}$$
+$$A \wedge B = \{L_1\cap L_2 : L_1\in ALL, L_2 = \varnothing\} = \{\varnothing\}$$
+
+% \subsection*{в)}
+% \begin{mdframed}
+%     $$A \subseteq 2^{\{0,1\}^*}$$
+%     $$\overline{A} = coA$$
+% \end{mdframed}
+
+% $$\overline{coA} = A$$
+% $$ALL \setminus \{2^{\{0,1\}^*} \setminus L_0 : L_0 \in A\} = A$$
+
+\section*{№ 4.5}
+\begin{mdframed}
+    $$C_1 = \{L_1 : \text{другий символ кожного слова мови дорiвнює 1}\}$$
+    $$C_2 = \{L_1 : \text{третій символ кожного слова мови дорiвнює 0}\}$$
+\end{mdframed}
+
+$$C_1 \cap C_2 = \{L_1 : \text{другий символ = 1, третій символ = 0, довжина >= 3}\}$$
+
+$$C_1 \wedge C_2 = C_1 \cap C_2 \cap \{\varnothing\}$$
+- бо $\{01, 11\} \cap \{010, 110\} = \varnothing$
+
+$$C_1 \cup C_2 = \{L_1 : \text{другий символ = 1 АБО третій символ = 0}\}$$
+$$C_1 \vee C_2 = \{L_1 : \text{другий символ = 1 АБО третій символ = 0}\}$$
+
+$$coC_1 = \{L_1 : \text{другий символ кожного слова мови \textbf{не} дорiвнює 1}\}$$
+$$coC_2 = \{L_1 : \text{третій символ кожного слова мови \textbf{не} дорiвнює 0}\}$$
+
+$$\overline{C_1} = 2^{\{\varepsilon, 1, 0\}} \cup coC_1$$
+$$\overline{C_2} = 2^{\{\varepsilon, 1, 0, 00, 01, 10, 11\}} \cup coC_2$$
+
+\section*{№ 4.6}
+\begin{mdframed}
+    Доведiть, що мова $HALT_{TM}$ є невирiшуваною, використовуючи
+необчислюванiсть функцiй Радо
+\end{mdframed}
+
+Нехай $HALT_{TM}$ є вирiшуваною. 
+Будуємо МТ $M_{1}(M)$ таку, що повертає, скільки кроків виконає машина М на порожньому вхідному слові
+або повертає 0 якщо M зациклюється (ця перевірка можлива, бо $HALT_{TM}$ є вирiшуваною).
+
+Будуємо МТ $M_{2,n,m}$ таку, що перевіряє, чи є МТ така, що зробить більше ніж n кроків.
+Вона просто дає на вхід $M_1$ послідовно всі МТ з $m$ станами. 
+Якщо знайшли таку МТ - повертаємо 1 та завершуємо роботу. Інакше природьо зациклюємося.
+
+$M_{3,m}(n) = (1-M_{HALT}(M_{2,n,m}, n))$ - перевіряє, чи є число $n$ максимальною кількістю кроків для класу $K_{BB}(m)$.
+Якщо $M_{2,n,m}$ зациклюється, то не існує МТ з більшою кількістю кроків на $\varepsilon$.
+
+Запускаємо $M_3$ послідовно на всіх числах від 1 до нескінченності.
+Рано чи пізно знайдемо значення функції.
+
+Тобто, функція Радо - обчислювана. протиріччя. Значить, $HALT_{TM}$ є невирiшуваною.
+
+\section*{№ 4.7}
+
+
+
+\end{document}

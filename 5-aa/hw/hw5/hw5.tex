@@ -247,13 +247,13 @@ $$
     \draw[decorate,decoration = {brace, amplitude=0.5cm}] (13,5.5) -- (13,-5.5);
     \path (13.5, 0) node[right] {$\displaystyle3^t$};
     \draw[decorate,decoration = {brace, amplitude=0.5cm, mirror}] (1.5,-5.5) -- (12.5,-5.5);
-    \path (6.5, -6.5) node[right] {$\displaystyle t = \log_2 n$};
+    \path (6.5, -6.5) node[right] {$\displaystyle t = \log_2 n + 1$};
     
 
 \end{tikzpicture}
 $$
 
-$$t = \log_2 n$$
+$$t = \log_2 n + 1$$
 $$T(n) = \sum_{i=0}^{t-1} 3^i \cdot \left(\frac{n}{2^i}\right)^2 + \sum_{i=1}^{3^t} 1 =$$
 $$= \sum_{i=0}^{t-1} \left(\frac{3}{4}\right)^i \cdot n^2 + 3^t = (\sum_{i=0}^{\infty} \left(\frac{3}{4}\right)^i - \sum_{i=t-1}^{\infty} \left(\frac{3}{4}\right)^i) \cdot n^2 + 3^t = $$
 $$= (\cancelto{4}{\frac{1}{1-3/4}} - \frac{(3/4)^{t-1}}{1-3/4}) \cdot n^2 + 3^t = 4\cdot (1-0.75^{t-1})\cdot n^2 + \cancelto{n^{\log_2 3}}{3^{\log_2 n}} \approx 4n^2 + n^{1.58} $$
@@ -309,7 +309,7 @@ $$T(n) = 4T(\frac{n}{2}) + cn, \quad c=\text{const} >0$$
                            -- [cn/4] T(n/4) -- ...       ...
                            -- [cn/4] T(n/4) -- ...       -- [1] T(n/2^t) 
 
-> Depth = t = log(2,n)
+> Depth = t = log(2,n) + 1
 > Number of points on the last level = 4^t = 2^(2 log(2,n)) = n^2
 \end{lstlisting}
 
@@ -347,15 +347,21 @@ $$T(n) = 2T(n^{0.5}) + n$$
 $$T(2^m) = 2T(2^{m/2}) + 2^m = G(m)$$
 $$G(m) = 2G(m/2) + 2^m$$
 
-\begin{itemize}
-    \item Глибина дерева рекурсії - $t = \log_2 m = \log_2 \log_2 n$.
-    \item Ширина дерева (кількість нод на найглибшому рівні) - $2^t = m$
-    \item Складність збірки на i-му рівні - $2^(m/2^i)$
-    \item к-сть нод на одному рівні - $2^i$
-\end{itemize}
+У термінах master theorem $a=2,  b=2, f(m)=2^m$.
+$$n^{\log_2 2} = n$$
+$$f(m) = 2^m = \Omega(n^{1+\varepsilon}), \text{ бо експонента більша за будь-який поліном}$$
+Тобто, третій випадок. Перевіряємо регулярність:
+$$2f(\frac{m}{2}) \le C f(m), \quad C\in(0;1)$$
+$$2\cdot 2^{m/2} \le C 2^m$$
+$$C \ge 2^{m/2 + 1 - m} = 2\sqrt{2^{-m}}, C \in (0;1)$$
+$$2\sqrt{2^{-m}} < 1;\quad m > 2$$
+Тобто, можемо сказати, що умова регулярності \textbf{виконується} після $m_0 = 4$ із $C = 1/2$
 
-$$G(m) = \sum_{i=0}^{t-1} 2^i \cdot 2^{m/2^i} + \sum_{i=1}^m 1 =  \sum_{i=0}^{t-1}2^{i + m/2^i} + m$$
-$$T(n) = G(m) = \sum_{i=0}^{t-1}2^{i + \log_2 n/2^i} + \log_2 n = \sum_{i=0}^{t-1}2^i \sqrt[2^i]{n} + \log_2 n$$
+Умови теореми виконані. Маємо:
+$$G(m) = \Theta(f(n)) = \Theta(2^m)$$
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(n)$$
+\end{mdframed}
 
 \section*{№ 2.37 в)}
 $$T(n) = 2T(n-1) + 1, \quad m = 2^n, \quad n = \log m$$
@@ -397,10 +403,156 @@ $$T(n) = 2^n \cdot \frac{64}{63} ( 1 - 2^{-6t} ) + 4^t, \quad t = 1 + \frac{n}{8
 
 
 \section*{№ 2.41}
-TODO
+\subsection*{a)}
+\begin{mdframed}
+    $$T(n) = 2T(\frac{n}{4}) + 1$$
+\end{mdframed}
+
+$$n^{\log_4 2} = n^{1/2} = \sqrt n$$
+$$f(n) = 1 = O(n^{1/2-\varepsilon})$$
+$\varepsilon = 1/2$. Перший випадок.
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(n^{\log_4 2}) = \Theta(n^{1/2})$$
+\end{mdframed}
+
+\subsection*{б)}
+\begin{mdframed}
+    $$T(n) = 2T(\frac{n}{4}) + \sqrt n$$
+\end{mdframed}
+
+$$n^{\log_4 2} = n^{1/2} = \sqrt n$$
+$$f(n) = \sqrt n = \Theta(n^{1/2})$$
+Другий випадок.
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(n^{\log_4 2} \log n) = \Theta(\sqrt n \log n)$$
+\end{mdframed}
+
+\subsection*{в)}
+\begin{mdframed}
+    $$T(n) = 2T(\frac{n}{4}) + n$$
+\end{mdframed}
+
+$$n^{\log_4 2} = n^{1/2} = \sqrt n$$
+$$f(n) = n = \Omega(n^{1/2+\varepsilon})$$
+$\varepsilon = 1/2$. Третій випадок.
+
+Регулярність:
+$$2f(n/4) \le c f(n),\quad c\in (0;1)$$
+$$n/2 \le c n, \quad c=1/2$$
+Ок
+
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(f(n)) = \Theta(n)$$
+\end{mdframed}
+
+\subsection*{г)}
+\begin{mdframed}
+    $$T(n) = 2T(\frac{n}{4}) + n^2$$
+\end{mdframed}
+
+$$n^{\log_4 2} = n^{1/2} = \sqrt n$$
+$$f(n) = n^2 = \Omega(n^{1/2+\varepsilon})$$
+$\varepsilon = 2$. Третій випадок.
+
+Регулярність:
+$$2f(n/4) \le c f(n),\quad c\in (0;1)$$
+$$2n^2/16 \le c n^2$$
+$$n^2 \le c 8n^2, \quad c = 1/2$$
+$$n^2 \le 4n^2$$
+Ок
+
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(f(n)) = \Theta(n^2)$$
+\end{mdframed}
 
 \section*{№ 2.42}
-TODO
+\subsection*{а)}
+\begin{mdframed}
+    $$T(n) = 2T(\frac{n}{2}) + n^4$$
+\end{mdframed}
+
+$$n^{\log_2 2} = n$$
+$$f(n) = n^4 = \Omega(n^{1+\varepsilon})$$
+$\varepsilon = 3$. Третій випадок.
+
+Регулярність:
+$$2f(n/2) \le c f(n),\quad c\in (0;1)$$
+$$2n^4/16 \le c n^4$$
+$$n^4 \le 8c n^4, \quad c=1/2$$
+$$n^4 \le 4 n^4$$
+Ок
+
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(f(n)) = \Theta(n^4)$$
+\end{mdframed}
+
+\subsection*{б)}
+\begin{mdframed}
+    $$T(n) = T(\frac{7n}{10}) + n$$
+\end{mdframed}
+
+$$n^{\log_7 1} = n^0 = 1$$
+$$f(n) = n = \Omega(n^{\varepsilon})$$
+$\varepsilon = 0.1$. Третій випадок.
+
+Регулярність:
+$$f(7n/10) \le c f(n),\quad c\in (0;1)$$
+$$7n/10 \le c n, \quad c=9/10$$
+$$n \le 9/10 \cdot 10/7 n = 9/7 n $$
+Ок
+
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(f(n)) = \Theta(n)$$
+\end{mdframed}
+
+\subsection*{в)}
+\begin{mdframed}
+    $$T(n) = 16T(\frac{n}{4}) + n^2$$
+\end{mdframed}
+
+$$n^{\log_4 16} = n^2$$
+$$f(n) = n^2 = \Theta(n^2)$$
+Другий випадок.
+
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(n^{\log_4 16}\log n) = \Theta(n^2 \log n)$$
+\end{mdframed}
+
+\subsection*{г)}
+\begin{mdframed}
+    $$T(n) = 7T(\frac{n}{2}) + n^2$$
+\end{mdframed}
+
+$$n^{\log_2 7} = n^{3-something} \approx n^{2.8}$$
+$$f(n) = n^2 = O(n^{2.8 - 0.1})$$
+$\varepsilon = 0.1$. Перший випадок.
+
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(n^{\log_2 7})$$
+\end{mdframed}
+
+\subsection*{д)}
+\begin{mdframed}
+    $$T(n) = 7T(\frac{n}{3}) + n^2$$
+\end{mdframed}
+
+$$n^{\log_3 7} \approx n^{1.77}$$
+$$f(n) = n^2 = \Omega(n^{1.77+0.1})$$
+$\varepsilon = 0.1$. Третій випадок.
+
+Регулярність:
+$$7f(n/3) \le c\cdot f(n), \quad c\in(0,1)$$
+$$7n^2/9 \le c \cdot n^2$$
+$$n^2 \le c \cdot 9/7 \cdot n^2$$
+$$c = 7/9 < 1$$
+$$n^2 \le n^2$$
+Ок 
+
+\begin{mdframed}[style=ans]
+    $$T(n) = \Theta(f(n)) = \Theta(n^2)$$
+\end{mdframed}
+
+
 
 \end{document}
 
