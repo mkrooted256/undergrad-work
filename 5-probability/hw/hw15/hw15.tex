@@ -1,0 +1,290 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Теорія ймовірності}
+\newcommand\hwnumber{ДЗ №14}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+% 13.14,13.15,13.21; 
+% 14.21,14.22,14.25,14.26,14.27
+
+\section*{№ 13.4}
+(зробив випадково)
+\begin{mdframed}
+    $\{\xi_k\}$ - незалежні.
+    $P(\xi_k = 1) = p;\quad P(\xi_k = 0) = 1-p$
+
+    Prove:
+    $$P(\sum_{k=0}^\infty \xi_n = +\infty) = 1$$
+\end{mdframed}
+
+$$\sum_{k=0}^\infty \xi_n = +\infty$$
+тоді і тільки тоді, коли нескінченно багато $\xi_k = 1$.
+\begin{proof}
+    Розглянемо
+    $A_n = \{\xi_n = 1\}; A = \limsup_{n\to\infty} A_n$.
+    
+    1. $$\sum_{n=1}^\infty P(A_n) = \sum_{n=1}^\infty p = +\infty \; (p=const >0)$$
+    2. $A_n$ - незалежні, бо $\xi_n$ - незалежні
+    Умови леми Бореля-Кантеллі виконані. Маємо, що 
+    $$P(\limsup_{n\to\infty} A_n) = 1$$
+    Тобто 
+    $$P(\sum_{k=0}^\infty \xi_n = +\infty) = 1$$
+\end{proof}
+
+\section*{№ 13.14}
+Розглядаємо послідовність н.о.р.в.в. $\{\xi_n\}$.
+$$P(\xi_n = k) = 1/6,\; k = \overline{1,6}$$
+
+Розглядаємо події $A_n = \{\xi_{6n} = 1, \xi_{6n+1} = 2, ..., \xi_{6n+5} = 6\}$
+та послідовність $\{A_n\}$.
+
+"$A_n$ зустрiнеться скiнченну кiлькiсть разiв" = "після якогось n подія $\overline{A_n}$ відбувається завжди".
+А це буде подія $A = \liminf_{n\to\infty} \overline{A_n}$
+
+$$P(A) - ?$$
+
+$$P(\liminf_{n\to\infty} \overline{A_n}) = 1 - P(\limsup_{n\to\infty} A_n)$$
+
+$$P(A_n) = \frac{1}{6^6} = const$$
+$$\sum{n=1}^\infty P(A_n) = \infty$$
+$$A_n - \text{незалежні, бо серії не перетинаються}$$
+Умови леми Бореля-Кантеллі виконані. 
+$$P(\limsup_{n\to\infty} A_n) = 1$$
+
+\begin{mdframed}[style=ans]
+    $$P(A) = 1 - P(\limsup_{n\to\infty} A_n) = 0$$
+\end{mdframed}
+
+\section*{№ 13.15}
+$$P(\liminf_{n\to\infty} \xi_n = 0) - ?$$
+
+\subsection*{a)}
+$$P(\xi_n = 0) = P(\xi_n = 1) = \frac{1}{2}$$
+
+$$P(\liminf_{n\to\infty} \xi_n = 0) = P(\exists N: \forall n>N: \xi_n = 0) =$$
+$$= P(\liminf_{n\to\infty} \{\xi_n = 0\})$$
+
+$$P(\xi_n = 1) = 1/2 = const.\quad \sum P(\xi_n = 1) = \infty$$
+$\xi_n$ - незалежні. Умови леми Бореля-Кантеллі виконані.
+$$P(\limsup_{n\to\infty}\xi_n = 1) = 1$$
+$$P(\liminf_{n\to\infty} \xi_n = 0) = 1 - P(\limsup_{n\to\infty}\xi_n = 1) = 0$$
+
+\subsection*{b)}
+$$P(\xi_n = 1) = P(\xi_n = \frac{1}{n}) = \frac{1}{n}$$
+$$P(\xi_n = 2 ) = 1 - \frac{2}{n}$$
+
+$$P(\liminf_{n\to\infty} \xi_n = 0) = P(\exists N: \forall n>N: \xi_n = \frac{1}{n}) =$$
+$$= P(\liminf_{n\to\infty} \{\xi_n = 1/n\})$$
+бо інакше буде нескінченно багато інших випадків.
+
+$$A_n = \{\xi_n \ne 1/n\}$$
+$$P(A_n) = 1-1/n$$
+$$\sum_{n=1}^\infty P(A_n) = \infty, \text{ бо ряд навіть не прямує до 0}$$
+$A_n$ - незалежні. Умови леми Бореля-Кантеллі виконані.
+$$P(\limsup_{n\to\infty}A_n) = 1$$
+$$P(\liminf_{n\to\infty} \{\xi_n = 1/n\}) = 1 - P(\limsup_{n\to\infty}A_n) = 0$$
+
+\subsection*{c)}
+$$P(\xi_n = 0) = \frac{1}{2^n},\quad P(\xi_n=1) = 1 - \frac{1}{2^n}$$
+$$P(\liminf_{n\to\infty} \xi_n = 0) = P(\liminf_{n\to\infty} \{\xi_n = 0\}) $$
+
+$$\sum_{n=1}^\infty \{\xi_n \ne 0\} = \sum_{n=1}^\infty \left(1-\frac{1}{2^n}\right) = \infty$$
+$A_n$ - незалежні
+Умови леми Бореля-Кантеллі виконані.
+$$P(\limsup_{n\to\infty} \{\xi_n \ne 0\}) = 1$$
+$$P(\liminf_{n\to\infty} \xi_n = 0) = 1 - P(\limsup_{n\to\infty} \{\xi_n \ne 0\}) = 0$$
+
+
+\section*{№ 13.21}
+
+\begin{mdframed}
+    $$\{A_n\}_{n\ge 1}, \quad A_n \sim U[0,1]$$
+    $$A \in [0,1]$$
+    $$d_n = \min\{|A_1-A|, ... , |A_n-A|\}$$
+    Довести:
+    $$P(d_n \xrightarrow[n \to \infty]{} 0) = 1$$
+\end{mdframed}
+
+% $$P(d_n \xrightarrow[n \to \infty]{} 0) = P(\min\{|A_1-A|, ... , |A_n-A|\} \xrightarrow[n \to \infty]{} 0) = $$
+% $$= P(\forall \varepsilon>0: \exists N:\; \forall n>N: \min\{|A_1-A|, ... , |A_n-A|\} < \varepsilon) =$$
+% $$= P(\forall \varepsilon>0: \exists k: |A_k-A| < \varepsilon)$$
+
+\begin{proof}
+    
+    Розглянемо 
+    $$B_n = |A_n-A|$$
+    Нам потрібно довести, що (a.s. = almost surely = майже напевне)
+    $$d_n \xrightarrow[n \to \infty]{a.s.} 0$$
+    
+    За достатньою умовою збіжності необхідно щоб
+    $$\forall \varepsilon>0: \sum_{k=1}^\infty P(d_k > \varepsilon) < \infty$$
+    
+    $$P(d_n > \varepsilon) = P(\forall k=\overline{1,n}: A_k > A + \varepsilon \vee A_k < A - \varepsilon) = $$
+    $$= P(A_k > A + \varepsilon \vee A_k < A - \varepsilon)^n = (1-2\varepsilon)^n$$
+    
+    $$\sum_{k=1}^\infty P(d_k > \varepsilon) = \sum_{k=1}^\infty (1-2\varepsilon)^n = \frac{1-2\varepsilon}{2\varepsilon} < \infty$$
+    
+    Достатня умова виконана. $$d_n \xrightarrow[n \to \infty]{a.s.} 0$$
+\end{proof}
+
+
+\section*{№ 14.21}
+$$\xi_n \sim Exp(n);\quad f_{\xi_n}(x) = ne^{-nx} $$
+Prove:
+$$\xi_n \xrightarrow[n\to\infty]{L^2} 0$$
+
+\begin{proof}
+    $$\xi_n \xrightarrow[n\to\infty]{L^2} 0 \iff$$
+    $$\iff M|\xi_n|^2 \xrightarrow[n\to\infty]{}0$$
+    
+    $$M|\xi_n|^2 = \int_0^\infty x^2 ne^{-nx}dx = -\int_0^\infty x^2 e^{-nx} = - \cancelto{0}{x^2e^{-nx}}|_0^\infty + 2\int_0^\infty xe^{-nx}dx = $$
+    $$= -\frac{2}{n} \cancelto{0}{x^2e^{-nx}}|_0^\infty + \frac{2}{n^2}\int_0^\infty e^{-nx} dx = \frac{2}{n^2}$$
+    
+    $$M|\xi_n|^2 = \frac{2}{n^2} \xrightarrow[n\to\infty]{}0$$
+\end{proof}
+
+% 14.22,14.25,14.26,14.27
+
+\section*{№ 14.22}
+$$\xi_n \sim N(0,1/n^2)$$
+$$f_{\xi_n}(x) = \frac{n^2}{\sqrt{2 \pi}} e^{-\frac{n^2x^2}{2}}$$
+Prove:
+$$\xi_n \xrightarrow[n\to\infty]{a.s.}0$$
+
+\begin{proof}
+    
+    Необхідно довести:
+    $$\forall \varepsilon>0: \sum_{k=1}^\infty P(\xi_n>\varepsilon) < \infty$$
+    З нерівності Чебишова
+    $$P(\xi_n > \varepsilon) = P(\xi_n \ge \varepsilon) \le \frac{M\xi_n}{\varepsilon} = 0$$
+    
+    $$\forall \varepsilon>0: \sum_{k=1}^\infty P(\xi_n>\varepsilon) = 0$$
+    Достатні умови збіжності майже напевне виконані
+\end{proof}
+
+\section*{№ 14.25}
+$$M\xi^2_n = \sigma^2, M\xi_n = 0$$
+Довести:
+$$\frac{S_n}{n} \xrightarrow[n\to\infty]{P}0,\quad S_n=\sum_{k=1}^n \xi_n$$
+
+\begin{proof}
+    З зв'язку між видами збіжності ми знаємо, що для збіжності за ймовірністю достатня $L^p$-збіжність 
+
+    $$M\frac{S_n^2}{n^2} = \frac{M\left(\sum_{k=1}^n \xi_n\right)^2}{n^2} \le \frac{\sum_{k=1}^n M\xi^2_n}{n^2} = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}$$
+    $$M\frac{S_n^2}{n^2} \xrightarrow[n\to\infty]{L^2} \frac{\sigma^2}{n} \xrightarrow[n\to\infty]{L^2} 0$$
+\end{proof}
+Можна було також через закон великих чисел з обмеженості маточікування та дисперсії
+
+\section*{№ 14.26}
+Prove:
+$$\sum_{k=1}^\infty M\xi^2_k < \infty \implies \left(\xi_n \xrightarrow[n\to\infty]{a.s.} 0\right)$$
+
+\begin{proof}
+    Необхідно довести:
+    $$\forall \varepsilon>0: \sum_{k=1}^\infty P(\xi_n>\varepsilon) < \infty$$
+
+    З нерівності Чебишова:
+    $$P(\xi_n>\varepsilon) \le P(\xi_n^2>\varepsilon^2) \le \frac{M\xi_n^2}{\varepsilon^2}$$
+    
+    $$\sum_{k=1}^\infty P(\xi_n>\varepsilon) \le \sum_{k=1}^\infty \frac{M\xi_k^2}{\varepsilon^2} < \infty$$
+    достатньо
+\end{proof}
+
+\section*{№ 14.27}
+$\{\xi_n\} - $ незалежні в.в.
+Prove:
+$$\left(\xi_n \xrightarrow[n\to\infty]{a.s.} 0 \right) \implies \sum_{k=1}^\infty P(|\xi_k|\ge 1) < \infty$$
+
+\begin{proof}
+    $$P(\xi_n \to 0) = 1$$
+    
+    Припустимо, що $$\sum_{k=1}^\infty P(|\xi_k|\ge 1) = \infty$$
+    Тоді з незалежності та з леми Бореля-Кантеллі випливає, що 
+    $$P(\limsup_{n\to\infty} \{|\xi_n|\ge 1\}) = 1$$
+    Тобто
+    $$\exists N: \forall n>N: |\xi_n|\ge 1$$
+    Але тоді $$\xi_n \cancel{\longrightarrow} 0$$
+
+    Протиріччя.
+    Значить, $$\sum_{k=1}^\infty P(|\xi_k|\ge 1) < \infty$$
+\end{proof}
+
+\end{document}
+
