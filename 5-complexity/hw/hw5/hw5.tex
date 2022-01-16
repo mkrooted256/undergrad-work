@@ -1,0 +1,210 @@
+    % !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+\usetikzlibrary{decorations.pathreplacing,calligraphy}
+
+\setmainfont[Ligatures=TeX]{Times New Roman} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{5 - Complexity}
+\newcommand\hwnumber{ДЗ №5}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+\section*{№ 5.1}
+\subsection*{$L_1 \cap L_2$}
+Запускаємо два вирішувача. Якщо обидва повернули 1, то повератємо 1. 
+Максимальний час: $T(n) = O(T_1(n) + T_2(n))$ - також поліном.
+
+
+\subsection*{$L_1 \cup L_2$}
+Запускаємо два вирішувача. Якщо хоча б один повернув 1, то повератємо 1. 
+Максимальний час (якщо обидва повернуть 0): $T(n) = O(T_1(n) + T_2(n))$ - також поліном.
+
+
+\subsection*{$L_1 \cdot L_2$}
+Запускаємо два вирішувача для кожного розбиття слова на два підслова. Якщо хоча б один повернув 1, то повератємо 1. 
+Таких розбиттів скінченна кількість.
+
+Оцінка згори: $T(n) = |w| \cdot O(T_1(n) + T_2(n))$ - також поліном.
+
+\subsection*{$L_1^R$}
+Просто записати у зворотньому порядку. Той самий час розпізнавання, тобто поліномний
+
+\subsection*{$L_1^*$}
+Замкнено відносно конкатенації $\implies$ замкнено відносно ступеня мови. 
+Запускаємо розпізнавачі $L_1, L_1^2, ... , L_1^{|w|}$. Якщо хоча б один поверне 1, то повертаємо 1.
+
+Час роботи буде не більше, ніж на поліном, більше за сумму часів розпізнавання кожного степеня. Маємо суму поліномів - поліном
+
+\subsection*{№ 5.2}
+\subsection*{a)}
+$$\forall m: m \vdots m$$
+А нам потрібно, щоб k було не менше, ніж максимальний дільник. Просто перевіряємо $k \ge m$.
+Це аналогічно відніманню - $P$
+
+\subsection*{b)}
+Весь граф можна представити як $0,1-$ матрицю суміжності $A$. Підносимо $A$ в степінь $|V|$ - маємо матрицю досяжності.
+Піднесення до степеня - $P$.
+
+
+\subsection*{c)}
+Весь граф можна представити як $0,1-$ матрицю суміжності $A$. Підносимо $A$ в степінь $|V|$ - маємо матрицю досяжності.
+Піднесення до степеня - $P$.
+Тепер просто дивимося, чи є в матриці $A^{|V|}$ нулі. Якщо є - деякі вершини недосяжні. Якщо всі одиниці - маємо лише одну компоненту зв'язності.
+
+\subsection*{№ 5.5}
+\begin{mdframed}
+    Чи iснує така мова $L_1 \subseteq \{0,1\}^*$, що $L_1 \notin P$, але $L_1^* \in P$?
+\end{mdframed}
+
+let $L_1 = HALT \cup \{0,1\}$.
+$L_1$ - невирішувана, тобто точно не в $P$.
+
+$\{0,1\}^* \supset L_1^* = (HALT \cup \{0,1\})^* = HALT^* (\{0,1\}(HALT^*))^* \supseteq \{0,1\}^*$
+
+Тобто $L_1^* = \{0,1\}^*$ - розпізнається за $O(1)$.
+
+\subsection*{№ 5.6}
+\begin{mdframed}
+    Prove: $$P \subseteq NP \cap coNP$$
+\end{mdframed}
+
+Тобто prove $$L_1 \in P \implies L_1 \in NP \wedge L_1 \in coNP$$
+
+\begin{proof}
+    $$L_1 \in P \implies coL_1 \in P$$
+    $$P \subseteq NP$$
+    Тобто 
+    $$coL_1 \in NP$$
+    $$L_1 \in NP$$
+    Тобто
+    $$L_1 \in NP \cap coNP$$
+\end{proof}
+
+\subsection*{№ 5.7}
+\begin{mdframed}
+    Доведiть, що класи складностi $NP$ та $coNP$ є замкненими вiдносно по-
+лiномiального зведення, а клас складностi $NP \cap coNP$ є замкненим вiдносно
+зведення за Куком.
+\end{mdframed}
+
+\subsection*{1.}
+\begin{proof}
+    Нехай $L_1 \in NP$, МТ $M_1: M_1(w) = M_P(M_{L1}(w))$, де $M_P$ - деяка МТ, що працює за $P$ час.
+    Тоді $M_1$ також буде в $NP$.
+
+    Тобто будь-яке поліноміальне зведення не може вивести з $NP$. Аналогічно для $coNP$.
+\end{proof}
+
+\subsection*{2.}
+
+\subsection*{№ 5.8}
+\begin{proof}
+    Нехай $$\begin{cases}
+        L_1 \in coNP \\
+        L_1 \in NP \\
+        \forall L' \in coNP: L' \le_p L_1 
+    \end{cases}$$
+
+    Тоді
+    $$\forall L' \in coNP: L' \le_p L_1 \in NP$$
+    Тобто $\forall L' \in coNP: L' \in NP$
+    \begin{mdframed}
+        $$coNP \subseteq NP$$
+    \end{mdframed}
+
+    Відомо, що $$L_1 \le L_2 \implies coL_1 \le coL_2$$
+
+    % $$\forall L' \in NP: \exists L''\in coNP: L' = coL''$$
+    $$\forall L' \in coNP: L''=coL' \le_p coL_1 \in NP, coNP$$
+    $$\forall L'' \in NP: L'' \le_p coL_1 \in NP, coNP$$
+    Тобто $\forall L'' \in NP: L'' \in coNP$
+    \begin{mdframed}
+        $$NP \subseteq coNP$$
+    \end{mdframed}
+\end{proof}
+
+\section*{№ 5.10}
+\begin{mdframed}
+    $$L_1 \in NPC$$
+    Prove:
+    $$L_2 = 1\cdot L_1 \in NPC$$
+\end{mdframed}
+\begin{proof}
+    Для цього побудую P-зведення $L_1$ до $L_2$, бо цього достатньо.
+
+    Нехай $M_{L2}$ розпізнає $L_2$.
+    
+    Тоді $M_1(w) = M_{L2}(1w)$ буде розпізнавати $L_1$.
+\end{proof}
+
+\end{document}

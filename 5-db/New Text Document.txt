@@ -1,0 +1,2 @@
+INSERT INTO Rooms VALUES
+('999'  , 'NoName', null, dbo.getDivisionByName('Reception'), 1)

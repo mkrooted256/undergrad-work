@@ -7,7 +7,7 @@ def show_table(A, col_labels, row_labels, selected=[]):
     
     width = max(map(len, col_labels + row_labels)) + 2
 
-    if width < 7: width = 7
+    if width < 7: width = 11
 
     s = ""
     s += ' '*width
@@ -22,9 +22,9 @@ def show_table(A, col_labels, row_labels, selected=[]):
         for j in range(A.shape[1]):
             # print((i,j), selected)
             if (i,j) not in selected:
-                s += (f"{A[i,j]:.2f}"+' ').rjust(width) + '|'
+                s += (f"{A[i,j]:.5f}"+' ').rjust(width) + '|'
             else:
-                s += (f"[{A[i,j]:.2f}]").rjust(width) + '|'
+                s += (f"[{A[i,j]:.5f}]").rjust(width) + '|'
         s += '\n'
 
     return s
