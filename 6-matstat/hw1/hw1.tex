@@ -1,0 +1,353 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{unicode-math}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{6 - Матстатистика}
+\newcommand\hwnumber{ДЗ №1}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+% !17.12, !17.13, !17.15 !17.16 !17.17, !17.20, 17.22
+
+\section*{№ 17.12}
+\begin{mdframed}
+    \(\xi \sim \mathcal{N}(0,1)\). Знайти:
+    \begin{itemize}
+        \item \(P(\xi \in [-3, 1])\)
+        \item \(x : P(|\xi| \le x) = 0.9\)
+    \end{itemize}
+\end{mdframed}
+
+\subsection*{a) \(P(\xi \in [-3, 1])\)}
+\begin{align*}
+    P(\xi \in [-3, 1]) &= P(\xi \le 1) - P(\xi \le -3) = \Phi_{0,1}(1) - \Phi_{0,1}(-3) = \Phi_{0,1}(1) - 1 + \Phi_{0,1}(3) = \\
+    &= 0.841 - 1 + 0.999 = \boxed{0.84}
+\end{align*}
+
+\subsection*{b) \(x : P(|\xi| \le x) = 0.9\)}
+
+\[P(|\xi| \le x) = P(\xi \le x) - P(\xi \le -x) = \Phi_{0,1}(x) - 1 + \Phi_{0,1}(x) = 2\Phi_{0,1}(x) - 1 = 0.9\]
+
+Умова: \(2\Phi_{0,1}(x) - 1 \ge 0.9\quad\). \(\Phi_{0,1}(x) \ge \frac{19}{20}\).
+
+Маємо \(\boxed{x = 1.645}\)
+
+Зображення: \[
+    \begin{tikzpicture}
+        \fill[red!20, domain=-1.65:1.65, smooth, variable=\x] (-1.65,0) -- plot ({\x}, {2 * exp(-\x*\x / 2)}) -- (1.65,0);
+        \draw[scale=1, domain=-4:4, smooth, variable=\x, blue] plot ({\x}, {2 * exp(-\x*\x / 2)});
+        \draw[->] (-4,0) -- (4,0);
+        \draw[->] (0,0) -- (0,2.2);
+        \node at (0.5,1) {$0.9$}; 
+    \end{tikzpicture}
+\]
+
+\section*{№ 17.13}
+\begin{mdframed}
+    $N = 10^6$ підкидань чесної монети. $S = $ кількість гербів. 
+    Оцінити $P(499000 < S < 501000)$ Чебишовим та ЦГТ.
+\end{mdframed}
+
+\subsection*{а) ЦГТ}
+$S = \sum_{i=1}^N \mathbb{1}(H_i)$, де $H_i = \{$в $i$-му підкиданні випав герб $\}$.
+$P(H_i) = 0.5$. $\{\xi_i = \mathbb{1}(H_i)\}$ - i.i.d.
+
+$$\xi_i \sim B(0.5)$$
+$$P(499000 < S < 501000) = P(S < 501000) - P(S \le 499000)$$
+
+$$MS = M\left[\sum_{i=1}^N \mathbb{1}(H_i)\right] = \sum_{i=1}^N M\xi_1 = \frac{N}{2}$$
+$$DS = D\left[\sum_{i=1}^N \mathbb{1}(H_i)\right] = \sum_{i=1}^N D\xi_1 = \frac{N}{4}$$
+
+Розглянемо $R = \frac{S - N/2}{\sqrt{N/4}}$. $MR = 0, DR = 1$.
+$$P(S < 501000) = P(\sqrt{N/4}R + N/2 < 501000) = P(R < \frac{501000 - N/2}{\sqrt{N/4}}) = P(R < 2) \approx \Phi_{0,1}(2) = 0.977$$
+$$P(S \le 499000) = P(R < \frac{499000 - N/2}{\sqrt{N/4}}) = P(R \le -2) \approx 1-\Phi_{0,1}(2) = 0.023$$
+\begin{mdframed}[style=ans]
+    $$P(499000 < S < 501000) \approx 0.977 - 0.023 = 0.954$$
+\end{mdframed}
+
+\subsection*{б) Чебишов}
+Розглянемо $Q = S - N/2 = S - 500000$.
+$$MQ = 0, DQ = DS = \frac{N}{4} = 10^6 / 4$$
+
+$$P(499000 < S < 501000) = 1 - P(|Q| > 10^3)$$
+$$ P(|Q| > 10^3) \le \frac{DQ}{10^6} = \frac{10^6 / 4}{10^6} = 0.25$$
+$$P(499000 < S < 501000) \ge 1 - 0.25 = 0.75$$
+
+
+\section*{№ 17.15}
+\begin{mdframed}
+    При випадковому блуканнi на числовiй осi частинка, стартуючи з точки 0, 
+    робить крок вправо або влiво з ймовiрностями 1/2. Оцiнiть ймовiрнiсть того, що
+    пiсля сотого кроку частинку вiддалятиме вiд початкової точки не менше, нiж 10
+    крокiв.
+\end{mdframed}
+
+\[S(n) - \text{положення частинки після n кроку}\]
+\[S(0) = 0; \quad P(S(n+1)=S(n)+1) = P(S(n+1)=S(n)-1) = 1/2.\]
+\[\boxed{P(|S(100)| \ge 10) = ?}\]
+
+\[S(n) = 2\sum_{i=1}^n b_i - n, \quad \{b_i\} - iid, \; b_i \sim B(1/2), \quad n = 1,2,...\]
+(iid тут і надалі - "independant identically distributed")
+
+\[MS(n) = 2n Mb_1 - n = n - n = 0;\quad DS(n) = 4n Db_1 = 4n/4 = n.\]
+
+тут я моделюю випадкове блукання через бернулівські випадкові величини.
+
+\begin{align*}
+    P(|S(100)| > 10) &= P(S(100) > 10) + P(S(100) < -10) = \\
+    &= 1 - P(S(100) \le 10) + P(S(100) < -10)
+\end{align*}
+\begin{align*}
+    P(S(100) \le 10) &= P(\frac{S(100)}{\sqrt{n}} \le \frac{10}{\sqrt{n}} ) = P(\frac{S(100)}{10} \le 1) \approx \\
+    &\approx \Phi_{0,1}(1) = 0.841
+\end{align*}
+\begin{align*}
+    P(S(100) < -10) &= P(\frac{S(100)}{\sqrt{n}} < -\frac{10}{\sqrt{n}} ) = P(\frac{S(100)}{10} < -1) \approx \\
+    &\approx \Phi_{0,1}(-1) = 1 - \Phi_{0,1}(1) = 0.159
+\end{align*}
+\begin{align*}
+    P(|S(100)| < 10) &= 1 - P(S(100) \le 10) + P(S(100) < -10) \approx \\
+    &\approx \Phi_{0,1}(-1) = 1 - 0.841 + 0.159 = \boxed{0.318}
+\end{align*}
+
+\section*{№ 17.16}
+\begin{mdframed}
+    У компанiї-авiаперевiзнику оцiнили, що в середньому 4\% квиткiв, проданих 
+    на авiарейс, \\ залишаються невикористаними. Як наслiдок, компанiя обрала наступну
+    стратегiю: продавати 100 квиткiв на лiтак, що має 98 мiсць. 
+    Знайдiть ймовiрнiсть того, що кожному пасажиру, що опиниться на борту лiтака, знайдеться мiсце.
+\end{mdframed}
+
+\[u_i \sim B(0.04), \quad u_i = \{i-\text{й квиток невикористано}\}, \quad u_i - iid\]
+\[N = 100, M = 98\]
+\[S = \sum_{i=1}^N u_i - \text{ скільки невикористаних квитків при 100 проданих}\]
+\[\boxed{P(S \ge 100-98) = P(S \ge 2) = ?}\]
+
+\[MS = 100 \cdot Mu_1 = 100 \cdot 0.04 = 4\]
+\[DS = 100 \cdot Du_1 = 100 \cdot 0.04 \cdot 0.96 = 3.84\]
+\begin{align*}
+    P(S \ge 2) &= P(\frac{S - 4}{\sqrt{3.84}}\ge \frac{2-4}{\sqrt{3.84}} = -1.02) \approx \\
+    &\approx \Phi_{0,1}(-1.02) = 1-\Phi_{0,1}(1.02) = \boxed{0.154}
+\end{align*}
+\pagebreak
+
+\section*{№ 17.17}
+\begin{mdframed}
+    Кожен з членiв жюрi, яке складається з непарної кiлькостi осiб, незалежно 
+    вiд iнших приймає справедливе рiшення з ймовiрнiстю 0.7. Якою повинна бути 
+    чисельнiсть жюрi для того, щоб рiшення, ухвалене бiльшiстю голосiв, було 
+    справедливим з ймовiрнiстю не меншою за 0.9?
+\end{mdframed}
+
+\(N\) жюрі. \(N\) - непарне. $f_i = \mathbb{1}(i$-те жюрі прийняло справедливе рішення$) \sim B(0.7)$.
+\[S_N = \sum_{i=1}^N f_i\]
+
+Нехай рішення справедливе, якщо хоча б половина журі проголосувала справедливо. Тоді
+\[\boxed{P(S_N > N/2) \ge 0.9, N-?}\]
+
+\[MS_N = 0.7 N,\quad DS_N = 0.7 \cdot 0.3 \cdot N = 0.21 N\]
+
+\[P(S_N > N/2) = P\left(\frac{S_N - 0.7 N}{\sqrt{0.21 N}} > \frac{N/2 - 0.7 N}{\sqrt{0.21 N}}\right) \approx\]
+\[\approx 1-\Phi_{0,1}\left(-\frac{0.2N}{\sqrt{0.21 N}}\right) = \Phi_{0,1}\left(\frac{0.2N}{\sqrt{0.21 N}}\right) \ge 0.9 \]
+
+Маємо: \[\frac{0.2N}{\sqrt{0.21 N}} \ge 1.282\]
+Нехай \(\sqrt{N} = t\)
+\[t (0.2 t - 1.282 \cdot \sqrt{0.21}) \ge 0\]
+\[0.2 t \ge 1.282 \cdot \sqrt{0.21} = 0.587\]
+\[\sqrt{N} = t \ge \frac{0.587}{0.2} = 2.94 \implies N \ge 9\]
+\begin{mdframed}[style=ans]
+    \[N \ge 9\]
+\end{mdframed}
+\pagebreak
+
+\section*{№ 17.20}
+\begin{mdframed}
+    Гральний кубик пiдкидається до тих пiр, аж поки сума очок вперше перевищить 700. 
+    Оцiнiть ймовiрнiсть того, що для цього знадобиться:
+    \begin{itemize}
+        \item a) \(n > 210\) підкидань
+        \item б) \(n < 190\) підкидань
+        \item a) \(180 \le n \le 210\) підкидань
+    \end{itemize}
+\end{mdframed}
+
+\[\xi_i \sim Uniform\{1,2,3,4,5,6\} - iid\]
+\[M\xi_1 = \frac{1}{6}(1+2+3+4+5+6) = \frac{7}{2} = 3.5\]
+\[D\xi_1 = \frac{1}{6}\sum_{i=1}^6(i-3.5)^2 = 2.92\]
+
+\[S_n = \sum_{i=1}^n \xi_i\]
+\[MS_n = 3.5 n; \quad DS_n = 2.92 n\]
+
+\subsection*{a)}
+\(n > 210\) значить, що після 210-го підкидання сума менша за 700. Лише в такому випадку ми підкидаємо далі і вимушені мати n > 210.
+\begin{align*}
+    P(n > 210) &= P(S_{210} < 700) = P\left(\frac{S_n - MS_n}{\sqrt{DS_n}} < \frac{700 - MS_n}{\sqrt{DS_n}}\right) = \\
+    &= P\left(\frac{S_n - 3.5 n}{\sqrt{2.92 n}} < \frac{700 - 3.5 n}{\sqrt{2.92 n}}\right) \approx \Phi_{0,1}\left(\frac{700 - 3.5 n}{\sqrt{2.92 n}}\right) = \\
+    &= \Phi_{0,1}\left(\frac{700 - 3.5 \cdot 210}{\sqrt{2.92 \cdot 210}}\right) = \Phi_{0,1}(-1.413) = \\
+    &= 1 - \Phi_{0,1}(1.413) = 0.079
+\end{align*}
+\begin{mdframed}[style=ans]
+    \[P(n > 210) = 0.079\]
+\end{mdframed}
+
+\subsection*{b)}
+Аналогічно а), але перейдемо до оберненої події.
+$$P(n < 190) = 1 - P(n \ge 190)$$
+\begin{align*}
+    P(n \ge 190) &= P(S_{190} < 700) = \\
+    &= \Phi_{0,1}\left(\frac{700 - 3.5 \cdot 190}{\sqrt{2.92 \cdot 190}}\right) = \Phi_{0,1}(1.486) = \\
+    &= \Phi_{0,1}(1.486) = 0.931
+\end{align*}
+$$P(n < 190) = 1 - 0.931 = 0.069$$
+
+\begin{mdframed}[style=ans]
+    \[P(n < 190) = 0.069\]
+\end{mdframed}
+
+\subsection*{c)}
+Аналогічно. Але використаємо те, що $P(n\le 210) = P(S_{210} \ge 700)$.
+\begin{align*}
+    P(180 \le n \le 210) &= P(S_{180}\le 700, S_{210}\ge 700) = 1 - P(\{S_{180}> 700\} \sqcup \{S_{210}< 700\}) = \\
+    &= 1 - P(S_{180} > 700) - P(S_{210} < 700)
+\end{align*}
+Бо сума ніколи не може бути більша 700 на 180-му кроці, а потім менша за 700 на 210-му - ці події несумісні.
+
+\begin{align*}
+    P(S_{180}>700) &= P\left(\frac{S_{180} - 3.5 \cdot 180}{\sqrt{2.92 \cdot 180}} > \frac{700 - 3.5 \cdot 180}{\sqrt{2.92 \cdot 180}} \right) \approx \\
+    &\approx 1 - \Phi_{0,1}(3.05) = 0.001
+\end{align*}
+\begin{align*}
+    P(S_{210}<700) &= P\left(\frac{S_{210} - 3.5 \cdot 210}{\sqrt{2.92 \cdot 210}} < \frac{700 - 3.5 \cdot 210}{\sqrt{2.92 \cdot 210}} \right) \approx \\
+    &\approx \Phi_{0,1}(-1.413) = 0.079
+\end{align*}
+\[P(180 \le n \le 210) \approx 1 - 0.001 - 0.079 = 0.92\]
+
+\section*{№ 17.21}
+\begin{mdframed}
+    Соцiологiчне опитування має на метi оцiнити невiдому частку p' суспiльства, 
+    що пiдтримує новий законопроект. Для цього планується опитати n людей i частку 
+    p тих з них, що схвалюють новий законопроект, обрати в якостi оцiнки для p'. За 
+    допомогою центральної граничної теореми визначте, яким повинно бути число 
+    опитаних n для того, щоб з ймовiрнiстю 0.95 оцiнка вiдрiзнялася вiд iстинного 
+    значення не бiльше, нiж на 0.01
+\end{mdframed}
+
+\[\xi_i \sim B(p) - iid\]
+\[S_n = \sum_{i=1}^n \xi_i\]
+\[p' - \text{ істинна частка},\; p_n = \frac{S_n}{n}\]
+\[MS_n = np',\quad DS_n = np'(1-p')\]
+\[Mp_n = p',\quad Dp_n = \frac{p'(1-p')}{n} = \sigma^2\]
+
+\begin{align*}
+    P(|p_n-p'| < 0.01) &= P\left(-\frac{0.01}{\sigma} < \frac{p_n - p'}{\sigma} < \frac{0.01}{\sigma}\right) \approx \\
+    &\approx \Phi_{0,1}\left(\frac{0.01}{\sigma}\right) - \Phi_{0,1}\left(-\frac{0.01}{\sigma}\right) = 2\Phi_{0,1}\left(\frac{0.01}{\sigma}\right) - 1 \ge 0.95
+\end{align*}
+
+\[\Phi_{0,1}\left(\frac{0.01}{\sigma}\right) \ge \frac{0.95 + 1}{2} = 0.975\]
+\[\frac{0.01}{\sigma} \ge 1.96\]
+\[\sigma \le \frac{0.01}{1.96} = 0.0051\]
+\[\sigma = \sqrt{\frac{p'(1-p')}{n}} \le 0.0051\]
+\[n \ge \frac{p'(1-p')}{0.0051} \le \frac{1/4}{0.0051} \approx 49\]
+Тобто
+\[\boxed{n \ge 49}\]
+
+
+\section*{№ 17.22}
+\begin{mdframed}
+    \[\{X_i\} - iid. \quad X_i \sim U[-3,3]\]
+    \[T_n = \frac{1}{n} \sum_{i=1}^n |X_i|\]
+    \[\sqrt{n} \cdot (T_n - a) \overset{d}{\longrightarrow} \mathcal{N}(0,b^2) \]
+    \[a,b - ?\]
+\end{mdframed}
+
+\[M|X_i| = \int_{-3}^3 |x| \cdot \frac{1}{6}dx = \frac{1}{6} \left(\int_0^3 x dx + \int_{0}^{-3} x dx\right) = \]
+\[= \frac{1}{6} \left(\frac{9}{2} + \frac{9}{2}\right) = \frac{9}{6} = \frac{3}{2} = 1.5\]
+
+\[M|X_i|^2 = MX_i^2 = \int_{-3}^3 x^2 \cdot \frac{1}{6}dx = \frac{1}{18} \left(3^3 - (-3)^3\right) = 3\]
+
+\[D|X_i| = M|X_i|^2 - \left(M|X_i|\right)^2 = 3 - 2.25 = 0.75\]
+
+\[MT_n = \frac{n}{n}M|X_1| = 1.5; \quad DT_n = \frac{n}{n^2}D|X_1| = \frac{0.75}{n}\]
+За ЦГТ:
+\[\frac{T_n - MT_n}{\sqrt{DT_n}} \overset{d}{\longrightarrow} \mathcal{N}(0,1)\]
+\[\sqrt{n} \frac{T_n - 1.5}{\sqrt{0.75}} \overset{d}{\longrightarrow} \mathcal{N}(0,1)\]
+\[\sqrt{n} (T_n - 1.5) \overset{d}{\longrightarrow} \mathcal{N}(0,0.75)\]
+А отже 
+\[a = MT_n = 1.5,\quad b^2 = DT_n = 0.75\]
+
+
+\end{document}
+
