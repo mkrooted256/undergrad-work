@@ -1,0 +1,5 @@
+C:/Users/mkrooted/Uni/6-graphics/rick_astley/cmake-build-debug/CMakeFiles/lab1.dir
+C:/Users/mkrooted/Uni/6-graphics/rick_astley/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mkrooted/Uni/6-graphics/rick_astley/cmake-build-debug/CMakeFiles/SDL2.dir
+C:/Users/mkrooted/Uni/6-graphics/rick_astley/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/mkrooted/Uni/6-graphics/rick_astley/cmake-build-debug/CMakeFiles/SDL2main.dir

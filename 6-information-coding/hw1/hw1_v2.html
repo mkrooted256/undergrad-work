@@ -14606,7 +14606,7 @@ $$H(p_w, p_b) = -(p_w \log p_w + p_b \log p_b)$$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Перелік чотирьох конфігурацій</span>
@@ -14628,12 +14628,14 @@ $$H(p_w, p_b) = -(p_w \log p_w + p_b \log p_b)$$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Функція, що обчислює ентропію конфігурації</span>
 <span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">conf</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">conf</span> <span class="o">/</span> <span class="n">conf</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">conf</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">conf</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14646,14 +14648,14 @@ $$H(p_w, p_b) = -(p_w \log p_w + p_b \log p_b)$$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ентропії конфігурацій:&quot;</span><span class="p">)</span>
 <span class="n">Hs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">configurations</span><span class="p">):</span>
     <span class="n">Hs</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; H_</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">H</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; H_</span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">H</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> - entropy of </span><span class="si">{</span><span class="n">v</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Конфігурації в порядку зростання ентропії:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">([</span><span class="n">configurations</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Hs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">kv</span><span class="p">:</span> <span class="n">kv</span><span class="p">[</span><span class="mi">1</span><span class="p">]))])</span>
@@ -14679,13 +14681,13 @@ $$H(p_w, p_b) = -(p_w \log p_w + p_b \log p_b)$$</p>
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Ентропії конфігурацій:
- H_1 = 13.59
- H_2 = 16.09
- H_3 = 16.30
- H_4 = 21.50
+ H_1 = 0.6870 - entropy of [0.55555556 0.44444444]
+ H_2 = 0.6931 - entropy of [0.5 0.5]
+ H_3 = 0.6730 - entropy of [0.6 0.4]
+ H_4 = 0.6931 - entropy of [0.5 0.5]
 
 Конфігурації в порядку зростання ентропії:
-[array([5, 4]), array([5, 5]), array([6, 4]), array([6, 6])]
+[array([6, 4]), array([5, 4]), array([5, 5]), array([6, 6])]
 </pre>
 </div>
 </div>
@@ -14701,13 +14703,7 @@ $$H(p_w, p_b) = -(p_w \log p_w + p_b \log p_b)$$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Тобто $H_1 &lt; H_2 &lt; H_3 &lt; H_4$.
-Це природньо, бо:</p>
-<ul>
-<li>К1 має 9 кульок - найменшу кількість з усіх - найменшу кількість станів</li>
-<li>К2 та К3 мають одну кількість кульок, але кожна кулька в К3 цінніша в сенсі інформації, бо ймовірності не рівні </li>
-<li>К4 має найбільшу кількість кульок - найбільшу кількість можливих станів</li>
-</ul>
+<p>Тобто $H_3 &lt; H_1 &lt; H_2 = H_4$.</p>
 
 </div>
 </div>
@@ -14930,12 +14926,28 @@ Tree is ok.</code></pre>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 <pre><code>Result:
-0 1 11 10 111 101 0 1111 10 110 10 010 10
-W ! A  !  K   A   ! J    A  W   A  K   A</code></pre>
+W 1 A 10 K 101 0 J 10 110 10 010 10
+W ! A !  K A   ! J A  W   A  K   A</code></pre>
 
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 </body>
 
