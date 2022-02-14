@@ -10,9 +10,6 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,calc,patterns}
 
-\setmainfont[Ligatures=TeX]{Cambria Math} % set the main body font (\textrm), assumes Charis SIL is installed
-%\setsansfont{Deja Vu Sans}
-\setmonofont[Ligatures=TeX]{Fira Code}
 
 % other LaTeX packages.....
 \usepackage{fullpage}
@@ -27,6 +24,12 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{multicol}
+
+% FONTS
+\setmainfont[Ligatures=TeX]{Cambria Math} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+\setmathfont[Ligatures=TeX]{NewCMMath-Regular.otf}
 
 \renewcommand\lstlistingname{Algorithm}
 \renewcommand\lstlistlistingname{Algorithms}
@@ -122,21 +125,246 @@
     \end{enumerate}
     
 \end{proof}
+\pagebreak
 
 \section*{№ 23}
 \begin{mdframed}
-    Визначити операції \(\cup, \cap\) через \(\triangle, \setminus\) 
+    Чи є сепарабельним простір 
+    \[l^1 = \{\{x_n\}_{n\ge1} : \sum_{k=1}^\infty |x_k| < +\infty\}\]
+    з метрикою 
+    \[d(x,y) = \sum_{k=1}^\infty |x_k - y_k|\]?
 \end{mdframed}
+
+\begin{mdframed}[backgroundcolor=purple!20]
+    Простір $(X, d)$ сепарабельний, якщо містить всюди щільну не більш ніж зліченну множину.
+    Тобто
+    \[\exists S \subset X : (|X| \le \aleph_0) \wedge (\forall x \in X, \varepsilon > 0: S \cap B(x,\varepsilon) \ne \varnothing) \]
+\end{mdframed}
+
+Знаємо, що $\mathbb Q$ - всюди щільна в $\mathbb R$. 
+Перевіримо потужність множини всіх раціональних послідовностей.
+
+\[\text{let } Q - \text{ множина всіх раціональних послідовностей}\]
+На жаль, за методом діагоналізації Кантора для 0/1-послідовностей можна сказати, що $|Q| > \aleph_0$.
+Треба йти іншим шляхом.
+
+Я можу як завгодно близько наблизити нескінченну послідовність $\{x_n\}_{n\ge1} = x \in l^1$ 
+скінченною послідовністю \[(x^{(n)}_1, x^{(n)}_2, ..., x^{(n)}_n, 0, 0, ...) = x^{(n)} \in l^1\].
+Це можлилво, бо \[\sum_{k=1}^\infty |x_k| < +\infty \implies \lim_{n\to \infty} \sum_{k=n}^\infty |x_k| = 0  \].
+Тобто залишкова сума збіжного ряду має прямувати до 0. Тобто 
+\[\forall \varepsilon>0: \exists N: \forall n>N: \sum_{k=n}^\infty |x_k| < \varepsilon\]
+
+Таким чином
+\[\forall \varepsilon>0, x \in l^1: \exists x^{(n)}: d(x,x^{(n)}) = \sum_{k=n}^\infty |x_k| < \varepsilon\]
+
+Оскільки $\mathbb Q$ - всюди щільна в $\mathbb R$, то можемо обмежитись скінченними послідовностями з раціональними елементами.
+
+З іншого боку, множина всіх скінченних послідовностей довжини $n$ над $\mathbb Q$ - зліченна.
+\[|X^{(n)}|=|=|\{(x^{(n)}_1, x^{(n)}_2, ..., x^{(n)}_n, 0, 0, ...), x^{(n)}_i \in \mathbb Q\}| = |\mathbb Q^n| = \aleph_0\]
+Більше того, 
+\[|X| = \left|\bigcup_{i=1}^\infty X^{i}\right| = \aleph_0\]
+як зліченне об'єднання зліченних множин.
+
+Маємо,
+\[\left(\forall \varepsilon>0, x \in l^1: \exists x^{(n)} \in X: d(x,x^{(n)}) < \varepsilon\right) \wedge \left(|X|=\aleph_0\right)\]
+
+Отже, простір $(l^1, d)$ - сепарабельний, бо $X \subset l^1$ - всюди щільна скінченна множина.
+
+\section*{№ 24}
+\begin{mdframed}
+    Чи є сепарабельним простір 
+    \[l^2 = \{\{x_n\}_{n\ge1} : \sum_{k=1}^\infty |x_k|^2 < +\infty\}\]
+    з метрикою 
+    \[d_2(x,y) = \sqrt{\sum_{k=1}^\infty |x_k - y_k|^2}\]?
+\end{mdframed}
+
+$\sum_{k=1}^\infty |x_k|^2$ - збіжний ряд.
+Тоді суму $S = \sum_{k=n}^\infty |x_k|^2$ можна зробити як завгодно малою (збільшуючи $n$).
+
+Тоді довільну послідовність $x \in l^2$ можна наблизити скінченною послідовністю, ще й раціональних чисел.
+Бо \[d_2(x,x^{(n)}) = \sqrt{\sum_{k=n}^\infty |x_k|^2} = \sqrt{S}\]
+
+А далі аналогічно № 23. 
+Множина всіх скінченних раціональних послідовностей - зліченна та всюди щільна в $(l^2, d_2)$
+
+Отже, простір $(l^2, d_2)$ - сепарабельний
+\pagebreak
+
+\section*{№ 39}
 
 \begin{mdframed}
-    Загальноприйняті визначення:
-    \[A \triangle B = (A\setminus B) \cup (B \setminus A) = (A \cup B) \setminus (A \cap B) \]
-    \[A \setminus B = A \cap \overline B\]
+    \[l^p = \{(x_1,x_2,...) : \left(\sum_{k=1}^\infty |x_k|^p\right)^{\frac{1}{p}} < +\infty\}, \quad d(x,y) = \left(\sum_{k=1}^\infty |x_k-y_k|^p\right)^{\frac{1}{p}}\]
+    \[l^\infty = \{(x_1,x_2,...) : \max_{k\ge1} |x_k| < +\infty\}, \quad d(x,y) = \max_{k\ge1} |x_k-y_k|\]
+    \[s = \{(x_1, x_2,...) - \text{довільна дійсна послідовність}\}, \quad d(x,y) = \sum_{k=1} \frac{1}{2^k} \frac{|x_k - y_k|}{1+|x_k - y_k|}\]
 \end{mdframed}
 
-\begin{align*}
-    A \cup B = \{x : x \in A \vee x \in B\} =   
-\end{align*}
+\subsection*{1.}
+\begin{mdframed}
+    \[\{x^{(n)}\}, \; x^{(n)} = (1,2,...,n,0,0,...)\]
+    \[\lim_{n\to\infty} x^{(n)} = (1,2,3,...,n-1,n,n+1,...)\]
+\end{mdframed}
+\begin{enumerate}
+    \item $l^p$: \[\lim_{n\to\infty} \sum_{k=1}^\infty |x^{(n)}_k|^p = \sum_{k=1}^\infty k^p = +\infty\]
+    тобто $\lim_{n\to\infty} x^{(n)} \notin l^p$. \begin{mdframed}[backgroundcolor=red!20]
+    Робіжна
+    \end{mdframed}
+
+    \item $l^\infty$: \[\lim_{n\to\infty} \max_{k\ge1} x^{(n)}_k = \max_{k\ge1} k  = +\infty\]
+    тобто $\lim_{n\to\infty} x^{(n)} \notin l^\infty$. \begin{mdframed}[backgroundcolor=red!20]
+    Робіжна
+    \end{mdframed}
+
+    \item $s$: очевидно, $x = \lim_{n\to\infty} x^{(n)} \in s$
+    Перевіримо збіжність. Нехай $d(x^{(n)}, x) = d_n$. Для збіжності достатньо щоб $\lim_{n\to\infty} d_n = 0$.
+    
+    \[d_n = d(x^{(n)}, x) = \sum_{k > n} \frac{k}{2^k} \cdot \frac{1}{1+1} = \frac{1}{2} \sum_{k > n} \frac{k}{2^k}\]
+    \[d_0 = \frac{1}{2} \sum_{k \ge 1} \frac{k}{2^k} \]
+    Досліджу на збіжність ряд $d_0$. Ознака д'Аламбера:
+    \[\lim_{k\to\infty} \frac{\frac{k+1}{2^{k+1}}}{\frac{k}{2^k}} = \frac{1}{2}\lim_{k\to\infty} \frac{k+1}{k} = \frac{1}{2} \cdot 1 < 1\]
+    Успішно. Тобто ряд збіжний. Тоді $\lim_{n\to\infty} d_n =0$ як залишок збіжного ряду.
+
+    Отже, $x^{(n)} \to x$ у $(s,d)$ - \begin{mdframed}[style=ans]
+    Збіжна
+    \end{mdframed}
+\end{enumerate}
+
+\subsection*{2.}
+\begin{mdframed}
+    \[x^{(n)} = (\underset{n}{\underbrace{1,1,...,1}},0,...)\]
+    \[x = (1,1,1,...,1,...)\]
+\end{mdframed}
+\begin{enumerate}
+    \item $l^p$: \[\lim_{n\to\infty} \sum_{k=1}^\infty |x^{(n)}_k|^p = \sum_{k=1}^\infty 1 = +\infty\]
+    тобто $\lim_{n\to\infty} x^{(n)} \notin l^p$. \begin{mdframed}[backgroundcolor=red!20]
+    Робіжна
+    \end{mdframed}
+
+    \item $l^\infty$: 
+    \[\lim_{n\to\infty} \max_{k\ge1} x^{(n)}_k = \max_{k\ge1} 1  = 1 < \infty\; \implies \; x\in l^\infty \]
+    Нехай $d(x^{(n)}, x) = d_n$.
+    \[\forall n: d_n = \max_{k\ge1} |x^{(n)}_k-1| = 1 = const\]
+    $d_n \to 1 \ne 0$, отже $\lim_{n\to\infty}x^{(n)} \ne x$.
+
+    Треба ще довести, що інших кандидатів на границю немає, але в мене не вийшло.
+
+    \begin{mdframed}[backgroundcolor=red!20]
+    Робіжна
+    \end{mdframed}
+
+
+    \item $s$: очевидно, $x = \lim_{n\to\infty} x^{(n)} \in s$
+    \[d_n = d(x^{(n)}, x) = \sum_{k>n} \frac{1}{2^k} \cdot \frac{1}{1+1} = \frac{1}{2}\sum_{k>n} \frac{1}{2^k}\}\]
+    $d_0 = \frac{1}{2}\sum_{k\ge 1} \frac{1}{2^k} = \frac{1}{2} \cdot \frac{1/2}{1-1/2} = \frac{1}{2}$ - збіжний ряд.
+    Тоді $d_n \longrightarrow 0$ як залишок збіжного ряду.
+    
+    Отже, $x^{(n)} \longrightarrow x$ у $(s,d)$ - \begin{mdframed}[style=ans]
+    Збіжна
+    \end{mdframed}. 
+\end{enumerate}
+\pagebreak
+
+\subsection*{3.}
+\begin{mdframed}
+    \[x^{(n)} = (\underset{n}{\underbrace{\frac{1}{n},\frac{1}{n},...,\frac{1}{n}}},0,...)\]
+    \[x = (0,0,...,0,...)\]
+\end{mdframed}
+\begin{enumerate}
+    \item $l^p$: очевидно $x\in l^p$.
+    Нехай $d(x^{(n)}, x) = d_n$.
+    \[d_n = \sum_{1 \le k \le n} \frac{1}{n} = n \cdot \frac{1}{n} = 1 = const\]
+    \[d_n \longrightarrow 1 \ne 0\]
+    Тобто, збіжності до $x$ немає. (очевидно, інших границь крім $x$ бути не може).
+
+    \begin{mdframed}[backgroundcolor=red!20]
+    Робіжна
+    \end{mdframed}
+    
+
+    \item $l^\infty$: очевидно $x\in l^\infty$.
+    \[d_n = d(x^{(n)}, x) = \max_{1 \le k \le n} \frac{1}{n} = \frac{1}{n} \underset{n\to\infty}{\longrightarrow} 0\]
+    Тобто, $x^{(n)} \longrightarrow x$ в $(l^\infty, d)$! 
+    
+    \begin{mdframed}[style=ans]
+    Збіжна
+    \end{mdframed}
+
+    \item $s$: очевидно, $x \in s$. 
+    Нехай \[d'(x,y) = \sum_{k=1} \frac{1}{2^k} |x_k - y_k| \ge \sum_{k=1} \frac{1}{2^k} \frac{|x_k - y_k|}{1+|x_k - y_k|}\]
+    \[d'_n = d'(x^{(n)}, x) = \sum_{1\le k \le n} \frac{1}{2^k} \cdot \frac{1}{n} = \frac{1}{n} \cdot \frac{1}{2} \cdot \frac{1-\frac{1}{2^n}}{1-\frac{1}{2}} = \frac{1}{n} \cdot \left(1-\frac{1}{2^n}\right)\]
+    Тут була застосована формула суми скінченної геометричної прогресії.
+    \[\lim_{n\to\infty} d'_n = \lim_{n\to\infty} \frac{1}{n} \cdot \left(1-\frac{1}{2^n}\right) = 0 \cdot 1 = 0\]
+    \[0 \le \lim_{n\to\infty} d_n \le \lim_{n\to\infty} d'_n = 0\]
+    Тобто, $x^{(n)} \longrightarrow x$ в $(s, d)$! 
+    
+    \begin{mdframed}[style=ans]
+    Збіжна
+    \end{mdframed}
+\end{enumerate}
+\pagebreak
+
+\subsection*{4.}
+\begin{mdframed}
+    \[x^{(n)} = (\underset{n}{\underbrace{\frac{1}{n^a},\frac{1}{n^a},...,\frac{1}{n^a}}},0,...)\]
+    \[x = (0,0,...,0,...)\]
+
+    Одразу припускаю, що $a \ne 1$.
+\end{mdframed}
+\begin{enumerate}
+    \item $l^p$: очевидно $x\in l^p$.
+    \begin{multline*}
+        d_n = d(x^{(n)}, x) = \sum_{1 \le k \le n} \frac{1}{n^a} = n \cdot \frac{1}{n^a} = n^{1-a} 
+        \underset{n\to\infty}{\longrightarrow} \begin{cases}
+            0, & a > 1\\
+            \infty, & a < 1
+        \end{cases} 
+    \end{multline*}
+    Тобто, збіжність є за $a > 1$.
+
+    \begin{mdframed}[backgroundcolor=yellow!20]
+    Збіжна за $a > 1$
+    \end{mdframed}
+    
+
+    \item $l^\infty$: очевидно $x\in l^\infty$.
+    \begin{multline*}
+        d_n = d(x^{(n)}, x) = \max_{1 \le k \le n} \frac{1}{n^a} = \frac{1}{n^a} 
+        \underset{n\to\infty}{\longrightarrow} \begin{cases}
+            0, & a > 0\\
+            \infty, & a < 0\\
+            1, & a = 0
+        \end{cases}
+    \end{multline*} 
+    Тобто, збіжність є за $a > 0$.
+
+    \begin{mdframed}[backgroundcolor=yellow!20]
+    Збіжна за $a > 0$
+    \end{mdframed}
+
+    \item $s$: очевидно, $x \in s$.
+    \begin{multline*}
+        d_n = d(x^{(n)}, x) = \sum_{1\le k \le n} \frac{1}{2^k} \cdot \frac{\frac{1}{n^a}}{1+\frac{1}{n^a}} = \frac{\frac{1}{n^a}}{1+\frac{1}{n^a}} \cdot \frac{1}{2} \cdot \frac{1-\frac{1}{2^n}}{1-\frac{1}{2}} = \frac{\frac{1}{n^a}}{1+\frac{1}{n^a}} \cdot \left(1-\frac{1}{2^n}\right)
+    \end{multline*}
+    Тут була застосована формула суми скінченної геометричної прогресії.
+    
+    \[\lim_{n\to\infty} d_n = \lim_{n\to\infty} \frac{\frac{1}{n^a}}{1+\frac{1}{n^a}} \cdot \left(1-\frac{1}{2^n}\right) \]
+    \[\lim_{n\to\infty} \frac{1}{n^a} = \begin{cases}
+        0, & a>0\\
+        1, & a=0\\
+        \infty, & a<0
+    \end{cases}\]
+    Тоді
+    \[\lim_{n\to\infty} d_n = \begin{cases}
+        0, & a>0\\
+        \frac{1}{1+1} \cdot 1 = \frac{1}{2}, & a=0\\
+        \infty, & a<0
+    \end{cases}\]
+    Тобто, збіжність є за $a > 0$.
+
+    \begin{mdframed}[backgroundcolor=yellow!20]
+    Збіжна за $a > 0$
+    \end{mdframed}
+\end{enumerate}
+
 
 
 \end{document}

@@ -1,7 +1,3 @@
-
-% !TEX TS-program = xelatex
-% !TEX encoding = UTF-8
-
 \documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
 
 \usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
@@ -11,9 +7,6 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,calc,patterns}
 
-\setmainfont[Ligatures=TeX]{Garamond} % set the main body font (\textrm), assumes Charis SIL is installed
-%\setsansfont{Deja Vu Sans}
-\setmonofont[Ligatures=TeX]{Fira Code}
 
 % other LaTeX packages.....
 \usepackage{fullpage}
@@ -28,6 +21,12 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{multicol}
+
+% FONTS
+\setmainfont[Ligatures=TeX]{Cambria Math} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+\setmathfont[Ligatures=TeX]{NewCMMath-Regular.otf}
 
 \renewcommand\lstlistingname{Algorithm}
 \renewcommand\lstlistlistingname{Algorithms}
@@ -52,8 +51,8 @@
 }
 \lstset{style=mystyle}
 
-\newcommand\course{}
-\newcommand\hwnumber{}                   % <-- homework number
+\newcommand\course{6 - Функціональний аналіз}
+\newcommand\hwnumber{ДЗ №1}                   % <-- homework number
 \newcommand\idgroup{ФІ-91}                
 \newcommand\idname{Михайло Корешков}  
 
