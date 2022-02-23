@@ -4,19 +4,19 @@ $$\overline X \underset{n\to\infty}{\longrightarrow} MX_1$$
 
 ## Змістовність
 
-$$T_n(\vec X) \underset{n\to\infty}{\longrightarrow} $$
+$$T_n(\vec X) \overset{P}{\longrightarrow} \theta$$
 
 > Змістовність оцінки - інваріантна відносно неперервних відображень властивість
 
 ## №2.8
-$X_1, X_2, ... \sim Exp(\aplha > 1)$  
+$X_1, X_2, ... \sim Exp(\alpha), \alpha>1$  
 $\theta_n = e^{\overline X}$
 
 1) ![](sem3_1.png)
 
 2) Змістовність  
-    $Me^{\overline X} = \left(\varphi_{X_1}(1/ni))^n = \frac{\alpha^n}{(\alpha-1/n)^n} = $  
-    $= (1 + \frac{1/n}{\alpha - 1/n})^n = (1 + \frac{1}{\alpha/\sqrt})$
+    $Me^{\overline X} = \left(\varphi_{X_1}(1/ni)\right)^n = \frac{\alpha^n}{(\alpha-1/n)^n} = $  
+    $= (1 + \frac{1/n}{\alpha - 1/n})^n = ...$
 
 ## № 2.9
 ![](sem3_2.png)

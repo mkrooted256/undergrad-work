@@ -1,0 +1,244 @@
+% !TeX program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{unicode-math}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+% FONTS
+\setmainfont[Ligatures=TeX]{Cambria Math} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{Fira Code}
+\setmathfont[Ligatures=TeX]{NewCMMath-Regular.otf}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{6 - Функціональний аналіз}
+\newcommand\hwnumber{ДЗ №2}                   % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+\begin{document}
+
+% № 6.11 ( д), е), и), к) ). Треногин
+% № 21 ( 1), 2), 3), 4) ). Антонович
+
+\section*{№ 6.11}
+\begin{mdframed}
+    $x,y \in S$ - простір всіх послідовностей з натуральних чисел
+    $$d(x,y) = \begin{cases}
+        0, & x=y \\
+        \frac{1}{k(x,y)}
+    \end{cases}$$
+    $k(x,y)$ - номер першого елемента, що відрізняється
+\end{mdframed}
+
+\subsection*{д) }
+\begin{mdframed}
+    Довести, що замкнена куля $\bar B(r,x)$ є також відкритою.  
+
+    Довести, що $\forall y \in \bar B(r,x): \bar B(r,y) = \bar B(r,x)$
+\end{mdframed}
+
+\begin{proof}
+    Множина відкрита якщо кожен елемент входить з деяким відкритим околом.
+    
+    Нехай $y \in \bar B(r,x)$. Тобто 
+    $$\frac{1}{k(x,y)} = d(x,y) \le r $$
+    $$\iff k(x,y) \ge \left\lceil \frac{1}{r} \right\rceil $$
+
+    Відомо що $\forall r: \exists n\in \mathbb N: \frac{1}{n+1} < r \le \frac{1}{n}$.
+
+    Нехай $z \in B(r, y)$. Тоді $k(z,y) > n $.
+
+    \begin{multline*}
+        \begin{cases}
+            t = k(z,y) > n\\
+            l = k(x,y) \ge n
+        \end{cases} \implies \begin{cases}
+            z = (y_1, y_2, ..., y_t, z_{t+1}, ...), t > n \\
+            y = (x_1, x_2, ..., x_l, y_{l+1}, ...), l \ge n \\
+            x = (x_1, x_2, ...)
+        \end{cases} \implies \\ \implies k(z,x) \ge \min(t,l) \ge n \implies d(z, x) \le \frac{1}{n} \implies z \in \bar B(r,x) 
+    \end{multline*}
+
+\end{proof}
+
+\begin{proof}
+    Нехай $y \in \bar B(r,x)$. Тобто 
+    $$\frac{1}{k(x,y)} = d(x,y) \le r $$
+    $$\iff k(x,y) \ge \left\lceil \frac{1}{r} \right\rceil $$
+    
+    Нехай $z \in \bar B(r,y)$. $k(z,y) \ge \left\lceil \frac{1}{r} \right\rceil$.
+
+    Тоді $k(x,z) \ge \min(k(x,y), k(y,z)) \ge \left\lceil \frac{1}{r} \right\rceil$. Тобто $z \in \bar B(r,x)$.
+
+    Нехай $z \in \bar B(r,x)$. $k(z,x) \ge \left\lceil \frac{1}{r} \right\rceil$.
+
+    Тоді $k(y,z) \ge \min(k(x,y), k(z,x)) \ge \left\lceil \frac{1}{r} \right\rceil$. Тобто $z \in \bar B(r,y)$.
+
+    Маємо $\forall y \in \bar B(r,x): \bar B(r,x) \subseteq \bar B(r,y) \wedge \bar B(r,y) \subseteq \bar B(r,x)$.
+
+    $\forall y \in \bar B(r,x): \bar B(r,x) = \bar B(r,y)$
+    
+\end{proof}
+
+\subsection*{е)}
+\begin{mdframed}
+    Якщо дві кулі мають спільну точку, то одна міститься в іншій.
+\end{mdframed}
+
+\begin{proof}
+    Нехай $r_1 < r_2$. Нехай $y \in B(r_1,x_1), B(r_2, x_2)$. 
+    Тоді $\begin{cases}
+        d(y,x_1) < r_1 \\
+        d(y,x_2) < r_2
+    \end{cases}$. 
+    Вже довели нерівність трикутника в посиленій формі (в тому числі неявно в попередньому пункті):
+    $$d(x,y) \le \max(d(x,z), d(y,z))$$
+    це еквівалентно
+    $$k(x,y) \ge \min(k(x,z), k(y,z))$$
+    
+    $$d(x_1, x_2) \le \max(d(y,x_1), d(y,x_2)) < \max(r_1, r_2) = r_2$$
+
+    Нехай $z \in B(r_1, x_1)$. Тоді
+    $$d(z, x_2) \le \max(d(z,x_1), d(x_1,x_2)) < \max(r_1, r_2) = r_2$$
+    Тобто $z \in B(r_2, x_2)$.
+    Тобто $B(r_1, x_1) \subseteq B(r_2, x_2)$
+\end{proof}
+
+\subsection*{и) Повнота простору}
+
+\begin{proof}
+    Нехай послідовність (послідовностей) $(x^n)_{n\ge 1}$ - фундаментальна.
+
+    Тобто $d(x^n, x^m) \to 0$. Тобто $k(x^n, x^m) \to \infty$.
+    $$\forall D>0: \exists N: \forall n,m >N: k(x^n, x^m) > D$$
+
+    Візьмемо $x_{(k)} = (x_k^1, x_k^2, ...)$ - послідовність значень одного елементу.
+    З попереднього тверження видно, що $\forall k: x_{(k)}$ - з якогось моменту стала послідовність.
+    Тобто $\forall k: \exists \lim_{t\to\infty} x_k^t =: x_k$.
+    
+    Будуємо з $x_k$ послідовність $x$. Вона, очевидно, складається з натуральних чисел та міститься у $X$.
+
+    $\lim_{n\to\infty} d(x^n, x) = \lim_{n\to\infty} \frac{1}{k(x^n,x)} = 0$
+
+    Маємо, що фундаментальна послідовність - збіжна.
+\end{proof}
+
+\subsection*{к) Сепарабельність}
+\begin{proof}
+    У якості зліченної всюди щільної множини можна спробувати взяти множину всіх можливих 
+    натуральних \textbf{фінітних} послідовностей.
+    $$S = \{s = (s_1, ..., s_t, 0, 0, ...) : s_i, t \in \mathbb N\}$$
+    $$|S| = |\bigcup_{i=1}^\infty \{(s_1, ..., s_i, 0, 0, ...)\}| = \aleph_0$$
+
+    Нехай $x \in X, \epsilon > 0$. Шукаємо $s\in S: d(x,s) < \epsilon$.
+    
+    По-перше, нехай $t = \left\lceil\frac{1}{\epsilon}\right\rceil + 1$.
+    Беремо $s = (x_1, x_2, ... ,x_t, 0, 0, ...) \in S$.
+    $$d(s, x) = \frac{1}{k(s,x)} \le \frac{1}{\left\lceil\frac{1}{\epsilon}\right\rceil + 1} < \epsilon$$
+
+    Тобто, елементи зліченної $S$ знайдуться в будь-якому околі будь-якого елементу $X$. 
+    That is, $X$ - сепарабельний
+\end{proof}
+
+\section*{№ 3.21 (Антонович)}
+\begin{mdframed}
+    $p$ - деяке просте, $n$ - натуральне, $x$ - раціональне.
+    Нехай $V_p(n) : n = \prod_p p^{V_p(n)}$.
+
+    $$x = \pm\frac{m}{n} \implies V_p(x) := V_p(m) - V_p(n)$$
+    $$V_p(xy) = V_p(x) + V_p(y)$$
+
+    Нехай $d(x,y) = \begin{cases}
+        0, & x=y \\
+        p^{-V_p(x-y)}& x\ne y
+    \end{cases}$
+\end{mdframed}
+
+\subsection*{1)}
+\begin{proof}
+    1. $d(x,y) = 0$ за визначенням.
+
+    2. $V_p(x) = V_p(m) - V_p(n) = V_p(-x)$. Тоді $d(x,y) = p^{-V_p(x-y)} = p^{-V_p(-(x-y))}= d(y,x)$
+
+    3. $d(x,y) + d(y,z) = p^{-V_p(x-y)} + p^{-V_p(y-z)}$
+
+    Нехай 
+    $$x = \frac{m(x)}{n(x)} \cdot p^a, y = \frac{m(y)}{n(y)} \cdot p^b, z = \frac{m(z)}{n(z)} \cdot p^c$$
+    $$x-y = \frac{m(x)}{n(x)} \cdot p^a - \frac{m(y)}{n(y)} \cdot p^b 
+    \le p^{\max(a,b)} \cdot (\frac{m(x)}{n(x)} - \frac{m(y)}{n(y)}) \le 
+    $$
+    В правій дужці множник $p$ може з'явитись лише в чисельнику та лише з додатнім ступенем.
+    
+\end{proof}
+
+\subsection*{1)}
+
+
+\end{document}
+
