@@ -48,6 +48,44 @@ struct Vec3f {
 
 #define clip3f(vec, min, max) (Vec3f{ clip((vec).x, min, max), clip((vec).y, min, max), clip((vec).z, min, max) })
 
+struct Vec2f {
+    float x;
+    float y;
+    
+    Vec2f operator*(float k) const { return { x*k, y*k }; }
+    friend Vec2f operator*(float k, const Vec2f& v) { return v*k; }
+    Vec2f operator/(float k) const { return { x/k, y/k }; }
+
+    Vec2f& operator+=(const Vec2f& v) { x+=v.x; y+=v.y; return *this; }
+    Vec2f& operator-=(const Vec2f& v) { x-=v.x; y-=v.y; return *this; }
+    Vec2f operator+(const Vec2f& v) const { return { x+v.x, y+v.y }; }
+    Vec2f operator-(const Vec2f& v) const { return { x-v.x, y-v.y };; }
+    Vec2f operator-() const { return { -x, -y }; }
+
+    float Dot(const Vec2f& v) const { return x*v.x + y*v.y; }
+
+    float Normsq() const { return x*x + y*y; };
+    float Norm() const { return sqrt(x*x + y*y); };
+    Vec2f Ort() const { return *this / Norm(); } // TODO: fast inverse sqrt
+
+    float Cos(const Vec2f& v) const { return Dot(v) / sqrt(Normsq() * v.Normsq()); }
+
+    bool operator>(float f) const { return x>f && y>f; }
+    bool operator>=(float f) const { return x>=f && y>=f; }
+    bool operator<(float f) const { return x<f && y<f; }
+    bool operator<=(float f) const { return x<=f && y<=f; }
+
+    Vec2f Reflect(const Vec2f& normal) const { return *this + (normal + normal) * this->Dot(normal); }
+
+    Vec2f Multiply(const Vec2f& v) const { return { x*v.x, y*v.y }; }
+
+    friend std::ostream& operator<<(std::ostream& os, const Vec2f& vec) {
+        os << "( " << vec.x << " ; " << vec.y << " )";
+        return os;
+    }
+
+};
+
 // ----- COLOR -----
 
 typedef Vec3f Color;

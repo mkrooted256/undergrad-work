@@ -11,4 +11,4 @@ add_executable(raytracing
         geometry.h
         main.cpp
         scene.h
-        shading.h render.h light.h)
+        shading.h render.h light.h AntiAliasing.h)

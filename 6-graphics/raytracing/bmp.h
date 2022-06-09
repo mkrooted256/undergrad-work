@@ -56,9 +56,14 @@ struct BMP {
     BMPFileHeader file_header;
     BMPInfoHeader bmp_info_header;
     BMPColorHeader bmp_color_header;
-    std::vector<BMPPixel>& data;
+    std::vector<BMPPixel> data;
 
-    BMP(int32_t width, int32_t height, std::vector<BMPPixel>& data) : data(data) {
+    BMP(int32_t width, int32_t height, const std::vector<Color>& img) {
+        data.reserve(img.size());
+        for (const Color& c : img) {
+            data.emplace_back( c.x * 255,c.y * 255,c.z * 255 );
+        }
+
         bmp_info_header.width = width;
         bmp_info_header.height = height;
         bmp_info_header.size = sizeof(BMPInfoHeader);
@@ -67,7 +72,7 @@ struct BMP {
         bmp_info_header.bit_count = 24;
         bmp_info_header.compression = 0;
 
-        data_size = data.size();
+        data_size = data.size() * 3;
         row_stride = width * 3;
         row_padding_size = (4 - row_stride % 4) % 4; // = - row_stride (mod 4)
 
