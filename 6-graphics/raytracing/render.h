@@ -19,7 +19,7 @@ struct Renderer {
     Color globalIllumination = { 0,0,0};
 
 private:
-    std::vector<BMPPixel> img;
+    std::vector<Color> img;
 public:
 
     Color GetPointColor(const TraceResult& trace, Body * body) {
@@ -43,7 +43,7 @@ public:
         return visibleColor;
     }
 
-    void Render(const char *fname) {
+    virtual void Render() {
         const float tanHalfFov = tan(M_PI * fov / 360.f);
         const float aspect = width / float(height);
         const float D = width / (2 * tanHalfFov);
@@ -67,8 +67,8 @@ public:
         const int p = height/10;
         int next_checkpoint = p;
 
-        unsigned int n = height * width * 3;
-        img.resize(n);
+        unsigned int n = height * width;
+        img.reserve(n);
         n = 0;
 
         Ray ray{};
@@ -86,12 +86,7 @@ public:
 
                 visibleColor = clip3f(visibleColor, 0, 1);
 
-                BMPPixel bmpPixel(
-                    visibleColor.x * 255,
-                    visibleColor.y * 255,
-                    visibleColor.z * 255
-                );
-                img[n++] = bmpPixel;
+                img.push_back(visibleColor);
 
                 pixel += horizontalStep;
             }
@@ -103,9 +98,22 @@ public:
                 std::cout << "rendering : " << y << "/" << height << std::endl;
             }
         }
-        std::cout << "rendering : finished. starting writing to file..." << std::endl;
-
-        BMP bmp(width, height, img);
-        bmp.write(fname);
+        std::cout << "first pass : finished" << std::endl;
     }
+
+    virtual const std::vector<Color>& GetBuffer() { return img; }
+};
+
+struct PostRenderer {
+protected:
+    std::vector<Color> output;
+    Renderer * renderer;
+public:
+    explicit PostRenderer(Renderer  * renderer) : renderer(renderer) {};
+
+    virtual void Apply() = 0;
+
+    const std::vector<Color>& GetOutput() { return output; }
+    virtual size_t GetWidth() = 0;
+    virtual size_t GetHeight() = 0;
 };
