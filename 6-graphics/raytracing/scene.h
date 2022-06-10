@@ -29,14 +29,19 @@ struct Tracer {
         float tmin = maxDistance;
         Body *foundBody = nullptr;
 
+        TraceResult finalResult{};
+
         for (const std::shared_ptr<Body> &body: scene->bodies) {
-            bool hit = body->geom->Intersect(ray, traceResult);
-            if (hit && traceResult.t < tmin && ray.dir.Dot(traceResult.normal) < 0) {
-                tmin = traceResult.t;
+            TraceResult tmpResult{};
+            bool hit = body->geom->Intersect(ray, tmpResult);
+            if (hit && tmpResult.t < tmin && ray.dir.Dot(tmpResult.normal) < 0) {
+                tmin = tmpResult.t;
                 foundBody = body.get();
+                finalResult = tmpResult;
             }
         }
 
+        traceResult = finalResult;
         return foundBody;
     }
 };

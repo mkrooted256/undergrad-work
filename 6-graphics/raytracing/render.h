@@ -29,7 +29,7 @@ public:
             auto lightTestRays = light->GetTestRays(trace.hitpoint);
             for (const Ray& r : lightTestRays) {
                 TraceResult lightTraceResult{};
-                tracer.Trace(scene, r, lightTraceResult);
+                auto lightHitBody = tracer.Trace(scene, r, lightTraceResult);
                 if (!light->IsRayBlocked(lightTraceResult, trace.geom)) {
                     const Color illumination = light->Illuminate(trace.hitpoint, trace.normal);
                     visibleColor += body->mat->GetSurfaceColor(illumination, trace.normal, camera.origin - trace.hitpoint);
