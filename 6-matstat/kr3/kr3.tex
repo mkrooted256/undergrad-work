@@ -100,6 +100,22 @@ $$= A_{22} + m_2^2 - m_1m_3 - A_{13} = 6 + 4 - 3 - 1 = 6$$
 $$\eta_1 = \xi_1 + a\xi_3;\quad \eta_2 = \xi_2 + b \xi_3$$
 $$a+b = 1$$
 
+
+% Доведемо, що $\vec \eta$ - гаусовий вектор.
+
+% Нехай $\zeta(\vec t) = \vec t \cdot \vec \eta$. $\zeta \sim \mathcal{N}(\vec t \cdot \vec m, D\zeta)$
+% $$\varphi_{\vec\eta}(\vec t) = Me^{i\vec t \cdot \vec \eta} = Me^{i\zeta} = \varphi_\zeta(1) = $$
+% $$= \exp\left\{ i(1+3a, 2+3b) \cdot \vec t + D\zeta \right\}$$
+
+% $$D\zeta = \cov(\zeta,\zeta) = \left(\cov(\zeta_i, \zeta_j)\right)_{i,j = 1,2}$$
+% $$D\zeta_{11} = D\zeta_1 = t_1^2(\sigma_1^2 + a^2\sigma_3^2) = t_1^2(1 + 12a^2)$$
+% $$D\zeta_{22} = D\zeta_2 = t_2^2(\sigma_2^2 + b^2\sigma_3^2) = t_2^2(6 + 12b^2)$$
+% $$D\zeta_{12} = D\zeta_{21} = \cov(t_1\eta_1, t_2\eta_2) = $$
+
+% Тобто 
+% $$\varphi_{\vec\eta}(\vec t) = \exp\left\{ i(1+3a, 2+3b) \cdot \vec t +  \right\}$$
+
+
 Для гаусових векторів відсутність кореляції між координатами еквівалентна їх незалежності.
 $$\cov(\eta_1, \eta_2) = 0$$
 
@@ -207,6 +223,13 @@ $$A' = BAB^T = \begin{pmatrix}
 \end{pmatrix}$$
 
 $$\varphi_{B\vec\xi}(\vec t) = \exp \left\{ i\vec t \cdot \vec m' - \frac{1}{2} \vec t \cdot A' \vec t \right\}$$
+
+$$\varphi_{\eta}(\vec t) = \exp \left\{ i(8t_1 + 2t_2) - \frac{1}{2} (172t_1^2 + 220t_1t_2 + 108t_2^2) \right\}$$
+\\
+
+$\eta_1$ та $\eta_2$ не є незалежними, бо $\cov(\eta_1,\eta_2) = 110 \ne 0$
+
+
 \pagebreak
 
 \section*{№4}
@@ -295,19 +318,25 @@ $$H_1 : b>3$$
 $$\alpha = 0.01$$
 
 Статистика критерію значущості окремого параметра має вигляд
-$$t_0 = \frac{\hat b - b}{\sqrt{S(\hat a, \hat b) \cdot \left(A^{-1}\right)_{11}}}\sqrt{n-k-1} \sim t(n-k-1)$$
-(Зауваження: $\left(A^{-1}\right)_{11}$ - це нижній правий кут, бо індексація з нуля)
+$$t_0 = \frac{\hat b - b}{\sqrt{S(\hat a, \hat b) \cdot \left(A^{-1}\right)_{22}}}\sqrt{n-k} \sim t(n-k)$$
+(Зауваження: $k=2$)
 
 $$\hat a = 21.69; \quad \hat b = 3.47$$
 $$S(\hat a, \hat b) = 14.94; \quad \left(A^{-1}\right)_{11} = 0.00266$$
 
 Обчислюємо і маємо
-$$|t_0| = 6.249 > t_{crit} = t_{1-\frac{0.01}{2};n-2-1} = 3.5$$
+$$|t_0| = 1.73 < t_{crit} = t_{1-\frac{0.01}{2};n-2} = 3.35$$
 
-Отже, нульову гіпотезу можна відкидати. Гіпотеза про те, що в середньому кожна додаткова 
-година пiдготовки до контрольної роботи пiдвищує бал на бiльше нiж три пункти \textbf{прийнята}.
+Отже, нульову гіпотезу \textbf{не} можна відхиляти. Можна зробити висновок, що в середньому кожна додаткова 
+година пiдготовки до контрольної роботи пiдвищує бал на \textbf{менше} нiж три пункти.
 
-Це, власне, узгоджується з отриманими коефіцієнтами лінійної регресії
+Тобто, різниця $\hat b - b = 0.47$ недостатня для статистичної значимості результатів.
+
+обчислення:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{task5.c.png}
+\end{figure}
 
 \subsection*{d)}
 Будуємо 0.95-довірчий інтервал для $b$ в термінах попереднього пункту.
@@ -320,7 +349,12 @@ $$\frac{\sqrt{S(\hat a, \hat b) \cdot \left(A^{-1}\right)_{11}}}{\sqrt{n-k-1}} g
 $$\hat b - \frac{\sqrt{S(\hat a, \hat b) \cdot \left(A^{-1}\right)_{11}}}{\sqrt{n-k-1}} \cdot t_{\frac{1+\gamma}{2};n-2-1} < b < \hat b + \frac{\sqrt{S(\hat a, \hat b) \cdot \left(A^{-1}\right)_{11}}}{\sqrt{n-k-1}} \cdot t_{\frac{1+\gamma}{2};n-2-1}$$
 
 Обчислюємо і маємо
-$$P(3.29 < b < 3.65) = 0.95$$
+$$P(2.84 < b < 4.1) = 0.95$$
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{task5.d.png}
+\end{figure}
 
 \pagebreak
 \section*{№6}
@@ -362,20 +396,21 @@ $$\hat y_0 = 192.68 + 34.06 \cdot 0.14 - 0.2126 \cdot 593 = 71$$
 \pagebreak
 
 \section*{№8}
+Доповнюємо Z стовпцями $(x_i^2)$ та обчислюємо регресію із $k=3$.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{task8.png}
 \end{figure}
 
-$$\hat y = -36.94 + 15.26 x$$
-Тобто прискорення $a = 15.26$.
+$$\hat y = -0.8 + 2.17 x + 1 \cdot x^2$$
+Тобто прискорення $a = 1$.
 
 Вже вивели такий вигляд довірчого інтервалу:
-$$\hat a - \frac{\sqrt{S(\hat \beta) \cdot \left(A^{-1}\right)_{11}}}{\sqrt{n-k-1}} \cdot t_{\frac{1+\gamma}{2};n-2-1} < a < \hat a + \frac{\sqrt{S(\hat \beta) \cdot \left(A^{-1}\right)_{11}}}{\sqrt{n-k-1}} \cdot t_{\frac{1+\gamma}{2};n-2-1}$$
+$$\hat a - \frac{\sqrt{S(\hat \beta) \cdot \left(A^{-1}\right)_{33}}}{\sqrt{n-k}} \cdot t_{\frac{1+\gamma}{2};n-3} < a < \hat a + \frac{\sqrt{S(\hat \beta) \cdot \left(A^{-1}\right)_{33}}}{\sqrt{n-k}} \cdot t_{\frac{1+\gamma}{2};n-3}$$
 
 Обчислюємо і маємо
-$$P(13.48 < a < 17.03) = 0.95$$
+$$P(0.744 < a < 1.259) = 0.95$$
 
 Також маємо наступну статистику для $\sigma^2$:
 $$\frac{S(\hat \beta)}{\sigma^2} \sim \chi^2(n-k)$$
@@ -385,7 +420,13 @@ $$P\left(g_1 < \frac{S(\hat \beta)}{\sigma^2} < g_2\right) = \gamma$$
 $$P\left(\frac{S(\hat \beta)}{g_2} < \sigma^2 < \frac{S(\hat \beta)}{g_1}\right) = \gamma$$
 
 Обчислюємо і маємо
-$$P(1.2 < \sigma^2 < 51.65) = 0.95$$
+$$P(0.12 < \sigma^2 < 17.4) = 0.95$$
+
+Обчислення:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{task8.1.png}
+\end{figure}
 
 
 % \noindent\rule{\textwidth}{0.4pt}
@@ -406,12 +447,19 @@ $$H_0 : \beta_2 = 0$$
 $$H_1 : \beta_2 \ne 0$$
 
 Запишемо вже знайому статистику
-$$t_0 = \frac{\hat \beta_2 - 0}{\sqrt{S(\beta) \cdot \left(A^{-1}\right)_{22}}}\sqrt{n-k-1} \sim t(n-k-1); \quad t_{crit} = t_{1-\frac{\alpha}{2}; n-k-1}$$
+$$t_0 = \frac{\hat \beta_2 - 0}{\sqrt{S(\beta) \cdot \left(A^{-1}\right)_{33}}}\sqrt{n-k} \sim t(n-k); \quad t_{crit} = t_{1-\frac{\alpha}{2}; n-k}$$
 
 Обчислюємо
-$$t_0 = 6.7 > t_{crit} = 0.079$$
+$$t_0 = 2.94 < t_{crit} = 4.3$$
 
-Отже, можна відкинути нульову гіпотезу та прийняти гіпотезу про те, що залежість має сенс описувати параболічно. 
+Отже, \textbf{не можна} відхилити нульову гіпотезу.
+Залежність, скоріш за все, не має сенсу описувати параболічно.
+
+Обчислення:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{task9.1.png}
+\end{figure}
 
 \noindent\rule{\textwidth}{0.4pt}
 
@@ -423,7 +471,7 @@ $$r = \frac{\sum_{i=1}^n y_i (x_i-\bar x)}{\sqrt{\sum_{i=1}^n(x_i-\bar x)^2 \sum
 $$r = 0.936$$
 
 Значення близьке до 1, а значить регресія є значущою - є сенс вважати, що існує лінійна залежність.\\
-А $r^2 = 0.876$ вказує на те, що лінійна модель пояснює 87\% спостережень.\\  
+А $r^2 = 0.876$ вказує на те, що лінійна модель пояснює 87\% варіативності.\\  
 
 Статистикою критерію гіпотези $(H_0: \rho = 0)$ проти $(H_1 : \rho \ne 0)$  є
 $$z = \frac{\sqrt{n-3}}{2}\ln \frac{1+r}{1-r}$$
@@ -431,7 +479,7 @@ $$z_{crit}: \quad |z| > u_{1-\frac{\alpha}{2}}$$
 
 $$z = 4.5 > z_{crit} = 2.576$$
 
-Отже, можна відкинути нульову гіпотезу про некорельованість цих наборів даних. \\
+Отже, можна відхилити нульову гіпотезу про некорельованість цих наборів даних. \\
 Тобто, можна прийняти, що дані корельовані між собою.
 
 \end{document}
