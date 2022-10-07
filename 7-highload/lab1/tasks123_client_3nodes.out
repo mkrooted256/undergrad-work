@@ -1,0 +1,883 @@
+(sci) C:\Users\mkrooted\Uni\7-highload\lab1>docker run --name H1 --network dev --rm -it highload1
+06/10/2022 20:57:56.975 INFO: [140156744152640] hz.client_1[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (3c0123f2-d32e-4bcb-85ec-cbf14c41d821) is STARTING
+06/10/2022 20:57:56.975 INFO: [140156744152640] hz.client_1[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:56.975 INFO: [140156744152640] hz.client_1[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:56.977 INFO: [140156744152640] hz.client_1[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:56.980 INFO: [140156744152640] hz.client_1[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:56.980 INFO: [140156744152640] hz.client_1[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48910]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:56.979, last_write_time=2022-10-06 20:57:56.978, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:56.981 INFO: [140156501673536] hz.client_1[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:56.981 INFO: [140156744152640] hz.client_1[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.006 INFO: [140156744152640] hz.client_1[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37392]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.006, last_write_time=2022-10-06 20:57:56.982, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.007 INFO: [140156744152640] hz.client_1[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:57:57.047 INFO: [140156744152640] hz.client_1[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39288]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.047, last_write_time=2022-10-06 20:57:57.007, closedTime=never, connected server version=5.1.3}
+Starting task '1. Simple increment'
+06/10/2022 20:57:57.114 INFO: [140156342212160] hz.client_2[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (92a39f0b-7bd7-48dd-b390-2ed5a84b4b8d) is STARTING
+06/10/2022 20:57:57.114 INFO: [140156342212160] hz.client_2[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.114 INFO: [140156342212160] hz.client_2[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.114 INFO: [140155302172224] hz.client_5[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (bbc24cb1-aa12-4f08-9cab-c4e85e7fa780) is STARTING
+06/10/2022 20:57:57.114 INFO: [140155302172224] hz.client_5[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.114 INFO: [140155302172224] hz.client_5[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.114 INFO: [140155276994112] hz.client_6[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (4c0d3344-2de6-4383-a420-9f8bdc46f523) is STARTING
+06/10/2022 20:57:57.114 INFO: [140155276994112] hz.client_6[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.114 INFO: [140155276994112] hz.client_6[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.115 INFO: [140155411211840] hz.client_3[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (4ebe7ddf-f411-4956-92be-61952db1884c) is STARTING
+06/10/2022 20:57:57.115 INFO: [140155411211840] hz.client_3[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.115 INFO: [140155411211840] hz.client_3[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.115 INFO: [140155293779520] hz.client_4[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (54a3b489-38d4-4c14-b642-6252b5c89a51) is STARTING
+06/10/2022 20:57:57.115 INFO: [140155293779520] hz.client_4[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.115 INFO: [140155293779520] hz.client_4[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.115 INFO: [140155285386816] hz.client_7[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (071ac23c-5aa4-433c-b08e-4df4e20960b6) is STARTING
+06/10/2022 20:57:57.115 INFO: [140155285386816] hz.client_7[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.115 INFO: [140155285386816] hz.client_7[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.117 INFO: [140155285386816] hz.client_7[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.119 INFO: [140154740123200] hz.client_9[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (fdd7674a-ae88-4401-9176-e51d0e7c501e) is STARTING
+06/10/2022 20:57:57.119 INFO: [140154740123200] hz.client_9[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.119 INFO: [140154740123200] hz.client_9[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.120 INFO: [140156342212160] hz.client_2[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.121 INFO: [140154782086720] hz.client_8[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (16d16be5-e875-4f4e-b20f-69da0b79b1a4) is STARTING
+06/10/2022 20:57:57.121 INFO: [140154782086720] hz.client_8[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.121 INFO: [140154782086720] hz.client_8[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.121 INFO: [140153657988672] hz.client_11[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (d6bd6cef-4f58-4041-adb0-5e67699f3759) is STARTING
+06/10/2022 20:57:57.121 INFO: [140153657988672] hz.client_11[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.121 INFO: [140153657988672] hz.client_11[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.121 INFO: [140155276994112] hz.client_6[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.121 INFO: [140155427997248] hz.client_10[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (51b67cb9-732c-47e4-afbe-73a2e9743d42) is STARTING
+06/10/2022 20:57:57.121 INFO: [140155427997248] hz.client_10[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:57:57.121 INFO: [140155427997248] hz.client_10[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:57:57.126 INFO: [140155276994112] hz.client_6[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.126 INFO: [140155276994112] hz.client_6[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48918]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.126, last_write_time=2022-10-06 20:57:57.124, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.126 INFO: [140155427997248] hz.client_10[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.126 INFO: [140155302172224] hz.client_5[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.128 INFO: [140153053910592] hz.client_6[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.128 INFO: [140155276994112] hz.client_6[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.134 INFO: [140155285386816] hz.client_7[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.139 INFO: [140155285386816] hz.client_7[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48916]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.134, last_write_time=2022-10-06 20:57:57.119, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.143 INFO: [140153993532992] hz.client_7[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.145 INFO: [140155285386816] hz.client_7[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.198 INFO: [140153657988672] hz.client_11[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.198 INFO: [140155293779520] hz.client_4[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.198 INFO: [140154740123200] hz.client_9[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.198 INFO: [140155411211840] hz.client_3[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.198 INFO: [140154782086720] hz.client_8[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:57:57.200 INFO: [140156342212160] hz.client_2[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.200 INFO: [140156342212160] hz.client_2[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48930]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.200, last_write_time=2022-10-06 20:57:57.199, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.200 INFO: [140155427997248] hz.client_10[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.200 INFO: [140155427997248] hz.client_10[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48928]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.200, last_write_time=2022-10-06 20:57:57.198, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.201 INFO: [140153657988672] hz.client_11[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.201 INFO: [140153657988672] hz.client_11[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48934]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.200, last_write_time=2022-10-06 20:57:57.199, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.201 INFO: [140155302172224] hz.client_5[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.201 INFO: [140155302172224] hz.client_5[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48920]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.201, last_write_time=2022-10-06 20:57:57.198, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.201 INFO: [140155293779520] hz.client_4[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.201 INFO: [140153179801152] hz.client_2[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.201 INFO: [140156342212160] hz.client_2[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.202 INFO: [140155293779520] hz.client_4[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48932]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.201, last_write_time=2022-10-06 20:57:57.199, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.202 INFO: [140150570980928] hz.client_11[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.202 INFO: [140153657988672] hz.client_11[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.202 INFO: [140155411211840] hz.client_3[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.202 INFO: [140155411211840] hz.client_3[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48936]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.201, last_write_time=2022-10-06 20:57:57.199, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.201 INFO: [140154740123200] hz.client_9[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.204 INFO: [140154740123200] hz.client_9[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48938]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.201, last_write_time=2022-10-06 20:57:57.200, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.203 INFO: [140154782086720] hz.client_8[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:57:57.204 INFO: [140154782086720] hz.client_8[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48940]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:57:57.202, last_write_time=2022-10-06 20:57:57.201, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.203 INFO: [140150889576000] hz.client_3[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.203 INFO: [140151845951040] hz.client_10[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.203 INFO: [140151896307264] hz.client_5[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.204 INFO: [140155427997248] hz.client_10[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.204 INFO: [140155411211840] hz.client_3[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.204 INFO: [140150042502720] hz.client_4[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.204 INFO: [140155302172224] hz.client_5[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.204 INFO: [140151040644672] hz.client_9[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.205 INFO: [140154740123200] hz.client_9[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.205 INFO: [140151191713344] hz.client_8[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:57:57.205 INFO: [140154782086720] hz.client_8[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.204 INFO: [140155293779520] hz.client_4[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:57:57.206 INFO: [140155276994112] hz.client_6[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37400]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.206, last_write_time=2022-10-06 20:57:57.198, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.207 INFO: [140155276994112] hz.client_6[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:57:57.206 INFO: [140155285386816] hz.client_7[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37402]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.206, last_write_time=2022-10-06 20:57:57.198, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.207 INFO: [140155285386816] hz.client_7[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:57:57.211 INFO: [140155276994112] hz.client_6[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39332]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.211, last_write_time=2022-10-06 20:57:57.209, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.211 INFO: [140155285386816] hz.client_7[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39334]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.211, last_write_time=2022-10-06 20:57:57.207, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.220 INFO: [140153657988672] hz.client_11[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37422]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.220, last_write_time=2022-10-06 20:57:57.203, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.220 INFO: [140153657988672] hz.client_11[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:57:57.221 INFO: [140155427997248] hz.client_10[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37426]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.221, last_write_time=2022-10-06 20:57:57.204, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.221 INFO: [140155427997248] hz.client_10[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:57:57.221 INFO: [140156342212160] hz.client_2[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37424]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.221, last_write_time=2022-10-06 20:57:57.204, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.222 INFO: [140156342212160] hz.client_2[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:57:57.222 INFO: [140155411211840] hz.client_3[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37430]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.222, last_write_time=2022-10-06 20:57:57.205, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.222 INFO: [140155411211840] hz.client_3[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:57:57.223 INFO: [140154740123200] hz.client_9[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37432]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.221, last_write_time=2022-10-06 20:57:57.205, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.223 INFO: [140154740123200] hz.client_9[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+Starting worker 2
+06/10/2022 20:57:57.227 INFO: [140155293779520] hz.client_4[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37436]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.227, last_write_time=2022-10-06 20:57:57.207, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.227 INFO: [140155293779520] hz.client_4[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:57:57.227 INFO: [140153657988672] hz.client_11[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39336]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.227, last_write_time=2022-10-06 20:57:57.221, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.231 INFO: [140155302172224] hz.client_5[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37428]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.231, last_write_time=2022-10-06 20:57:57.205, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.231 INFO: [140155302172224] hz.client_5[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+Starting worker 8
+06/10/2022 20:57:57.233 INFO: [140154782086720] hz.client_8[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37434]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.233, last_write_time=2022-10-06 20:57:57.205, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.234 INFO: [140154782086720] hz.client_8[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+Starting worker 9
+Worker 2 - 0
+Worker 8 - 0
+Worker 9 - 0
+06/10/2022 20:57:57.273 INFO: [140154782086720] hz.client_8[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39340]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.272, last_write_time=2022-10-06 20:57:57.268, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.273 INFO: [140156342212160] hz.client_2[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39350]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.273, last_write_time=2022-10-06 20:57:57.268, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.274 INFO: [140155302172224] hz.client_5[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39338]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.274, last_write_time=2022-10-06 20:57:57.268, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.275 INFO: [140155427997248] hz.client_10[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39342]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.275, last_write_time=2022-10-06 20:57:57.273, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.275 INFO: [140155293779520] hz.client_4[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39352]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.275, last_write_time=2022-10-06 20:57:57.273, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.276 INFO: [140154740123200] hz.client_9[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39356]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.276, last_write_time=2022-10-06 20:57:57.274, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:57:57.276 INFO: [140155411211840] hz.client_3[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39354]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:57:57.276, last_write_time=2022-10-06 20:57:57.273, closedTime=never, connected server version=5.1.3}
+Starting worker 6
+Starting worker 3
+Starting worker 0
+Starting worker 5
+Starting worker 7
+Starting worker 4
+Worker 0 - 0
+Worker 3 - 0
+Worker 5 - 0
+Starting worker 1
+Worker 6 - 0
+Worker 7 - 0
+Worker 4 - 0
+Worker 1 - 0
+Worker 8 - 1000
+Worker 9 - 1000
+Worker 4 - 1000
+Worker 3 - 1000
+Worker 5 - 1000
+Worker 6 - 1000
+Worker 1 - 1000
+Worker 0 - 1000
+Worker 2 - 1000
+Worker 7 - 1000
+Worker 9 - 2000
+Worker 5 - 2000
+Worker 8 - 2000
+Worker 3 - 2000
+Worker 4 - 2000
+Worker 6 - 2000
+Worker 1 - 2000
+Worker 7 - 2000
+Worker 2 - 2000
+Worker 0 - 2000
+Worker 9 - 3000
+Worker 8 - 3000
+Worker 5 - 3000
+Worker 3 - 3000
+Worker 4 - 3000
+Worker 6 - 3000
+Worker 2 - 3000
+Worker 7 - 3000
+Worker 1 - 3000
+Worker 0 - 3000
+Worker 9 - 4000
+Worker 8 - 4000
+Worker 5 - 4000
+Worker 3 - 4000
+Worker 4 - 4000
+Worker 6 - 4000
+Worker 2 - 4000
+Worker 7 - 4000
+Worker 1 - 4000
+Worker 0 - 4000
+Worker 9 - 5000
+Worker 8 - 5000
+Worker 5 - 5000
+Worker 3 - 5000
+Worker 4 - 5000
+Worker 6 - 5000
+Worker 2 - 5000
+Worker 7 - 5000
+Worker 1 - 5000
+Worker 0 - 5000
+Worker 9 - 6000
+Worker 8 - 6000
+Worker 5 - 6000
+Worker 3 - 6000
+Worker 4 - 6000
+Worker 6 - 6000
+Worker 2 - 6000
+Worker 7 - 6000
+Worker 1 - 6000
+Worker 0 - 6000
+Worker 8 - 7000
+Worker 9 - 7000
+Worker 5 - 7000
+Worker 3 - 7000
+Worker 4 - 7000
+Worker 6 - 7000
+Worker 2 - 7000
+Worker 7 - 7000
+Worker 1 - 7000
+Worker 0 - 7000
+Worker 8 - 8000
+Worker 5 - 8000
+Worker 9 - 8000
+Worker 3 - 8000
+Worker 4 - 8000
+Worker 6 - 8000
+Worker 2 - 8000
+Worker 7 - 8000
+Worker 1 - 8000
+Worker 0 - 8000
+Worker 8 - 9000
+Worker 5 - 9000
+Worker 3 - 9000
+Worker 9 - 9000
+Worker 4 - 9000
+Worker 6 - 9000
+Worker 2 - 9000
+Worker 7 - 9000
+Worker 1 - 9000
+Worker 0 - 9000
+Worker 8 finished!
+06/10/2022 20:58:06.996 INFO: [140155310564928] hz.client_7[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:06.996 INFO: [140155310564928] hz.client_7[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:06.996, last_write_time=2022-10-06 20:58:06.996, closedTime=2022-10-06 20:58:06.996, connected server version=5.1.3}
+06/10/2022 20:58:06.996 INFO: [140155310564928] hz.client_7[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.230, last_write_time=2022-10-06 20:57:57.220, closedTime=2022-10-06 20:58:06.996, connected server version=5.1.3}
+06/10/2022 20:58:06.997 INFO: [140155310564928] hz.client_7[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:06.996, last_write_time=2022-10-06 20:57:57.220, closedTime=2022-10-06 20:58:06.996, connected server version=5.1.3}
+06/10/2022 20:58:06.997 INFO: [140155310564928] hz.client_7[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.001 INFO: [140155310564928] hz.client_7[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 5 finished!
+06/10/2022 20:58:07.016 INFO: [140155436389952] hz.client_4[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.016 INFO: [140155436389952] hz.client_4[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.015, last_write_time=2022-10-06 20:58:07.015, closedTime=2022-10-06 20:58:07.015, connected server version=5.1.3}
+06/10/2022 20:58:07.016 INFO: [140155436389952] hz.client_4[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.281, last_write_time=2022-10-06 20:57:57.280, closedTime=2022-10-06 20:58:07.015, connected server version=5.1.3}
+06/10/2022 20:58:07.016 INFO: [140155436389952] hz.client_4[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.016, last_write_time=2022-10-06 20:57:57.279, closedTime=2022-10-06 20:58:07.015, connected server version=5.1.3}
+06/10/2022 20:58:07.016 INFO: [140155436389952] hz.client_4[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.020 INFO: [140155436389952] hz.client_4[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 3 finished!
+06/10/2022 20:58:07.031 INFO: [140155318957632] hz.client_10[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.032 INFO: [140155318957632] hz.client_10[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.031, last_write_time=2022-10-06 20:58:07.031, closedTime=2022-10-06 20:58:07.031, connected server version=5.1.3}
+06/10/2022 20:58:07.032 INFO: [140155318957632] hz.client_10[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.283, last_write_time=2022-10-06 20:57:57.282, closedTime=2022-10-06 20:58:07.031, connected server version=5.1.3}
+06/10/2022 20:58:07.032 INFO: [140155318957632] hz.client_10[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.031, last_write_time=2022-10-06 20:57:57.279, closedTime=2022-10-06 20:58:07.031, connected server version=5.1.3}
+06/10/2022 20:58:07.032 INFO: [140155318957632] hz.client_10[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.035 INFO: [140155318957632] hz.client_10[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 9 finished!
+06/10/2022 20:58:07.060 INFO: [140154773694016] hz.client_11[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.060 INFO: [140154773694016] hz.client_11[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.060, last_write_time=2022-10-06 20:58:07.060, closedTime=2022-10-06 20:58:07.060, connected server version=5.1.3}
+06/10/2022 20:58:07.060 INFO: [140154773694016] hz.client_11[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.236, last_write_time=2022-10-06 20:57:57.234, closedTime=2022-10-06 20:58:07.060, connected server version=5.1.3}
+06/10/2022 20:58:07.060 INFO: [140154773694016] hz.client_11[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.060, last_write_time=2022-10-06 20:57:57.233, closedTime=2022-10-06 20:58:07.060, connected server version=5.1.3}
+06/10/2022 20:58:07.060 INFO: [140154773694016] hz.client_11[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.065 INFO: [140154773694016] hz.client_11[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 4 finished!
+06/10/2022 20:58:07.105 INFO: [140155444782656] hz.client_3[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.106 INFO: [140155444782656] hz.client_3[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.105, last_write_time=2022-10-06 20:58:07.105, closedTime=2022-10-06 20:58:07.105, connected server version=5.1.3}
+06/10/2022 20:58:07.106 INFO: [140155444782656] hz.client_3[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.289, last_write_time=2022-10-06 20:57:57.288, closedTime=2022-10-06 20:58:07.105, connected server version=5.1.3}
+06/10/2022 20:58:07.106 INFO: [140155444782656] hz.client_3[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.105, last_write_time=2022-10-06 20:57:57.287, closedTime=2022-10-06 20:58:07.105, connected server version=5.1.3}
+06/10/2022 20:58:07.106 INFO: [140155444782656] hz.client_3[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.120 INFO: [140155444782656] hz.client_3[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 6 finished!
+06/10/2022 20:58:07.126 INFO: [140155419604544] hz.client_5[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.126 INFO: [140155419604544] hz.client_5[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.126, last_write_time=2022-10-06 20:58:07.125, closedTime=2022-10-06 20:58:07.125, connected server version=5.1.3}
+06/10/2022 20:58:07.126 INFO: [140155419604544] hz.client_5[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:07.125, last_write_time=2022-10-06 20:58:07.125, closedTime=2022-10-06 20:58:07.126, connected server version=5.1.3}
+06/10/2022 20:58:07.126 INFO: [140155419604544] hz.client_5[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.126, last_write_time=2022-10-06 20:58:07.125, closedTime=2022-10-06 20:58:07.126, connected server version=5.1.3}
+06/10/2022 20:58:07.126 INFO: [140155419604544] hz.client_5[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.129 INFO: [140155419604544] hz.client_5[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 7 finished!
+06/10/2022 20:58:07.161 INFO: [140155402819136] hz.client_8[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.161 INFO: [140155402819136] hz.client_8[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.161, last_write_time=2022-10-06 20:58:07.161, closedTime=2022-10-06 20:58:07.161, connected server version=5.1.3}
+06/10/2022 20:58:07.161 INFO: [140155402819136] hz.client_8[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.282, last_write_time=2022-10-06 20:57:57.281, closedTime=2022-10-06 20:58:07.161, connected server version=5.1.3}
+06/10/2022 20:58:07.162 INFO: [140155402819136] hz.client_8[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.161, last_write_time=2022-10-06 20:57:57.280, closedTime=2022-10-06 20:58:07.161, connected server version=5.1.3}
+06/10/2022 20:58:07.162 INFO: [140155402819136] hz.client_8[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.165 INFO: [140155402819136] hz.client_8[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 1 finished!
+06/10/2022 20:58:07.173 INFO: [140156350604864] hz.client_9[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.173 INFO: [140156350604864] hz.client_9[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.172, last_write_time=2022-10-06 20:58:07.172, closedTime=2022-10-06 20:58:07.172, connected server version=5.1.3}
+06/10/2022 20:58:07.173 INFO: [140156350604864] hz.client_9[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:57:57.294, last_write_time=2022-10-06 20:57:57.289, closedTime=2022-10-06 20:58:07.172, connected server version=5.1.3}
+06/10/2022 20:58:07.173 INFO: [140156350604864] hz.client_9[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.173, last_write_time=2022-10-06 20:57:57.288, closedTime=2022-10-06 20:58:07.172, connected server version=5.1.3}
+06/10/2022 20:58:07.173 INFO: [140156350604864] hz.client_9[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.175 INFO: [140156350604864] hz.client_9[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 2 finished!
+06/10/2022 20:58:07.178 INFO: [140155453175360] hz.client_6[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.178 INFO: [140155453175360] hz.client_6[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.178, last_write_time=2022-10-06 20:58:07.177, closedTime=2022-10-06 20:58:07.177, connected server version=5.1.3}
+06/10/2022 20:58:07.178 INFO: [140155453175360] hz.client_6[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:07.120, last_write_time=2022-10-06 20:58:07.120, closedTime=2022-10-06 20:58:07.177, connected server version=5.1.3}
+06/10/2022 20:58:07.178 INFO: [140155453175360] hz.client_6[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.178, last_write_time=2022-10-06 20:58:07.120, closedTime=2022-10-06 20:58:07.178, connected server version=5.1.3}
+06/10/2022 20:58:07.178 INFO: [140155453175360] hz.client_6[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.182 INFO: [140155453175360] hz.client_6[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 0 finished!
+06/10/2022 20:58:07.219 INFO: [140156744152640] hz.client_2[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.219 INFO: [140156744152640] hz.client_2[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.219, last_write_time=2022-10-06 20:58:07.219, closedTime=2022-10-06 20:58:07.219, connected server version=5.1.3}
+06/10/2022 20:58:07.219 INFO: [140156744152640] hz.client_2[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:07.119, last_write_time=2022-10-06 20:58:07.119, closedTime=2022-10-06 20:58:07.219, connected server version=5.1.3}
+06/10/2022 20:58:07.219 INFO: [140156744152640] hz.client_2[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.219, last_write_time=2022-10-06 20:58:07.119, closedTime=2022-10-06 20:58:07.219, connected server version=5.1.3}
+06/10/2022 20:58:07.219 INFO: [140156744152640] hz.client_2[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.222 INFO: [140156744152640] hz.client_2[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+
+Task '1. Simple increment' finished!
+> Result =  18817
+> Time = 10.1101s
+
+06/10/2022 20:58:07.224 INFO: [140156744157056] hz.client_1[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:07.224 INFO: [140156744157056] hz.client_1[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.224, last_write_time=2022-10-06 20:58:07.223, closedTime=2022-10-06 20:58:07.223, connected server version=5.1.3}
+06/10/2022 20:58:07.224 INFO: [140156744157056] hz.client_1[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:06.978, last_write_time=2022-10-06 20:58:06.976, closedTime=2022-10-06 20:58:07.223, connected server version=5.1.3}
+06/10/2022 20:58:07.224 INFO: [140156744157056] hz.client_1[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:06.976, last_write_time=2022-10-06 20:58:06.976, closedTime=2022-10-06 20:58:07.223, connected server version=5.1.3}
+06/10/2022 20:58:07.224 INFO: [140156744157056] hz.client_1[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:07.226 INFO: [140156744157056] hz.client_1[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+06/10/2022 20:58:07.227 INFO: [140156358997568] hz.client_12[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (bfce2038-6dd0-48b2-a5b9-4157be070940) is STARTING
+06/10/2022 20:58:07.227 INFO: [140156358997568] hz.client_12[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:07.227 INFO: [140156358997568] hz.client_12[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:07.228 INFO: [140156358997568] hz.client_12[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:07.230 INFO: [140156358997568] hz.client_12[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:07.230 INFO: [140156358997568] hz.client_12[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48984]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.230, last_write_time=2022-10-06 20:58:07.229, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:07.231 INFO: [140156510066240] hz.client_12[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:07.231 INFO: [140156358997568] hz.client_12[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:07.232 INFO: [140156358997568] hz.client_12[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37466]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:07.232, last_write_time=2022-10-06 20:58:07.231, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:07.232 INFO: [140156358997568] hz.client_12[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:07.234 INFO: [140156358997568] hz.client_12[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39362]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.234, last_write_time=2022-10-06 20:58:07.233, closedTime=never, connected server version=5.1.3}
+Starting task '2. Pessimistic blocking'
+06/10/2022 20:58:07.238 INFO: [140156342212160] hz.client_13[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (99503cc8-1514-427d-8441-080cf645cd81) is STARTING
+06/10/2022 20:58:07.238 INFO: [140156342212160] hz.client_13[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:07.238 INFO: [140156342212160] hz.client_13[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:07.238 INFO: [140155453175360] hz.client_14[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (c718bf62-559a-4427-99ae-818d3e1b7196) is STARTING
+06/10/2022 20:58:07.238 INFO: [140155453175360] hz.client_14[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:07.238 INFO: [140155453175360] hz.client_14[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:07.240 INFO: [140156342212160] hz.client_13[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:07.240 INFO: [140155453175360] hz.client_14[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:07.242 INFO: [140155453175360] hz.client_14[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:07.242 INFO: [140156342212160] hz.client_13[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:07.242 INFO: [140155453175360] hz.client_14[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48992]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.242, last_write_time=2022-10-06 20:58:07.241, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:07.242 INFO: [140156342212160] hz.client_13[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:48990]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:07.242, last_write_time=2022-10-06 20:58:07.241, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:07.243 INFO: [140153993532992] hz.client_14[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:07.243 INFO: [140155453175360] hz.client_14[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:07.243 INFO: [140154018711104] hz.client_13[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:07.243 INFO: [140156342212160] hz.client_13[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:07.245 INFO: [140155453175360] hz.client_14[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37476]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:07.245, last_write_time=2022-10-06 20:58:07.243, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:07.245 INFO: [140156342212160] hz.client_13[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37478]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:07.245, last_write_time=2022-10-06 20:58:07.243, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:07.245 INFO: [140155453175360] hz.client_14[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:07.245 INFO: [140156342212160] hz.client_13[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:07.248 INFO: [140156342212160] hz.client_13[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39376]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.248, last_write_time=2022-10-06 20:58:07.245, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:07.248 INFO: [140155453175360] hz.client_14[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39374]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:07.248, last_write_time=2022-10-06 20:58:07.245, closedTime=never, connected server version=5.1.3}
+Starting worker 0
+Starting worker 1
+Worker 0 - 0
+Worker 1 - 0
+Worker 0 - 1000
+Worker 1 - 1000
+Worker 0 - 2000
+Worker 1 - 2000
+Worker 0 - 3000
+Worker 1 - 3000
+Worker 0 - 4000
+Worker 1 - 4000
+Worker 0 - 5000
+Worker 1 - 5000
+Worker 0 - 6000
+Worker 1 - 6000
+Worker 0 - 7000
+Worker 1 - 7000
+Worker 0 - 8000
+Worker 1 - 8000
+Worker 0 - 9000
+Worker 1 - 9000
+Worker 0 finished!
+06/10/2022 20:58:16.705 INFO: [140156358997568] hz.client_13[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:16.705 INFO: [140156358997568] hz.client_13[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.705, last_write_time=2022-10-06 20:58:16.705, closedTime=2022-10-06 20:58:16.705, connected server version=5.1.3}
+06/10/2022 20:58:16.705 INFO: [140156358997568] hz.client_13[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:07.250, last_write_time=2022-10-06 20:58:07.250, closedTime=2022-10-06 20:58:16.705, connected server version=5.1.3}
+06/10/2022 20:58:16.705 INFO: [140156358997568] hz.client_13[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.705, last_write_time=2022-10-06 20:58:07.249, closedTime=2022-10-06 20:58:16.705, connected server version=5.1.3}
+06/10/2022 20:58:16.705 INFO: [140156358997568] hz.client_13[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:16.707 INFO: [140156358997568] hz.client_13[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 1 finished!
+06/10/2022 20:58:16.710 INFO: [140156350604864] hz.client_14[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:16.710 INFO: [140156350604864] hz.client_14[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.710, last_write_time=2022-10-06 20:58:16.710, closedTime=2022-10-06 20:58:16.709, connected server version=5.1.3}
+06/10/2022 20:58:16.710 INFO: [140156350604864] hz.client_14[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:07.250, last_write_time=2022-10-06 20:58:07.250, closedTime=2022-10-06 20:58:16.710, connected server version=5.1.3}
+06/10/2022 20:58:16.710 INFO: [140156350604864] hz.client_14[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.710, last_write_time=2022-10-06 20:58:07.249, closedTime=2022-10-06 20:58:16.710, connected server version=5.1.3}
+06/10/2022 20:58:16.710 INFO: [140156350604864] hz.client_14[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:16.711 INFO: [140156350604864] hz.client_14[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+
+Task '2. Pessimistic blocking' finished!
+> Result =  19759
+> Time = 9.4751s
+
+06/10/2022 20:58:16.713 INFO: [140156744157056] hz.client_12[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:16.713 INFO: [140156744157056] hz.client_12[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.713, last_write_time=2022-10-06 20:58:16.713, closedTime=2022-10-06 20:58:16.713, connected server version=5.1.3}
+06/10/2022 20:58:16.713 INFO: [140156744157056] hz.client_12[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:07.237, last_write_time=2022-10-06 20:58:07.236, closedTime=2022-10-06 20:58:16.713, connected server version=5.1.3}
+06/10/2022 20:58:16.713 INFO: [140156744157056] hz.client_12[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:11.737, last_write_time=2022-10-06 20:58:07.236, closedTime=2022-10-06 20:58:16.713, connected server version=5.1.3}
+06/10/2022 20:58:16.714 INFO: [140156744157056] hz.client_12[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:16.716 INFO: [140156744157056] hz.client_12[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+06/10/2022 20:58:16.717 INFO: [140156367390272] hz.client_15[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (5edd5150-7aab-440b-9c6f-b452481e2626) is STARTING
+06/10/2022 20:58:16.717 INFO: [140156367390272] hz.client_15[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.718 INFO: [140156367390272] hz.client_15[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.719 INFO: [140156367390272] hz.client_15[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.721 INFO: [140156367390272] hz.client_15[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.721 INFO: [140156367390272] hz.client_15[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49006]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.721, last_write_time=2022-10-06 20:58:16.720, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.721 INFO: [140156510066240] hz.client_15[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.721 INFO: [140156367390272] hz.client_15[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.723 INFO: [140156367390272] hz.client_15[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37488]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.723, last_write_time=2022-10-06 20:58:16.722, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.723 INFO: [140156367390272] hz.client_15[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.725 INFO: [140156367390272] hz.client_15[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39384]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.725, last_write_time=2022-10-06 20:58:16.723, closedTime=never, connected server version=5.1.3}
+Starting task '3. Optimistic blocking'
+06/10/2022 20:58:16.728 INFO: [140156342212160] hz.client_16[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (4e6f3a8a-263b-41d2-abe6-a7c6dc536f9b) is STARTING
+06/10/2022 20:58:16.728 INFO: [140155444782656] hz.client_18[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (c13bf21e-1f55-4131-a908-52a0b7bb1a1a) is STARTING
+06/10/2022 20:58:16.728 INFO: [140156342212160] hz.client_16[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.728 INFO: [140155427997248] hz.client_17[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (4beb8ddf-2869-44a6-bdee-efb9f0d2b790) is STARTING
+06/10/2022 20:58:16.728 INFO: [140155427997248] hz.client_17[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.728 INFO: [140155427997248] hz.client_17[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.728 INFO: [140155444782656] hz.client_18[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.728 INFO: [140155444782656] hz.client_18[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.728 INFO: [140156342212160] hz.client_16[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.729 INFO: [140154756908608] hz.client_20[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (6567449d-7073-4ec8-aed8-9f03eaf74925) is STARTING
+06/10/2022 20:58:16.729 INFO: [140154756908608] hz.client_20[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.729 INFO: [140154756908608] hz.client_20[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.729 INFO: [140154773694016] hz.client_19[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (00be0dc9-0bd9-44dc-ac9d-def81a88b5a0) is STARTING
+06/10/2022 20:58:16.729 INFO: [140154773694016] hz.client_19[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.729 INFO: [140154773694016] hz.client_19[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.729 INFO: [140154765301312] hz.client_21[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (f2ef3930-0092-4fd4-b36f-2ed5616869ae) is STARTING
+06/10/2022 20:58:16.729 INFO: [140154765301312] hz.client_21[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.729 INFO: [140154765301312] hz.client_21[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.729 INFO: [140154563974720] hz.client_22[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (5d627fa7-1076-4689-aa5d-874a7f086b31) is STARTING
+06/10/2022 20:58:16.730 INFO: [140154563974720] hz.client_22[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.730 INFO: [140154563974720] hz.client_22[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.730 INFO: [140155310564928] hz.client_23[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (eec6554c-fda0-46e2-8253-236d18c4e06a) is STARTING
+06/10/2022 20:58:16.730 INFO: [140155310564928] hz.client_23[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.730 INFO: [140155310564928] hz.client_23[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.730 INFO: [140154538796608] hz.client_24[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (3722505c-18ae-49fe-b5f6-6e83d7951c41) is STARTING
+06/10/2022 20:58:16.730 INFO: [140154538796608] hz.client_24[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.730 INFO: [140154538796608] hz.client_24[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.734 INFO: [140155427997248] hz.client_17[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.735 INFO: [140154169714240] hz.client_25[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent Client (75fb98c0-c3d8-4d05-a31c-cd0a4e839268) is STARTING
+06/10/2022 20:58:16.735 INFO: [140154169714240] hz.client_25[dev] [5.0.0] (NOT_FOUND:NOT_FOUND) LifecycleService::LifecycleEvent STARTING
+06/10/2022 20:58:16.735 INFO: [140154169714240] hz.client_25[dev] [5.0.0] LifecycleService::LifecycleEvent STARTED
+06/10/2022 20:58:16.737 INFO: [140155427997248] hz.client_17[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.737 INFO: [140155427997248] hz.client_17[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49012]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.737, last_write_time=2022-10-06 20:58:16.735, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.738 INFO: [140153280513600] hz.client_17[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.739 INFO: [140155427997248] hz.client_17[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.741 INFO: [140154773694016] hz.client_19[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.742 INFO: [140155427997248] hz.client_17[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37494]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.742, last_write_time=2022-10-06 20:58:16.740, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.742 INFO: [140155427997248] hz.client_17[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.743 INFO: [140154773694016] hz.client_19[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.743 INFO: [140154773694016] hz.client_19[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49016]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.743, last_write_time=2022-10-06 20:58:16.742, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.743 INFO: [140154765301312] hz.client_21[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.744 INFO: [140152860878400] hz.client_19[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.744 INFO: [140154773694016] hz.client_19[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.745 INFO: [140154756908608] hz.client_20[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.745 INFO: [140155427997248] hz.client_17[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39392]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.744, last_write_time=2022-10-06 20:58:16.742, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.747 INFO: [140154765301312] hz.client_21[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.747 INFO: [140154765301312] hz.client_21[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49020]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.747, last_write_time=2022-10-06 20:58:16.745, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.747 INFO: [140154773694016] hz.client_19[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37502]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.747, last_write_time=2022-10-06 20:58:16.745, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.747 INFO: [140154773694016] hz.client_19[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.747 INFO: [140151913092672] hz.client_21[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.747 INFO: [140154765301312] hz.client_21[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.749 INFO: [140154756908608] hz.client_20[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.749 INFO: [140154756908608] hz.client_20[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49024]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.748, last_write_time=2022-10-06 20:58:16.746, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.749 INFO: [140154773694016] hz.client_19[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39400]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.749, last_write_time=2022-10-06 20:58:16.748, closedTime=never, connected server version=5.1.3}
+Starting worker 2
+06/10/2022 20:58:16.751 INFO: [140154538796608] hz.client_24[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.751 INFO: [140151158142528] hz.client_20[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.751 INFO: [140155310564928] hz.client_23[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.751 INFO: [140154756908608] hz.client_20[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.753 INFO: [140154538796608] hz.client_24[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.753 INFO: [140154538796608] hz.client_24[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49030]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.753, last_write_time=2022-10-06 20:58:16.752, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.755 INFO: [140154756908608] hz.client_20[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37512]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.754, last_write_time=2022-10-06 20:58:16.752, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.755 INFO: [140154756908608] hz.client_20[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.755 INFO: [140152408000064] hz.client_24[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.755 INFO: [140154538796608] hz.client_24[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.756 INFO: [140156342212160] hz.client_16[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+Starting worker 5
+06/10/2022 20:58:16.757 INFO: [140155444782656] hz.client_18[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.757 INFO: [140154756908608] hz.client_20[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39410]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.757, last_write_time=2022-10-06 20:58:16.755, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.758 INFO: [140154765301312] hz.client_21[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37508]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.758, last_write_time=2022-10-06 20:58:16.753, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.758 INFO: [140154765301312] hz.client_21[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.759 INFO: [140154538796608] hz.client_24[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37518]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.759, last_write_time=2022-10-06 20:58:16.758, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.759 INFO: [140154538796608] hz.client_24[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.763 INFO: [140154169714240] hz.client_25[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.763 INFO: [140154563974720] hz.client_22[dev] [5.0.0] Trying to connect to Address[172.18.0.2:5701].
+06/10/2022 20:58:16.763 INFO: [140155444782656] hz.client_18[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.763 INFO: [140155444782656] hz.client_18[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49044]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.763, last_write_time=2022-10-06 20:58:16.761, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.763 INFO: [140155310564928] hz.client_23[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.764 INFO: [140155310564928] hz.client_23[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49034]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.763, last_write_time=2022-10-06 20:58:16.763, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.765 INFO: [140154538796608] hz.client_24[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39416]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.765, last_write_time=2022-10-06 20:58:16.762, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.766 INFO: [140152382821952] hz.client_18[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+Starting worker 8
+06/10/2022 20:58:16.766 INFO: [140155444782656] hz.client_18[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.767 INFO: [140151762024000] hz.client_23[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.767 INFO: [140155310564928] hz.client_23[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.769 INFO: [140155310564928] hz.client_23[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37530]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.769, last_write_time=2022-10-06 20:58:16.767, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.769 INFO: [140155310564928] hz.client_23[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.769 INFO: [140156342212160] hz.client_16[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.769 INFO: [140156342212160] hz.client_16[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49046]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.769, last_write_time=2022-10-06 20:58:16.766, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.769 INFO: [140154563974720] hz.client_22[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.770 INFO: [140154563974720] hz.client_22[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49052]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.769, last_write_time=2022-10-06 20:58:16.768, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.770 INFO: [140154169714240] hz.client_25[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_CONNECTED
+06/10/2022 20:58:16.770 INFO: [140154169714240] hz.client_25[dev] [5.0.0] Authenticated with server  Address[172.18.0.2:5701]:78e1bdd9-2cfe-469e-9188-c8d39172ea84, server version: 5.1.3, local address: Address[172.18.0.5:49054]. Connection{alive=1, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:16.769, last_write_time=2022-10-06 20:58:16.768, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.770 INFO: [140151745238592] hz.client_16[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.770 INFO: [140156342212160] hz.client_16[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.770 INFO: [140151812380224] hz.client_22[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.770 INFO: [140154563974720] hz.client_22[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.771 INFO: [140155444782656] hz.client_18[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37528]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.771, last_write_time=2022-10-06 20:58:16.768, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.771 INFO: [140155444782656] hz.client_18[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.771 INFO: [140154765301312] hz.client_21[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39414]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.771, last_write_time=2022-10-06 20:58:16.760, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.772 INFO: [140155310564928] hz.client_23[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39430]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.772, last_write_time=2022-10-06 20:58:16.769, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.773 INFO: [140156342212160] hz.client_16[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37538]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.773, last_write_time=2022-10-06 20:58:16.771, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.773 INFO: [140156342212160] hz.client_16[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.774 INFO: [140150084466240] hz.client_25[dev] [5.0.0]
+
+Members [3]  {
+        Member[172.18.0.4]:5701 - 6127f443-476a-42b0-85ff-ad94d738a815
+        Member[172.18.0.3]:5701 - 912ee477-e2f5-468d-b94d-3310803848ec
+        Member[172.18.0.2]:5701 - 78e1bdd9-2cfe-469e-9188-c8d39172ea84
+}
+
+06/10/2022 20:58:16.774 INFO: [140154169714240] hz.client_25[dev] [5.0.0] Trying to connect to Address[172.18.0.4:5701].
+06/10/2022 20:58:16.775 INFO: [140154563974720] hz.client_22[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37542]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.774, last_write_time=2022-10-06 20:58:16.772, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.775 INFO: [140154563974720] hz.client_22[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+Worker 8 - 0
+Worker 5 - 0
+Starting worker 6
+Worker 2 - 0
+Starting worker 3
+Starting worker 4
+06/10/2022 20:58:16.776 INFO: [140155444782656] hz.client_18[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39434]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.775, last_write_time=2022-10-06 20:58:16.771, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.776 INFO: [140156342212160] hz.client_16[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39438]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.776, last_write_time=2022-10-06 20:58:16.774, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.778 INFO: [140154169714240] hz.client_25[dev] [5.0.0] Authenticated with server  Address[172.18.0.4:5701]:6127f443-476a-42b0-85ff-ad94d738a815, server version: 5.1.3, local address: Address[172.18.0.5:37546]. Connection{alive=1, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:16.778, last_write_time=2022-10-06 20:58:16.776, closedTime=never, connected server version=5.1.3}
+06/10/2022 20:58:16.778 INFO: [140154169714240] hz.client_25[dev] [5.0.0] Trying to connect to Address[172.18.0.3:5701].
+06/10/2022 20:58:16.779 INFO: [140154563974720] hz.client_22[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39442]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.779, last_write_time=2022-10-06 20:58:16.778, closedTime=never, connected server version=5.1.3}
+Worker 4 - 0
+Worker 3 - 0
+06/10/2022 20:58:16.781 INFO: [140154169714240] hz.client_25[dev] [5.0.0] Authenticated with server  Address[172.18.0.3:5701]:912ee477-e2f5-468d-b94d-3310803848ec, server version: 5.1.3, local address: Address[172.18.0.5:39444]. Connection{alive=1, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:16.781, last_write_time=2022-10-06 20:58:16.778, closedTime=never, connected server version=5.1.3}
+Starting worker 1
+Worker 1 - 0
+Starting worker 7
+Starting worker 9
+Starting worker 0
+Worker 6 - 0
+Worker 9 - 0
+Worker 0 - 0
+Worker 7 - 0
+Worker 6 - 1000
+Worker 8 - 1000
+Worker 9 - 1000
+Worker 5 - 1000
+Worker 1 - 1000
+Worker 0 - 1000
+Worker 2 - 1000
+Worker 7 - 1000
+Worker 3 - 1000
+Worker 4 - 1000
+Worker 6 - 2000
+Worker 0 - 2000
+Worker 4 - 2000
+Worker 8 - 2000
+Worker 2 - 2000
+Worker 9 - 2000
+Worker 3 - 2000
+Worker 5 - 2000
+Worker 7 - 2000
+Worker 1 - 2000
+Worker 6 - 3000
+Worker 4 - 3000
+Worker 0 - 3000
+Worker 8 - 3000
+Worker 5 - 3000
+Worker 1 - 3000
+Worker 9 - 3000
+Worker 3 - 3000
+Worker 2 - 3000
+Worker 7 - 3000
+Worker 6 - 4000
+Worker 8 - 4000
+Worker 4 - 4000
+Worker 1 - 4000
+Worker 7 - 4000
+Worker 3 - 4000
+Worker 5 - 4000
+Worker 9 - 4000
+Worker 2 - 4000
+Worker 0 - 4000
+Worker 6 - 5000
+Worker 8 - 5000
+Worker 1 - 5000
+Worker 4 - 5000
+Worker 7 - 5000
+Worker 3 - 5000
+Worker 9 - 5000
+Worker 0 - 5000
+Worker 2 - 5000
+Worker 5 - 5000
+Worker 6 - 6000
+Worker 8 - 6000
+Worker 1 - 6000
+Worker 7 - 6000
+Worker 3 - 6000
+Worker 0 - 6000
+Worker 9 - 6000
+Worker 5 - 6000
+Worker 2 - 6000
+Worker 4 - 6000
+Worker 1 - 7000
+Worker 6 - 7000
+Worker 8 - 7000
+Worker 9 - 7000
+Worker 7 - 7000
+Worker 3 - 7000
+Worker 0 - 7000
+Worker 2 - 7000
+Worker 5 - 7000
+Worker 4 - 7000
+Worker 1 - 8000
+Worker 8 - 8000
+Worker 6 - 8000
+Worker 2 - 8000
+Worker 7 - 8000
+Worker 0 - 8000
+Worker 9 - 8000
+Worker 4 - 8000
+Worker 3 - 8000
+Worker 5 - 8000
+Worker 8 - 9000
+Worker 1 - 9000
+Worker 6 - 9000
+Worker 0 - 9000
+Worker 2 - 9000
+Worker 9 - 9000
+Worker 3 - 9000
+Worker 7 - 9000
+Worker 5 - 9000
+Worker 4 - 9000
+Worker 8 finished!
+06/10/2022 20:58:57.512 INFO: [140155285386816] hz.client_20[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:57.512 INFO: [140155285386816] hz.client_20[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:57.512, last_write_time=2022-10-06 20:58:57.512, closedTime=2022-10-06 20:58:57.511, connected server version=5.1.3}
+06/10/2022 20:58:57.512 INFO: [140155285386816] hz.client_20[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:51.747, last_write_time=2022-10-06 20:58:51.747, closedTime=2022-10-06 20:58:57.512, connected server version=5.1.3}
+06/10/2022 20:58:57.512 INFO: [140155285386816] hz.client_20[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:57.512, last_write_time=2022-10-06 20:58:51.747, closedTime=2022-10-06 20:58:57.512, connected server version=5.1.3}
+06/10/2022 20:58:57.512 INFO: [140155285386816] hz.client_20[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:57.520 INFO: [140155285386816] hz.client_20[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 2 finished!
+06/10/2022 20:58:57.731 INFO: [140155453175360] hz.client_17[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:57.731 INFO: [140155453175360] hz.client_17[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:57.731, last_write_time=2022-10-06 20:58:57.730, closedTime=2022-10-06 20:58:57.730, connected server version=5.1.3}
+06/10/2022 20:58:57.731 INFO: [140155453175360] hz.client_17[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:56.736, last_write_time=2022-10-06 20:58:56.736, closedTime=2022-10-06 20:58:57.730, connected server version=5.1.3}
+06/10/2022 20:58:57.731 INFO: [140155453175360] hz.client_17[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:57.731, last_write_time=2022-10-06 20:58:56.736, closedTime=2022-10-06 20:58:57.730, connected server version=5.1.3}
+06/10/2022 20:58:57.731 INFO: [140155453175360] hz.client_17[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:57.734 INFO: [140155453175360] hz.client_17[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 0 finished!
+06/10/2022 20:58:57.888 INFO: [140156367390272] hz.client_16[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:57.888 INFO: [140156367390272] hz.client_16[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:57.888, last_write_time=2022-10-06 20:58:57.887, closedTime=2022-10-06 20:58:57.887, connected server version=5.1.3}
+06/10/2022 20:58:57.888 INFO: [140156367390272] hz.client_16[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:56.759, last_write_time=2022-10-06 20:58:56.758, closedTime=2022-10-06 20:58:57.887, connected server version=5.1.3}
+06/10/2022 20:58:57.888 INFO: [140156367390272] hz.client_16[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:57.888, last_write_time=2022-10-06 20:58:56.758, closedTime=2022-10-06 20:58:57.887, connected server version=5.1.3}
+06/10/2022 20:58:57.888 INFO: [140156367390272] hz.client_16[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:57.898 INFO: [140156367390272] hz.client_16[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 1 finished!
+06/10/2022 20:58:57.976 INFO: [140156350604864] hz.client_18[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:57.976 INFO: [140156350604864] hz.client_18[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:57.976, last_write_time=2022-10-06 20:58:57.975, closedTime=2022-10-06 20:58:57.976, connected server version=5.1.3}
+06/10/2022 20:58:57.976 INFO: [140156350604864] hz.client_18[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:51.759, last_write_time=2022-10-06 20:58:51.759, closedTime=2022-10-06 20:58:57.976, connected server version=5.1.3}
+06/10/2022 20:58:57.977 INFO: [140156350604864] hz.client_18[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:57.976, last_write_time=2022-10-06 20:58:51.759, closedTime=2022-10-06 20:58:57.976, connected server version=5.1.3}
+06/10/2022 20:58:57.977 INFO: [140156350604864] hz.client_18[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:57.980 INFO: [140156350604864] hz.client_18[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 6 finished!
+06/10/2022 20:58:58.044 INFO: [140155402819136] hz.client_21[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:58.044 INFO: [140155402819136] hz.client_21[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:58.044, last_write_time=2022-10-06 20:58:58.044, closedTime=2022-10-06 20:58:58.044, connected server version=5.1.3}
+06/10/2022 20:58:58.044 INFO: [140155402819136] hz.client_21[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:56.746, last_write_time=2022-10-06 20:58:56.746, closedTime=2022-10-06 20:58:58.044, connected server version=5.1.3}
+06/10/2022 20:58:58.044 INFO: [140155402819136] hz.client_21[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:58.044, last_write_time=2022-10-06 20:58:56.746, closedTime=2022-10-06 20:58:58.044, connected server version=5.1.3}
+06/10/2022 20:58:58.044 INFO: [140155402819136] hz.client_21[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:58.048 INFO: [140155402819136] hz.client_21[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 9 finished!
+06/10/2022 20:58:58.121 INFO: [140154782086720] hz.client_25[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:58.121 INFO: [140154782086720] hz.client_25[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:58.121, last_write_time=2022-10-06 20:58:58.121, closedTime=2022-10-06 20:58:58.120, connected server version=5.1.3}
+06/10/2022 20:58:58.121 INFO: [140154782086720] hz.client_25[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:51.765, last_write_time=2022-10-06 20:58:51.764, closedTime=2022-10-06 20:58:58.120, connected server version=5.1.3}
+06/10/2022 20:58:58.121 INFO: [140154782086720] hz.client_25[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:58.121, last_write_time=2022-10-06 20:58:51.764, closedTime=2022-10-06 20:58:58.121, connected server version=5.1.3}
+06/10/2022 20:58:58.121 INFO: [140154782086720] hz.client_25[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:58.125 INFO: [140154782086720] hz.client_25[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 3 finished!
+06/10/2022 20:58:58.154 INFO: [140155436389952] hz.client_24[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:58.155 INFO: [140155436389952] hz.client_24[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:58.154, last_write_time=2022-10-06 20:58:58.154, closedTime=2022-10-06 20:58:58.154, connected server version=5.1.3}
+06/10/2022 20:58:58.155 INFO: [140155436389952] hz.client_24[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:51.754, last_write_time=2022-10-06 20:58:51.753, closedTime=2022-10-06 20:58:58.154, connected server version=5.1.3}
+06/10/2022 20:58:58.155 INFO: [140155436389952] hz.client_24[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:58.154, last_write_time=2022-10-06 20:58:51.753, closedTime=2022-10-06 20:58:58.154, connected server version=5.1.3}
+06/10/2022 20:58:58.155 INFO: [140155436389952] hz.client_24[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:58.158 INFO: [140155436389952] hz.client_24[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 5 finished!
+06/10/2022 20:58:58.204 INFO: [140155411211840] hz.client_19[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:58.204 INFO: [140155411211840] hz.client_19[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:58.204, last_write_time=2022-10-06 20:58:58.203, closedTime=2022-10-06 20:58:58.203, connected server version=5.1.3}
+06/10/2022 20:58:58.204 INFO: [140155411211840] hz.client_19[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:56.744, last_write_time=2022-10-06 20:58:56.744, closedTime=2022-10-06 20:58:58.203, connected server version=5.1.3}
+06/10/2022 20:58:58.204 INFO: [140155411211840] hz.client_19[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:58.204, last_write_time=2022-10-06 20:58:56.744, closedTime=2022-10-06 20:58:58.203, connected server version=5.1.3}
+06/10/2022 20:58:58.204 INFO: [140155411211840] hz.client_19[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:58.210 INFO: [140155411211840] hz.client_19[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 7 finished!
+06/10/2022 20:58:58.331 INFO: [140155318957632] hz.client_22[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:58.331 INFO: [140155318957632] hz.client_22[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:58.331, last_write_time=2022-10-06 20:58:58.330, closedTime=2022-10-06 20:58:58.330, connected server version=5.1.3}
+06/10/2022 20:58:58.331 INFO: [140155318957632] hz.client_22[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:56.765, last_write_time=2022-10-06 20:58:56.765, closedTime=2022-10-06 20:58:58.330, connected server version=5.1.3}
+06/10/2022 20:58:58.331 INFO: [140155318957632] hz.client_22[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:58.331, last_write_time=2022-10-06 20:58:56.765, closedTime=2022-10-06 20:58:58.330, connected server version=5.1.3}
+06/10/2022 20:58:58.331 INFO: [140155318957632] hz.client_22[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:58.336 INFO: [140155318957632] hz.client_22[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+Worker 4 finished!
+06/10/2022 20:58:58.339 INFO: [140155419604544] hz.client_23[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:58.339 INFO: [140155419604544] hz.client_23[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:58.339, last_write_time=2022-10-06 20:58:58.339, closedTime=2022-10-06 20:58:58.339, connected server version=5.1.3}
+06/10/2022 20:58:58.339 INFO: [140155419604544] hz.client_23[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:56.753, last_write_time=2022-10-06 20:58:56.753, closedTime=2022-10-06 20:58:58.339, connected server version=5.1.3}
+06/10/2022 20:58:58.340 INFO: [140155419604544] hz.client_23[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:58.339, last_write_time=2022-10-06 20:58:56.753, closedTime=2022-10-06 20:58:58.339, connected server version=5.1.3}
+06/10/2022 20:58:58.340 INFO: [140155419604544] hz.client_23[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:58.343 INFO: [140155419604544] hz.client_23[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN
+
+Task '3. Optimistic blocking' finished!
+> Result =  100000
+> Time = 41.617s
+
+06/10/2022 20:58:58.345 INFO: [140156744157056] hz.client_15[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTTING_DOWN
+06/10/2022 20:58:58.345 INFO: [140156744157056] hz.client_15[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.3:5701], connection: Connection{alive=0, connection id=3, remote endpoint=Address[172.18.0.3:5701], last_read_time=2022-10-06 20:58:58.345, last_write_time=2022-10-06 20:58:58.345, closedTime=2022-10-06 20:58:58.345, connected server version=5.1.3}
+06/10/2022 20:58:58.346 INFO: [140156744157056] hz.client_15[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.4:5701], connection: Connection{alive=0, connection id=2, remote endpoint=Address[172.18.0.4:5701], last_read_time=2022-10-06 20:58:56.721, last_write_time=2022-10-06 20:58:56.721, closedTime=2022-10-06 20:58:58.345, connected server version=5.1.3}
+06/10/2022 20:58:58.346 INFO: [140156744157056] hz.client_15[dev] [5.0.0] Removed connection to endpoint: Address[172.18.0.2:5701], connection: Connection{alive=0, connection id=1, remote endpoint=Address[172.18.0.2:5701], last_read_time=2022-10-06 20:58:56.722, last_write_time=2022-10-06 20:58:56.721, closedTime=2022-10-06 20:58:58.345, connected server version=5.1.3}
+06/10/2022 20:58:58.346 INFO: [140156744157056] hz.client_15[dev] [5.0.0] LifecycleService::LifecycleEvent CLIENT_DISCONNECTED
+06/10/2022 20:58:58.350 INFO: [140156744157056] hz.client_15[dev] [5.0.0] LifecycleService::LifecycleEvent SHUTDOWN

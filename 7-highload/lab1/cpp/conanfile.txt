@@ -1,0 +1,4 @@
+[requires]
+hazelcast-cpp-client/5.0.0
+[generators]
+cmake
