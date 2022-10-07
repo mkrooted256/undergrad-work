@@ -26,10 +26,11 @@ Actual result:
 Same, but with `map.lock`
 
 Expected result:
-> 20000
+> 20000 for 2 threads
+> 100000 for 10 threads
 
 I had a lot of problems with this task.   
-- first launch of 10 threads x 10000 iterations took more than 2 hours to finish and resulted in an incorrect sum (less than 20000)
+- first launch of 10 threads x 10000 iterations took more than 2 hours to finish and resulted in an incorrect sum (much less than 100000)
 - 2 threads, 1 node:
     ```
     Task '2. Pessimistic blocking' finished!
