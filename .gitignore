@@ -1,0 +1,21 @@
+*.pdf
+*.djvu
+*.epub
+*.exe
+*.zip
+*.7z
+lib/
+
+*.pyc
+
+# Latex
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.xdv
+
+# 5-aa labs
+5-aa/lab
