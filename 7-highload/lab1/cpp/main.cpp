@@ -52,7 +52,7 @@ void task_pessimistic(int worker_num)
         }
         map->unlock(key).get();
         // std::cout << "U" << worker_num << std::endl;
-        if (k % 10 == 0) std::cout << "Worker " << worker_num << " - " << k << " - v" << value << std::endl;
+        if (k % 1000 == 0) std::cout << "Worker " << worker_num << " - " << k << " - v" << value << std::endl;
     }
     std::cout << "Worker " << worker_num << " finished!" << std::endl;
 }

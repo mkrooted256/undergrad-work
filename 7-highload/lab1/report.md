@@ -1,6 +1,8 @@
 # 7-Highload. Lab 1
 Mykhailo Koreshkov, FI-91
 
+__updated on 14.12.2022__
+
 ## Task 1. No locking
 10 concurrent clients incrementing counter in a Distributed Map 10000 times each.
 
@@ -26,25 +28,18 @@ Actual result:
 Same, but with `map.lock`
 
 Expected result:
-> 20000 for 2 threads
-> 100000 for 10 threads
+> 100000
 
-I had a lot of problems with this task.   
-- first launch of 10 threads x 10000 iterations took more than 2 hours to finish and resulted in an incorrect sum (much less than 100000)
-- 2 threads, 1 node:
+I had a lot of problems with this task because I forgot to `.get` the `map.lock()`. 
+But here are the final results:
+
+- 10 threads, 3 nodes: 
     ```
     Task '2. Pessimistic blocking' finished!
-    > Result =  13673
-    > Time = 6.33956s
+	> Result =  100000
+	> Time = 161.528s
     ```
-- 2 threads, 3 nodes: 
-    ```
-    Task '2. Pessimistic blocking' finished!
-    > Result =  19759
-    > Time = 9.4751s
-    ```
-- more than 2 runners lead to dramatic increase in execution time so I never waited for it to finish
-- I also tried to test the impact of thread.wait, but did not found any pattern 
+
 
 
 ## Task 3. Optimistic locking
@@ -83,6 +78,8 @@ Task '4. IAtomicLong' finished!
 ## Висновки
 - "З великим конкаренсі приходить велика відповідальність"
 - Налаштовувати мережевий зв'язок між хост-системою та контейнерами буває складно. В результаті я упакував виконуваний файл в інший контейнер.
-- Песимістичне блокування працює дуже повільно і при цьому не забезпечує власне блокування. Або я щось неправильно реалізував
+- Песимістичне блокування працює дуже повільно
 - Оптимістичне блокування працює на подив чудово та швидко
+- Менше інстансів бази даних - швидше
 - Атомні операції це класно
+
