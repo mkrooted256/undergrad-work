@@ -4,6 +4,7 @@
 *.exe
 *.zip
 *.7z
+*.mp4
 lib/
 
 *.pyc
@@ -16,6 +17,16 @@ lib/
 *.out
 *.synctex.gz
 *.xdv
+
+# cpp
+**/.cmake/**
+**/CMakeFiles/**
+**/cmake-build-debug/**
+**/cpp/build/**
+
+# IDEs
+**/.idea/**
+**/.vscode/**
 
 # 5-aa labs
 5-aa/lab
