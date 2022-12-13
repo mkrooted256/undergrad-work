@@ -40,16 +40,19 @@ void task_pessimistic(int worker_num)
     const std::string key("1");
     
     std::cout << "Starting worker " << worker_num << std::endl;
+    int value = -1;
     for (int k = 0;k < 10000; ++k) {
-        map->lock(key); // pessimistic locking here
+        // std::cout << "L" << worker_num << std::endl;
+        map->lock(key).get(); // pessimistic locking here
         try {
-            int value = map->get<std::string, int>(key).get().value();
-            map->put(key, value+1).get();
+            value = map->get<std::string, int>(key).get().value_or(0);
+            map->put<std::string, int>(key, value+1).get();
         } catch (...) {
             std::cout << "exception in incr";
         }
-        map->unlock(key);
-        if (k % 1000 == 0) std::cout << "Worker " << worker_num << " - " << k << std::endl;
+        map->unlock(key).get();
+        // std::cout << "U" << worker_num << std::endl;
+        if (k % 10 == 0) std::cout << "Worker " << worker_num << " - " << k << " - v" << value << std::endl;
     }
     std::cout << "Worker " << worker_num << " finished!" << std::endl;
 }
@@ -116,6 +119,8 @@ void execute_task(std::string task_name, int workers, void task(int), bool atomi
     } else
     {
         map->put<std::string, int>(key, 0).get();
+        int res = map->get<std::string, int>(key).get().value();
+        std::cout << "init'ed map.1 with value " << res;
     }
 
     // Start threads
@@ -146,14 +151,23 @@ void execute_task(std::string task_name, int workers, void task(int), bool atomi
     std::cout << "> Time = " << duration_cast<std::chrono::duration<float>>(t2 - t1).count() << "s" << std::endl << std::endl;
 }
 
-int main() {
+int main(int argc, char** argv) {
+    int task = 0;
+    if (argc > 1) {
+        task = std::atoi(argv[1]);
+        if (task < 1 || task > 5) {
+            std::cout << "invalid task number. supported tasks: 1,2,3,4 and 5 for all. Aborting";
+            return 1;
+        }
+    }
+
     // Tasks 1-3
-    // execute_task("1. Simple increment", 10, task_dumb);
-    // execute_task("2. Pessimistic blocking", 3, task_pessimistic);
-    // execute_task("3. Optimistic blocking", 10, task_optimistic);
+    if(task==1 || task==5) execute_task("1. Simple increment", 10, task_dumb);
+    if(task==2|| task==5) execute_task("2. Pessimistic blocking", 10, task_pessimistic);
+    if(task==3|| task==5) execute_task("3. Optimistic blocking", 10, task_optimistic);
 
     // Task 4 - launched separately on a different set of hazelcast nodes
-    execute_task("4. IAtomicLong", 10, task_cp_atomic, true);
+    if(task==4|| task==5) execute_task("4. IAtomicLong", 10, task_cp_atomic, true);
 
     
     return 0;

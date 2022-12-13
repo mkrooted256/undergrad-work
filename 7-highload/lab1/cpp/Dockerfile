@@ -14,4 +14,4 @@ RUN cmake --build .
 
 
 WORKDIR /project/build/bin
-CMD [ "./main" ]
+ENTRYPOINT [ "./main" ]
