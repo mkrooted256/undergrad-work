@@ -1,6 +1,11 @@
 # 7-Highload. Lab 2
 Mykhailo Koreshkov, FI-91
 
+## Setup
+
+- один докер контейнер з postgresql
+- клієнт у вмгляді python скрипта
+
 ## Task 1. Lost-update (no locking)
 Expected result - 100000
 
