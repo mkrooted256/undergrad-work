@@ -101,6 +101,7 @@ $$A = \begin{pmatrix}a & -1 \\ b & a\end{pmatrix}$$
 ![Alt text](Screenshot_6.png)
 
 
+---
 
-### Additional sources
+Додаткові матеріали, використані при підготовці
 - https://www.youtube.com/watch?v=1_UobILf3cc&list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m&index=14&ab_channel=SteveBrunton
