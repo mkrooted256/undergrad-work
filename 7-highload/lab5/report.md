@@ -350,6 +350,7 @@ cqlsh:lab5> insert into orders (oid, customer, cart, subtotal, order_date)
     values (1, 'John', [107, 105, 101], 450, toTimestamp(now()));
 ...
 ...
+```
 
 ### 1)
 ```
@@ -467,7 +468,7 @@ cqlsh:lab5> select oid,customer,writetime(subtotal) from orders;
 
 ### 9)
 ```
-cqlsh:lab5> insert into orders (oid, customer, cart, subtotal, order_date)      values (10, 'John', [107, 105, 101], 450, toTimestamp(now())) using TTL 10;
+cqlsh:lab5> insert into orders (oid, customer, cart, subtotal, order_date)      values (10, 'John', [107, 105, 101], 450, toTimestamp(now())) using TTL 60;
 cqlsh:lab5> select * from orders;
 
  customer | order_date                      | cart                 | oid | subtotal
@@ -482,6 +483,11 @@ cqlsh:lab5> select * from orders;
   Johanna | 2022-12-28 12:16:46.246000+0000 | [106, 106, 106, 106] |   4 |     1200
 
 (8 rows)
+```
+
+![Alt text](60sec.png)
+
+```
 cqlsh:lab5> select * from orders;
 
  customer | order_date                      | cart                 | oid | subtotal
