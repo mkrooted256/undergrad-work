@@ -131,7 +131,8 @@ $$P\left(\left(X(t_1), ..., X(t_n)\right)\in B\right) = \mu_{t_1,...,t_n}(B)$$.
     \item
     \(C_{t_1...t_k}(B_1) \cup C_{t_{k+1}...t_n}(B_2) = C_{t_1...t_k...t_n}(B_1 \times \mathbb R^{n-k})\cup C_{t_1...t_k...t_n}(\mathbb R^k \times B_2) = \) \\
     \(= C_{t_1...t_n}(B_1 \cup B_2) \in \mathcal A\)
-    \item (+ узгодженість)
+    \item (+ узгодженість, тобто збереження цих виразів при перестановці індексів 
+    та відповідних елементів декартового добутку)
 \end{itemize}
 
 
@@ -274,8 +275,9 @@ $(X_n, \; n\in \mathbb N)$ - ланцюг Маркова якщо
 \subsection*{2. Неперервна диференційовність}
 Неперервної диференційовності бути не може, бо немає неперервності.
 
+\pagebreak
 
-\section*{4}
+\section*{№4}
 \begin{mdframed}
     Розв'язати задачу прогнозу для стаціонарної послідовності $\{\xi_n,\;n\in\mathbb Z\}$.
     \[M\xi_n = 0; \quad \cov(\xi_n,\xi_m) = K_{nm} = a^{|n-m|}\]
@@ -283,12 +285,74 @@ $(X_n, \; n\in \mathbb N)$ - ланцюг Маркова якщо
 \end{mdframed}
 
 \[K(n,m) = R(n-m); \quad R(k) = a^{|k|}.\]
-Нехай $\lambda = -\ln a, \; \lambda > 0$.
+Тобто, послідовність стаціонарна. Нехай $\lambda = -\ln a, \; \lambda > 0$.
 Тоді 
 \[R(k) = e^{-\lambda|k|}\]
-Тобто, послідовність стаціонарна.
 
-TODO
+Шукаємо оптимальну оцінку $\hat\xi_n$ для $\xi_n$ в просторі лінійних оцінок $H_0(\xi)$ 
+\[H_N(\xi) = \operatorname{span}\left(\{\xi_n,\; n\le N\}\right) = \left\{\sum_{k=0}^\infty c_k \xi_{N-k},\; c_k \in \mathbb R \right\}\]
+
+Оптимальність маємо на увазі у середньоквадратичному сенсі. Тобто для оцінки $\hat\xi_n$ виконується
+\[\hat\xi_n = \underset{\eta \in H_0(\xi)}{\arg\min} \operatorname{M}\left|\xi_n - \eta\right|^2\]
+
+Задам послідовність $\zeta$ як стаціонарний розв'язок наступного рівняння:
+\[\zeta_{n} = a\zeta_{n-1} + \varepsilon_n\]
+Де $\varepsilon_n$ - це послідовність білого шуму. $\operatorname{M} \varepsilon_n = 0, \;\cov(\varepsilon_n,\varepsilon_m) = b^2\delta_{nm}$.
+
+Відомо, що послідовність $\zeta$ є регулярною, є єдиним стаціонарним розв'язком цього рівняння та виражається як
+\[\zeta_n = \sum_{k=0}^\infty a^k\varepsilon_{n-k}\]
+
+Хочу, щоб $D\zeta_n = R(0) = 1$
+\[\cov(\zeta_n, \zeta_n) = \cov\left(\sum_{k=0}^\infty a^k\varepsilon_{n-k},\sum_{k=0}^\infty a^k\varepsilon_{n-k}\right) = \sum_{i=0}^\infty\sum_{j=0}^\infty a^{i+j}b^2\delta_{ij} = \sum_{k=0}^\infty a^{2k}b^2 = \frac{b^2}{1-a^2} = 1\]
+
+Отже $D\varepsilon_n = b^2 = 1-a^2$
+
+Зауважу, що для $n>m$:
+\[\cov(\zeta_n, \zeta_{n-1}) = \cov(a\zeta_{n-1} + \varepsilon_n, \zeta_{n-1}) = aD\zeta_{n-1} + 0 = a\]
+\[\cov(\zeta_n, \zeta_{n-2}) = \cov(a(a\zeta_{n-2} + \varepsilon_{n-1}) + \varepsilon_n, \zeta_{n-2}) = a^2D\zeta_{n-2} + 0 = a^2\]
+\[\cov(\zeta_n, \zeta_m) = a^{n-m}\]
+
+Тобто
+\[\cov(\zeta_n,\zeta_m) = a^{|n-m|} = R(n-m)\]
+
+Я так і не зміг зрозуміти, як з базових визначень довести, що $\xi$ та $\zeta$ - це однакові послідовності,
+але це можна довести з розкладу Вольда. 
+
+За теоремою Вольда, для стаціонарної в ш.сенсі послідовності із нульовим м.сподіванням існує єдиний розклад на суму сингулярної (тут $\chi$) та регулярної послідовністей:
+\[\xi_n = \zeta_n + \chi_n\]
+При чому $\forall n,m:\; \cov(\zeta_n, \chi_m) = 0$.
+
+Через те, що коваріаційні функції рівні, існує ізометрія між $H_{\infty}(\xi)$ та $H_\infty(\zeta)$. З цього випливатиме, що $\xi$ та $\zeta$ будуть регулярними одночасно, а ми знаємо, що $\zeta$ регулярна.
+
+Отже, $\xi$ і є своїм розкладом Вольда і рівна $\zeta$.
+
+Можемо одразу представити $\xi_n$ у вигляді згортки з білим шумом:
+\[\xi_n = \sum_{k=0}^\infty a^k\varepsilon_{n-k} \quad \left(a_k = a^k\right)\]
+
+Знайду відображення між $H_n(\varepsilon)$ та $H_n(\xi)$. 
+\[\xi_n = a\xi_{n-1} + \varepsilon_n\]
+\[H_n(\varepsilon) \ni \varepsilon_n = \xi_n - a\xi_{n-1} \in H_n(\xi)\]
+
+Далі виконуємо оцінку. Відомо, що 
+\[\hat\xi_n = \sum_{k=n}^\infty a^k \varepsilon_{n-k}\]
+але виразимо її через $\xi$
+\[\hat\xi_n = \sum_{k=n}^\infty a^k (\xi_{n-k} - a\xi_{n-k-1}) = \sum_{k=n}^\infty a^k \xi_{n-k} - a^{k+1}\xi_{n-k-1} = \]
+В другій сумі роблю заміну $j=k+1$
+\[= \sum_{k=n}^\infty a^k \xi_{n-k} - \sum_{j=n+1}^\infty a^{(j-1)+1} \xi_{n-(j-1)-1} = \]
+\[= \sum_{k=n}^\infty a^k \xi_{n-k} - \sum_{j=n+1}^\infty a^{j} \xi_{n-j} = \]
+\[= a^n\xi_0 \]
+
+Маємо оцінку 
+\[\hat\xi_n = a^n\xi_0\]
+
+Також оціню помилку
+\begin{align*}
+    \operatorname{M}|a^n\xi_0 - \xi_n|^2 &= \operatorname{M}|\sum_{k=1}^n a^{n-k}\varepsilon_k|^2 = \sum_{j=0}^{n-1} a^{2j} \operatorname{D} \varepsilon_{n-j} = \\
+    &= (1-a^2)\cdot \frac{1-a^{2(n-1)}}{1-a^2} =\\
+    &= 1-a^{2(n-1)}
+\end{align*}
+
+$D\varepsilon_{n}$ було обчислено раніше.
 
 
 \end{document}
