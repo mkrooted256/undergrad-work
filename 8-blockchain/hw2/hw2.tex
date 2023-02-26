@@ -1,0 +1,205 @@
+% !TEX program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt, a4paper]{article} % use larger type; default would be 10pt
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,patterns}
+
+\setmainfont[Ligatures=TeX]{[EBGaramond-Regular.ttf]} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+\setmonofont[Ligatures=TeX]{[FiraCode-Regular.ttf]}
+
+% other LaTeX packages.....
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd,systeme}
+\usepackage{unicode-math}
+\usepackage{cancel}
+\geometry{a4paper} 
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},   
+    % commentstyle=\color{codegreen},
+    % keywordstyle=\color{magenta},
+    % numberstyle=\tiny\color{codegray},
+    % stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\newcommand\course{8 - Blockchain}
+\newcommand\hwnumber{Домашнє завдання №2}             % <-- homework number
+\newcommand\idgroup{ФІ-91}                
+\newcommand\idname{Михайло Корешков}  
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfsetup{%
+	backgroundcolor = black!5,
+}
+\mdfdefinestyle{ans}{%
+    backgroundcolor = green!5,
+    linecolor = green!50,
+    linewidth = 1pt,
+}
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\idgroup \\ \idname}
+\chead{\textbf{\Large \hwnumber}}
+\rhead{\course \\ \today}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\linespread{1.2}
+
+
+\begin{document}
+
+\section*{№1}
+
+\[C_8^3 = \frac{8!}{3!5!} = \frac{8\cdot 7 \cdot 6}{6} = 56\]
+\[C_8^7 = C_8^1 = \frac{8!}{7!1!} = 8\]
+
+
+\section*{№2}
+
+\begin{mdframed}
+    Протокол PoW
+
+    $P_1 = 7000; P_2 = 6000; P_3 = 7000$
+
+    $N = 10$
+
+    $w = (3211323123)$
+
+    $P(w) = ?$
+\end{mdframed}
+
+\[P = 7000 + 6000 + 7000 = 20000\]
+\[p_1 = \frac{7}{20} = 0.35; \; p_2 = \frac{6}{20} = 0.3; \; p_3 = \frac{7}{20} = 0.35\]
+
+\[P(w) = P(w_1)P(w_2)...P(w_{10}) = p_1^3\cdot p_2^3 \cdot p_3^4 = (0.35)^3 \cdot (0.3)^3 \cdot (0.35)^4\]
+
+\section*{№3}
+
+\begin{mdframed}
+    Протокол PoS
+
+    $P_1 = 12; P_2 = 5; P_3 = 3$
+
+    $N=10$
+
+    $P(N_2 = 3) - ?$, де $N_k$ - кількість входжень $k$ у $w$.
+\end{mdframed}
+
+\[P = 12+5+3 = 20\]
+\[p_1 = 12/20 = 0.6; \; p_2 = 5/20 = 0.25;\; p_3 = 3/20 = 0.15\]
+
+\[P(N_2 = 3) = C_{10}^3 p_2^3 (1-p_2)^7 = C_{10}^3 (0.25)^3 \cdot (0.75)^7\]
+
+\section*{№4}
+
+\begin{mdframed}
+Умова 3 задачі, але знайти
+
+$P(N_3 \ge 8) - ?$
+\end{mdframed}
+
+\[P(N_3 \ge 8) = P(N_3 = 8) + P(N_3 = 9) + P(N_3 = 10) = \]
+\[ = C_{10}^8 (0.15)^8 \cdot (0.85)^2 + C_{10}^9 (0.15)^9 \cdot (0.85)^1 + C_{10}^10 (0.15)^10 \]
+
+\section*{№5}
+\begin{mdframed}
+    Умова 3 задачі, але знайти
+    
+    $P(N_1 = 4, N_2 = 0) - ?$
+    \end{mdframed}
+
+$C_n^{n_1,n_2,...,n_k} = \frac{n!}{n_1!n_2!...n_k!}$ - поліноміальний коефіцієнт, $\sum n_i = n$.
+
+\[P(N_1 = 4, N_2 = 0) = C_{10}^{4,0,6} p_1^4 p_2^0 p_3^6 = \frac{10!}{4!6!} (0.6)^4(0.15)^6\]
+
+\section*{№6}
+
+\begin{mdframed}
+    Протокол PoS.
+
+    $P_h = 14; \quad P_m = 6.$
+
+    $z = 4$
+\end{mdframed}
+
+Нехай $A$ - успіх на першому етапі DS, $B$ - успіх на другому етапі.
+
+Нехай $A_k$ - зловмисник отримав $k$ таймслотів на першому етапі. 
+
+Нехай $B_k$ - зловмисник зміг досягти успіху на другому етапі маючи на $k$ блоків менше, ніж чесні стейкхолдери.
+
+\[p_h = 14/20 = 0.7; \; p_m = 0.3\]
+
+
+\subsection*{a) $P(A_2) - ?$}
+\[P(A_2) = C_{z+k-1}^k p_m^k p_h^z = C_{5}^2 (0.3)^2 (0.7)^4 = 0.216\]
+
+\subsection*{б) $P(\bar A) - ?$}
+
+$A+B$ - диз'юнктне об'єднання (об'єднання маючи на увазі, що $A\cap B = \varnothing$)
+
+\[P(\bar A) = P(A_0 + A_1 + A_2 + A_3) = \sum_{k=0}^3 C_{z+k-1}^k p_m^k p_h^z = \]
+\[= C_{3}^0 (0.3)^0 (0.7)^4 + C_{4}^1 (0.3)^1 (0.7)^4 + C_{5}^2 (0.3)^2 (0.7)^4 + C_{6}^3 (0.3)^3 (0.7)^4 = \]
+\[= 0.24 + 0.288 + 0.216 + 0.13 = 0.874\]
+
+
+\subsection*{в) $P(B | A_3) - ?$}
+
+\[P(B|A_3) = \left(\frac{p_m}{p_h}\right)^{z-k} = \left(\frac{0.3}{0.7}\right)^{1} = 0.429\]
+
+\subsection*{г) $P(B \cap \bar A) - ?$}
+
+\[\bar A = A_0 + A_1 + A_2 + A_3\]
+За формулою повної ймовірності зважаючи на те, що $A_0, A_1, A_2, A_3$ - це повна група подій маємо
+\[P(B \cap \bar A) = P(B|A_0)P(A_0) + P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + P(B|A_3)P(A_3) = \]
+\[= \left(\frac{0.3}{0.7}\right)^4 \cdot C_3^0 (0.7)^4 (0.3)^0 + \left(\frac{0.3}{0.7}\right)^3 \cdot C_4^1 (0.7)^4 (0.3)^1 + 
+\left(\frac{0.3}{0.7}\right)^2 \cdot C_5^2 (0.7)^4 (0.3)^2 + \left(\frac{0.3}{0.7}\right)^1 \cdot C_6^3 (0.7)^4 (0.3)^3 = \]
+\[ = 0.0081  + 0.02268 + 0.03969 + 0.055566 = 0.126 \]
+
+\subsection*{д) $P(B | \bar A) - ?$}
+
+\[P(B | \bar A) = \frac{P(B \cap \bar A)}{P(\bar A)} = \frac{0.126}{0.874} = 0.144\]
+
+\subsection*{е) $P(DS), P(\bar {DS}) - ?$}
+
+\[P(DS) = P(A) + \sum_{k=0}^3  P(B|A_k) P(A_k) = (1 - 0.874) + 0.126 = 0.252\]
+
+\[P(\bar{DB}) = 1 - P(DS) = 0.748\]
+
+
+
+
+\end{document}
